@@ -55,19 +55,27 @@
 
     <h3>2.2. Данные лицензирования Pro</h3>
     <ul>
-        <li><strong><code>androidId</code></strong> — уникальный идентификатор Android-устройства. Используется <strong>только</strong> для привязки Pro-лицензии к устройству.</li>
-        <li><strong>Лицензионный ключ</strong> — сохраняется в зашифрованном виде (SecureStorage).</li>
-        <li><strong>Дата активации Pro</strong> — для проверки срока действия.</li>
-        <li><strong>Дата первого запуска триала</strong> — для отслеживания 14-дневного пробного периода.</li>
-        <li><strong>Дата последнего запуска</strong> — для защиты от отката системных часов.</li>
+        <li><strong>Идентификатор устройства</strong> используется приложением локально для привязки лицензии.</li>
+        <li><strong>Отпечаток устройства</strong> включается в код запроса, который пользователь может передать разработчику или службе поддержки для выпуска лицензии.</li>
+        <li><strong>Подписанная лицензия</strong> и связанные с ней данные хранятся на устройстве. При включённом экспорте лицензия попадает в зашифрованный резервный файл.</li>
+        <li><strong>Дата активации и срок лицензии</strong> используются для отображения и проверки лицензии.</li>
+        <li><strong>Дата старта триала и дата последней проверки</strong> хранятся локально для учёта пробного периода и защиты от отката системных часов.</li>
     </ul>
+    <p>
+        Код запроса содержит отпечаток, а не исходный Android ID. Если пользователь
+        передаёт код запроса разработчику или поддержке, полученный в нём отпечаток
+        становится им известен.
+    </p>
 
     <h3>2.3. Геолокация (опционально)</h3>
-    <ul>
-        <li><strong>Координаты устройства</strong> (широта, долгота) — <strong>только</strong> если вы включили функцию «Присутствие».</li>
-        <li><strong>Радиус «дома»</strong> — задаётся вами.</li>
-    </ul>
-    <p>Геолокация используется <strong>исключительно</strong> для определения статуса «дома / не дома / рядом» и автоматизаций. <strong>Не передаётся</strong> разработчику или третьим лицам.</p>
+    <p>
+        SHome использует геолокацию для определения статуса «дома / не дома / рядом»
+        и запуска настроенных автоматизаций. В обычном локальном режиме координаты
+        обрабатываются приложением на устройстве. Если пользователь настраивает
+        отправку координат на свой HTTP endpoint или другой внешний сервис,
+        координаты передаются выбранному им получателю. Не указывайте в запросе
+        адрес разработчика или неизвестного сервиса.
+    </p>
 
     <h3>2.4. Данные для уведомлений (опционально)</h3>
     <ul>
@@ -101,10 +109,10 @@
 
     <h2>4. Хранение данных</h2>
     <ul>
-        <li><strong>Локально</strong> на устройстве пользователя (SQLite, SecureStorage).</li>
-        <li>В <strong>зашифрованном</strong> виде (AES-256 для SecureStorage).</li>
-        <li>Данные <strong>не передаются</strong> на серверы разработчика.</li>
-        <li>Данные <strong>передаются</strong> только тем сервисам, которые <strong>явно</strong> настроены пользователем (см. раздел 5).</li>
+        <li><strong>Локальные данные</strong> хранятся на устройстве пользователя: настройки и состояние приложения — в локальном хранилище, секреты — в защищённом хранилище платформы.</li>
+        <li><strong>Резервная копия</strong> шифруется приложением до загрузки в облако. Для восстановления требуется ключ резервной копии или его QR-код.</li>
+        <li><strong>Лицензия</strong> включается в новые резервные копии. При восстановлении на том же устройстве приложение повторно проверяет её подпись и привязку. Старые бэкапы, созданные до добавления лицензии в экспорт, её не содержат.</li>
+        <li>Данные могут передаваться сервисам и устройствам, которые пользователь сам настроил; перечень интеграций приведён ниже.</li>
     </ul>
 
     <h2>5. Сторонние сервисы</h2>
@@ -167,33 +175,64 @@
         <li>Локальное хранение (без облачных сервисов разработчика)</li>
     </ul>
 
-    <h2>7. Аналитика и crash-логи</h2>
-    <p><strong>Мы не используем</strong> Firebase Analytics, Crashlytics или иные внешние сервисы аналитики.</p>
-    <p>Логи ошибок хранятся <strong>локально</strong> на устройстве (через <code>Talker</code>) и <strong>не передаются</strong> разработчику. Вы можете просмотреть их в настройках приложения.</p>
+    <h2>7. Аналитика и логи</h2>
+    <p>
+        В приложении не настроены Firebase Analytics и Crashlytics. Логи приложения
+        хранятся локально. Они могут быть переданы разработчику, если пользователь
+        самостоятельно отправит их вместе с обращением в поддержку.
+    </p>
 
     <h2>8. Права пользователя</h2>
     <ul>
-        <li><strong>Получить</strong> копию своих данных (экспорт конфигурации в настройках).</li>
-        <li><strong>Удалить</strong> данные (удаление приложения = удаление всех локальных данных).</li>
-        <li><strong>Отозвать</strong> согласие (удаление приложения).</li>
-        <li><strong>Отключить</strong> геолокацию, уведомления, облако — в настройках приложения.</li>
-        <li><strong>Обратиться</strong> с жалобой в Роскомнадзор (<a href="https://rkn.gov.ru">https://rkn.gov.ru</a>).</li>
+        <li><strong>Получить</strong> копию своих данных с помощью экспорта конфигурации в настройках.</li>
+        <li><strong>Удалить локальные данные</strong> средствами Android. Удаление приложения обычно удаляет его локальные данные; резервные копии в облаке нужно удалять отдельно.</li>
+        <li><strong>Отключить</strong> геолокацию, уведомления и облачные функции в настройках приложения.</li>
+        <li><strong>Обратиться</strong> с вопросом или жалобой в Роскомнадзор (<a href="https://rkn.gov.ru">https://rkn.gov.ru</a>).</li>
     </ul>
 
     <h2>9. Данные детей</h2>
     <p>Приложение не предназначено для детей младше 13 лет. Мы сознательно не собираем данные детей.</p>
 
-    <h2>10. Согласие на обработку</h2>
-    <p>Используя приложение, вы даёте согласие на обработку следующих данных:</p>
+    <h2>10. Обработка данных и управление настройками</h2>
+
+    <p>
+        SHome обрабатывает данные, необходимые для работы выбранных пользователем
+        функций. Необязательные функции можно не включать; доступ к геолокации
+        регулируется также разрешениями Android.
+    </p>
+
     <ul>
-        <li><code>androidId</code> (для лицензирования Pro)</li>
-        <li>Геолокация (для presence, если включено)</li>
-        <li>Логин/пароль Mail.ru Cloud (для бэкапов, если настроено)</li>
-        <li>VK-токен (для уведомлений, если настроено)</li>
-        <li>Номер телефона (для SMS, если настроено)</li>
-        <li>IP-адреса устройств (для управления)</li>
+        <li>
+            <strong>Идентификатор устройства:</strong> используется локально для
+            лицензирования Pro. При запросе лицензии приложение формирует код с
+            отпечатком устройства. Этот код передаётся разработчику или поддержке
+            только по решению пользователя, например при отправке обращения.
+        </li>
+        <li>
+            <strong>Геолокация:</strong> обрабатывается, если включена функция
+            присутствия и предоставлено разрешение Android. Если пользователь
+            настроил отправку координат на внешний endpoint, они передаются
+            указанному получателю.
+        </li>
+        <li>
+            <strong>Данные облака и резервной копии:</strong> используются при
+            настройке облачного резервного копирования. Резервная копия шифруется
+            приложением; для её восстановления нужен ключ резервной копии или QR-код.
+        </li>
+        <li>
+            <strong>VK-токен, номер телефона и данные устройств:</strong>
+            используются соответствующими функциями при их настройке и обращении
+            к выбранным пользователем сервисам.
+        </li>
     </ul>
-    <p>Согласие действует до удаления приложения. Вы можете отозвать согласие, удалив приложение.</p>
+
+    <p>
+        Пользователь может отключить необязательные функции и отозвать разрешения
+        Android в настройках приложения или системы. Удаление приложения обычно
+        удаляет локальные данные приложения, но резервные копии, ранее загруженные
+        в облако, нужно удалять отдельно. Переданные внешним сервисам данные
+        обрабатываются также по правилам этих сервисов.
+    </p>
 
     <h2>11. Изменения политики</h2>
     <p>Мы можем обновлять политику. О значительных изменениях будем уведомлять в приложении. Дата последнего обновления указана в начале документа.</p>
@@ -229,19 +268,31 @@
 
     <h3>2.2. Pro licensing data</h3>
     <ul>
-        <li><strong><code>androidId</code></strong> — unique Android device identifier. Used <strong>only</strong> to bind a Pro license to the device.</li>
-        <li><strong>License key</strong> — stored encrypted (SecureStorage).</li>
-        <li><strong>Pro activation date</strong> — to verify the license validity.</li>
-        <li><strong>Trial start date</strong> — to track the 14-day trial period.</li>
-        <li><strong>Last seen date</strong> — to protect against system clock rollback.</li>
+        <li><strong>Device identifier</strong> is used locally by the App for license binding.</li>
+        <li><strong>Device fingerprint</strong> is included in a license request code that the user may choose to send to the developer or support team to request a license.</li>
+        <li><strong>Signed license</strong> and related data are stored on the device. When included in an export, the license is part of the encrypted backup file.</li>
+        <li><strong>License activation date and expiry</strong> are used to display and validate the license.</li>
+        <li><strong>Trial start date and last-seen date</strong> are stored locally to track the trial period and help detect system clock rollback.</li>
     </ul>
+    <p>
+        The license request code contains a device fingerprint, not the original
+        Android ID. If the user sends the request code to the developer or support
+        team, they will be able to see the fingerprint contained in it.
+    </p>
 
     <h3>2.3. Geolocation (optional)</h3>
     <ul>
-        <li><strong>Device coordinates</strong> (latitude, longitude) — <strong>only</strong> if you enable the “Presence” feature.</li>
-        <li><strong>Home radius</strong> — set by you.</li>
+        <li><strong>Device coordinates</strong> (latitude and longitude) are processed when the user enables the “Presence” feature and grants the required Android permission.</li>
+        <li><strong>Home radius</strong> is set by the user.</li>
     </ul>
-    <p>Geolocation is used <strong>solely</strong> to determine “home / away / near” status for automations. It is <strong>not</strong> transmitted to the developer or third parties.</p>
+    <p>
+        SHome uses geolocation to determine “home / away / nearby” status and to
+        trigger configured automations. In the normal local mode, the App processes
+        coordinates on the device. If the user configures coordinates to be sent to
+        an HTTP endpoint or another external service, they are sent to the recipient
+        selected by the user. Do not configure an unknown service or an endpoint
+        controlled by the developer.
+    </p>
 
     <h3>2.4. Notification data (optional)</h3>
     <ul>
@@ -275,10 +326,10 @@
 
     <h2>4. Data storage</h2>
     <ul>
-        <li><strong>Locally</strong> on the user's device (SQLite, SecureStorage).</li>
-        <li><strong>Encrypted</strong> (AES-256 for SecureStorage).</li>
-        <li>Data is <strong>not</strong> transmitted to the developer's servers.</li>
-        <li>Data is <strong>transmitted</strong> only to services <strong>explicitly</strong> configured by the user (see Section 5).</li>
+        <li><strong>Local data</strong> is stored on the user's device. App settings and data are stored locally; secrets use the platform's secure storage.</li>
+        <li><strong>Backups</strong> are encrypted by the App before upload to cloud storage. A backup key or its QR code is required to restore a backup.</li>
+        <li><strong>License data</strong> is included in new backups. When restored on the same device, the App rechecks the license signature and device binding. Backups created before license data was added to exports do not contain the license.</li>
+        <li>Data may be sent to devices and services that the user has configured. See Section 5 for the integrations described in this policy.</li>
     </ul>
 
     <h2>5. Third-party services</h2>
@@ -335,39 +386,69 @@
 
     <h2>6. Security</h2>
     <ul>
-        <li>Data encryption (AES-256, SecureStorage)</li>
-        <li>Secure transmission protocols (HTTPS, MQTT over TLS — if configured)</li>
-        <li>Regular security updates</li>
-        <li>Local storage (no developer cloud services)</li>
+        <li>Secrets are stored using the platform's secure storage.</li>
+        <li>Cloud backups are encrypted by the App before upload using AES-256-GCM.</li>
+        <li>HTTPS and MQTT over TLS can be used where supported and configured.</li>
+        <li>Security also depends on the user's device, operating system, network and third-party service configuration.</li>
     </ul>
 
-    <h2>7. Analytics and crash logs</h2>
-    <p><strong>We do not use</strong> Firebase Analytics, Crashlytics, or other external analytics services.</p>
-    <p>Error logs are stored <strong>locally</strong> on the device (via <code>Talker</code>) and are <strong>not</strong> transmitted to the developer. You can view them in the App settings.</p>
+    <h2>7. Analytics and error logs</h2>
+    <p>
+        The App does not use Firebase Analytics, Crashlytics or other external
+        analytics services. App logs are stored locally. They may be shared with the
+        developer if the user chooses to include them in a support request.
+    </p>
 
     <h2>8. User rights</h2>
     <ul>
-        <li><strong>Obtain</strong> a copy of your data (export configuration in settings).</li>
-        <li><strong>Delete</strong> your data (uninstalling the App removes all local data).</li>
-        <li><strong>Withdraw</strong> consent (uninstall the App).</li>
-        <li><strong>Disable</strong> geolocation, notifications, cloud — in the App settings.</li>
-        <li><strong>Submit</strong> a complaint to Roskomnadzor (<a href="https://rkn.gov.ru">https://rkn.gov.ru</a>).</li>
+        <li><strong>Obtain</strong> a copy of your data by exporting the configuration in the App settings.</li>
+        <li><strong>Delete local data</strong> using Android settings. Uninstalling the App usually removes its local data; cloud backups must be deleted separately.</li>
+        <li><strong>Disable</strong> geolocation, notifications and cloud features in the App or Android settings.</li>
+        <li><strong>Contact</strong> Roskomnadzor with a complaint (<a href="https://rkn.gov.ru">https://rkn.gov.ru</a>).</li>
     </ul>
 
     <h2>9. Children's data</h2>
     <p>The App is not intended for children under 13. We do not knowingly collect children's data.</p>
 
-    <h2>10. Consent to processing</h2>
-    <p>By using the App, you consent to the processing of the following data:</p>
+    <h2>10. Data processing and settings</h2>
+
+    <p>
+        SHome processes data needed for the features selected by the user.
+        Optional features do not need to be enabled. Access to geolocation is also
+        controlled by Android permissions.
+    </p>
+
     <ul>
-        <li><code>androidId</code> (for Pro licensing)</li>
-        <li>Geolocation (for presence, if enabled)</li>
-        <li>Mail.ru Cloud login/password (for backups, if configured)</li>
-        <li>VK token (for notifications, if configured)</li>
-        <li>Phone number (for SMS, if configured)</li>
-        <li>Device IP addresses (for control)</li>
+        <li>
+            <strong>Device identifier:</strong> used locally for Pro licensing.
+            When a license is requested, the App creates a request code containing
+            a device fingerprint. The user decides whether to send that code to
+            the developer or support team, for example as part of a support request.
+        </li>
+        <li>
+            <strong>Geolocation:</strong> processed when Presence is enabled and
+            Android permission is granted. If the user configures an external
+            endpoint, coordinates are sent to the specified recipient.
+        </li>
+        <li>
+            <strong>Cloud and backup data:</strong> used when cloud backup is
+            configured. The App encrypts backups before upload. A backup key or its
+            QR code is required for restoration.
+        </li>
+        <li>
+            <strong>VK token, phone number and device data:</strong> used by the
+            corresponding features when configured and when communicating with
+            services selected by the user.
+        </li>
     </ul>
-    <p>Consent is valid until the App is uninstalled. You can withdraw consent by uninstalling the App.</p>
+
+    <p>
+        Users can disable optional features and revoke Android permissions in the
+        App or system settings. Uninstalling the App usually removes its local data,
+        but backups already uploaded to cloud storage must be deleted separately.
+        Data sent to external services is also subject to those services' own
+        policies.
+    </p>
 
     <h2>11. Changes to this policy</h2>
     <p>We may update this policy. We will notify users in the App about significant changes. The last updated date is shown at the beginning of this document.</p>
