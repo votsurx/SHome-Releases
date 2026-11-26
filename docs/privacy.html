@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHome — Политика конфиденциальности</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        h1 { color: #1a73e8; border-bottom: 2px solid #1a73e8; padding-bottom: 10px; }
+        h2 { color: #333; margin-top: 30px; }
+        h3 { color: #555; }
+        a { color: #1a73e8; }
+        .meta { color: #666; font-size: 14px; margin-bottom: 30px; }
+        .lang-switch { text-align: right; margin-bottom: 20px; }
+        .lang-switch a { margin-left: 10px; }
+        code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; }
+        ul { padding-left: 20px; }
+        .highlight { background: #fff3cd; padding: 15px; border-left: 4px solid #ffc107; margin: 20px 0; }
+    </style>
+</head>
+<body>
+
+<div class="lang-switch">
+    <a href="#ru">Русский</a> | <a href="#en">English</a>
+</div>
+
+<!-- ═══════════════ РУССКИЙ ═══════════════ -->
+<section id="ru">
+    <h1>Политика конфиденциальности SHome</h1>
+    <p class="meta"><strong>Версия приложения:</strong> 8.6.0<br>
+        <strong>Последнее обновление:</strong> 25 Ноября 2026</p>
+
+    <h2>1. Общие положения</h2>
+    <p>Настоящая Политика конфиденциальности описывает, какие данные собирает, использует и хранит приложение SHome («Приложение»), а также ваши права в отношении этих данных.</p>
+    <div class="highlight"><strong>Мы не продаём ваши данные третьим лицам.</strong></div>
+
+    <h2>2. Какие данные мы обрабатываем</h2>
+
+    <h3>2.1. Данные устройств умного дома</h3>
+    <ul>
+        <li>IP-адреса устройств (Tuya, Zigbee, Frigate)</li>
+        <li>Local Key (ключи шифрования Tuya) — в зашифрованном виде</li>
+        <li>Состояние устройств (вкл/выкл, температура, яркость и т.д.)</li>
+        <li>Названия устройств и комнат</li>
+        <li>DPS-параметры устройств</li>
+        <li><code>friendly_name</code> Zigbee-устройств</li>
+    </ul>
+
+    <h3>2.2. Данные лицензирования Pro</h3>
+    <ul>
+        <li><strong><code>androidId</code></strong> — уникальный идентификатор Android-устройства. Используется <strong>только</strong> для привязки Pro-лицензии к устройству.</li>
+        <li><strong>Лицензионный ключ</strong> — сохраняется в зашифрованном виде (SecureStorage).</li>
+        <li><strong>Дата активации Pro</strong> — для проверки срока действия.</li>
+        <li><strong>Дата первого запуска триала</strong> — для отслеживания 14-дневного пробного периода.</li>
+        <li><strong>Дата последнего запуска</strong> — для защиты от отката системных часов.</li>
+    </ul>
+
+    <h3>2.3. Геолокация (опционально)</h3>
+    <ul>
+        <li><strong>Координаты устройства</strong> (широта, долгота) — <strong>только</strong> если вы включили функцию «Присутствие».</li>
+        <li><strong>Радиус «дома»</strong> — задаётся вами.</li>
+    </ul>
+    <p>Геолокация используется <strong>исключительно</strong> для определения статуса «дома / не дома / рядом» и автоматизаций. <strong>Не передаётся</strong> разработчику или третьим лицам.</p>
+
+    <h3>2.4. Данные для уведомлений (опционально)</h3>
+    <ul>
+        <li><strong>VK-токен и user ID</strong> — для отправки уведомлений в VK.</li>
+        <li><strong>Номер телефона</strong> — для отправки SMS-уведомлений.</li>
+    </ul>
+
+    <h3>2.5. Данные для облачного резервного копирования (опционально)</h3>
+    <ul>
+        <li><strong>Логин и пароль Mail.ru Cloud</strong> — для загрузки/скачивания зашифрованных бэкапов.</li>
+        <li>Пароль хранится в зашифрованном виде (SecureStorage).</li>
+    </ul>
+
+    <h3>2.6. Технические данные</h3>
+    <ul>
+        <li>Версия приложения</li>
+        <li>Модель устройства (телефона)</li>
+        <li>Версия операционной системы</li>
+        <li>Логи ошибок (локально, через <code>Talker</code>)</li>
+    </ul>
+
+    <h2>3. Как мы используем данные</h2>
+    <ul>
+        <li>Для управления устройствами умного дома</li>
+        <li>Для активации и проверки Pro-лицензии</li>
+        <li>Для определения присутствия (если включено)</li>
+        <li>Для отправки уведомлений (если настроено)</li>
+        <li>Для резервного копирования (если настроено)</li>
+        <li>Для исправления ошибок</li>
+    </ul>
+
+    <h2>4. Хранение данных</h2>
+    <ul>
+        <li><strong>Локально</strong> на устройстве пользователя (SQLite, SecureStorage).</li>
+        <li>В <strong>зашифрованном</strong> виде (AES-256 для SecureStorage).</li>
+        <li>Данные <strong>не передаются</strong> на серверы разработчика.</li>
+        <li>Данные <strong>передаются</strong> только тем сервисам, которые <strong>явно</strong> настроены пользователем (см. раздел 5).</li>
+    </ul>
+
+    <h2>5. Сторонние сервисы</h2>
+    <p>Приложение может взаимодействовать со следующими сторонними сервисами <strong>по вашему выбору</strong>:</p>
+
+    <h3>5.1. Tuya (умные устройства)</h3>
+    <ul>
+        <li><strong>Что передаётся:</strong> идентификатор устройства, IP-адрес, статус.</li>
+        <li><strong>Куда:</strong> локально (LAN) или через Tuya Cloud (если настроено).</li>
+        <li><strong>Политика:</strong> <a href="https://www.tuya.com/privacy">https://www.tuya.com/privacy</a></li>
+    </ul>
+
+    <h3>5.2. Zigbee2MQTT (Zigbee-устройства)</h3>
+    <ul>
+        <li><strong>Что передаётся:</strong> MQTT-сообщения с состоянием устройств.</li>
+        <li><strong>Куда:</strong> ваш MQTT-брокер (локально или удалённо).</li>
+        <li><strong>Политика:</strong> зависит от вашего брокера.</li>
+    </ul>
+
+    <h3>5.3. Frigate (видеонаблюдение)</h3>
+    <ul>
+        <li><strong>Что передаётся:</strong> события детекции (person, car), статистика.</li>
+        <li><strong>Куда:</strong> ваш сервер Frigate (локально или удалённо).</li>
+        <li><strong>Политика:</strong> зависит от вашего сервера.</li>
+    </ul>
+
+    <h3>5.4. Mail.ru Cloud (резервное копирование)</h3>
+    <ul>
+        <li><strong>Что передаётся:</strong> зашифрованный файл конфигурации.</li>
+        <li><strong>Куда:</strong> Mail.ru Cloud.</li>
+        <li><strong>Политика:</strong> <a href="https://help.mail.ru/cloud/legal/privacy">https://help.mail.ru/cloud/legal/privacy</a></li>
+    </ul>
+
+    <h3>5.5. VK (уведомления)</h3>
+    <ul>
+        <li><strong>Что передаётся:</strong> текст уведомления, ваш VK user ID.</li>
+        <li><strong>Куда:</strong> VK API.</li>
+        <li><strong>Политика:</strong> <a href="https://vk.com/privacy">https://vk.com/privacy</a></li>
+    </ul>
+
+    <h3>5.6. SMS-шлюз (уведомления)</h3>
+    <ul>
+        <li><strong>Что передаётся:</strong> текст SMS, номер телефона.</li>
+        <li><strong>Куда:</strong> через SMS-шлюз вашего оператора.</li>
+        <li><strong>Политика:</strong> зависит от оператора.</li>
+    </ul>
+
+    <h3>5.7. GitHub (обновления)</h3>
+    <ul>
+        <li><strong>Что передаётся:</strong> версия приложения (для проверки обновлений).</li>
+        <li><strong>Куда:</strong> GitHub API.</li>
+        <li><strong>Политика:</strong> <a href="https://docs.github.com/en/site-policy/privacy-policies">https://docs.github.com/en/site-policy/privacy-policies</a></li>
+    </ul>
+
+    <h2>6. Безопасность</h2>
+    <ul>
+        <li>Шифрование данных (AES-256, SecureStorage)</li>
+        <li>Безопасные протоколы передачи (HTTPS, MQTT over TLS — если настроено)</li>
+        <li>Регулярные обновления безопасности</li>
+        <li>Локальное хранение (без облачных сервисов разработчика)</li>
+    </ul>
+
+    <h2>7. Аналитика и crash-логи</h2>
+    <p><strong>Мы не используем</strong> Firebase Analytics, Crashlytics или иные внешние сервисы аналитики.</p>
+    <p>Логи ошибок хранятся <strong>локально</strong> на устройстве (через <code>Talker</code>) и <strong>не передаются</strong> разработчику. Вы можете просмотреть их в настройках приложения.</p>
+
+    <h2>8. Права пользователя</h2>
+    <ul>
+        <li><strong>Получить</strong> копию своих данных (экспорт конфигурации в настройках).</li>
+        <li><strong>Удалить</strong> данные (удаление приложения = удаление всех локальных данных).</li>
+        <li><strong>Отозвать</strong> согласие (удаление приложения).</li>
+        <li><strong>Отключить</strong> геолокацию, уведомления, облако — в настройках приложения.</li>
+        <li><strong>Обратиться</strong> с жалобой в Роскомнадзор (<a href="https://rkn.gov.ru">https://rkn.gov.ru</a>).</li>
+    </ul>
+
+    <h2>9. Данные детей</h2>
+    <p>Приложение не предназначено для детей младше 13 лет. Мы сознательно не собираем данные детей.</p>
+
+    <h2>10. Согласие на обработку</h2>
+    <p>Используя приложение, вы даёте согласие на обработку следующих данных:</p>
+    <ul>
+        <li><code>androidId</code> (для лицензирования Pro)</li>
+        <li>Геолокация (для presence, если включено)</li>
+        <li>Логин/пароль Mail.ru Cloud (для бэкапов, если настроено)</li>
+        <li>VK-токен (для уведомлений, если настроено)</li>
+        <li>Номер телефона (для SMS, если настроено)</li>
+        <li>IP-адреса устройств (для управления)</li>
+    </ul>
+    <p>Согласие действует до удаления приложения. Вы можете отозвать согласие, удалив приложение.</p>
+
+    <h2>11. Изменения политики</h2>
+    <p>Мы можем обновлять политику. О значительных изменениях будем уведомлять в приложении. Дата последнего обновления указана в начале документа.</p>
+
+    <h2>12. Контакты</h2>
+    <p>По вопросам конфиденциальности: <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a></p>
+
+</section>
+
+<hr style="margin: 60px 0;">
+
+<!-- ═══════════════ ENGLISH ═══════════════ -->
+<section id="en">
+    <h1>SHome Privacy Policy</h1>
+    <p class="meta"><strong>App version:</strong> 8.6.0<br>
+        <strong>Last updated:</strong> November 25, 2026</p>
+
+    <h2>1. General</h2>
+    <p>This Privacy Policy describes what data the SHome application (the “App”) collects, uses, and stores, as well as your rights regarding this data.</p>
+    <div class="highlight"><strong>We do not sell your data to third parties.</strong></div>
+
+    <h2>2. Data we process</h2>
+
+    <h3>2.1. Smart home device data</h3>
+    <ul>
+        <li>Device IP addresses (Tuya, Zigbee, Frigate)</li>
+        <li>Local Keys (Tuya encryption keys) — encrypted</li>
+        <li>Device state (on/off, temperature, brightness, etc.)</li>
+        <li>Device and room names</li>
+        <li>Device DPS parameters</li>
+        <li>Zigbee device <code>friendly_name</code></li>
+    </ul>
+
+    <h3>2.2. Pro licensing data</h3>
+    <ul>
+        <li><strong><code>androidId</code></strong> — unique Android device identifier. Used <strong>only</strong> to bind a Pro license to the device.</li>
+        <li><strong>License key</strong> — stored encrypted (SecureStorage).</li>
+        <li><strong>Pro activation date</strong> — to verify the license validity.</li>
+        <li><strong>Trial start date</strong> — to track the 14-day trial period.</li>
+        <li><strong>Last seen date</strong> — to protect against system clock rollback.</li>
+    </ul>
+
+    <h3>2.3. Geolocation (optional)</h3>
+    <ul>
+        <li><strong>Device coordinates</strong> (latitude, longitude) — <strong>only</strong> if you enable the “Presence” feature.</li>
+        <li><strong>Home radius</strong> — set by you.</li>
+    </ul>
+    <p>Geolocation is used <strong>solely</strong> to determine “home / away / near” status for automations. It is <strong>not</strong> transmitted to the developer or third parties.</p>
+
+    <h3>2.4. Notification data (optional)</h3>
+    <ul>
+        <li><strong>VK token and user ID</strong> — to send VK notifications.</li>
+        <li><strong>Phone number</strong> — to send SMS notifications.</li>
+    </ul>
+
+    <h3>2.5. Cloud backup data (optional)</h3>
+    <ul>
+        <li><strong>Mail.ru Cloud login and password</strong> — to upload/download encrypted backups.</li>
+        <li>Password is stored encrypted (SecureStorage).</li>
+    </ul>
+
+    <h3>2.6. Technical data</h3>
+    <ul>
+        <li>App version</li>
+        <li>Device model</li>
+        <li>Operating system version</li>
+        <li>Error logs (locally, via <code>Talker</code>)</li>
+    </ul>
+
+    <h2>3. How we use data</h2>
+    <ul>
+        <li>To control smart home devices</li>
+        <li>To activate and verify the Pro license</li>
+        <li>To determine presence (if enabled)</li>
+        <li>To send notifications (if configured)</li>
+        <li>To perform backups (if configured)</li>
+        <li>To fix errors</li>
+    </ul>
+
+    <h2>4. Data storage</h2>
+    <ul>
+        <li><strong>Locally</strong> on the user's device (SQLite, SecureStorage).</li>
+        <li><strong>Encrypted</strong> (AES-256 for SecureStorage).</li>
+        <li>Data is <strong>not</strong> transmitted to the developer's servers.</li>
+        <li>Data is <strong>transmitted</strong> only to services <strong>explicitly</strong> configured by the user (see Section 5).</li>
+    </ul>
+
+    <h2>5. Third-party services</h2>
+    <p>The App may interact with the following third-party services <strong>at your choice</strong>:</p>
+
+    <h3>5.1. Tuya (smart devices)</h3>
+    <ul>
+        <li><strong>Data transmitted:</strong> device ID, IP address, status.</li>
+        <li><strong>Destination:</strong> locally (LAN) or via Tuya Cloud (if configured).</li>
+        <li><strong>Policy:</strong> <a href="https://www.tuya.com/privacy">https://www.tuya.com/privacy</a></li>
+    </ul>
+
+    <h3>5.2. Zigbee2MQTT (Zigbee devices)</h3>
+    <ul>
+        <li><strong>Data transmitted:</strong> MQTT messages with device state.</li>
+        <li><strong>Destination:</strong> your MQTT broker (local or remote).</li>
+        <li><strong>Policy:</strong> depends on your broker.</li>
+    </ul>
+
+    <h3>5.3. Frigate (video surveillance)</h3>
+    <ul>
+        <li><strong>Data transmitted:</strong> detection events (person, car), statistics.</li>
+        <li><strong>Destination:</strong> your Frigate server (local or remote).</li>
+        <li><strong>Policy:</strong> depends on your server.</li>
+    </ul>
+
+    <h3>5.4. Mail.ru Cloud (backup)</h3>
+    <ul>
+        <li><strong>Data transmitted:</strong> encrypted configuration file.</li>
+        <li><strong>Destination:</strong> Mail.ru Cloud.</li>
+        <li><strong>Policy:</strong> <a href="https://help.mail.ru/cloud/legal/privacy">https://help.mail.ru/cloud/legal/privacy</a></li>
+    </ul>
+
+    <h3>5.5. VK (notifications)</h3>
+    <ul>
+        <li><strong>Data transmitted:</strong> notification text, your VK user ID.</li>
+        <li><strong>Destination:</strong> VK API.</li>
+        <li><strong>Policy:</strong> <a href="https://vk.com/privacy">https://vk.com/privacy</a></li>
+    </ul>
+
+    <h3>5.6. SMS gateway (notifications)</h3>
+    <ul>
+        <li><strong>Data transmitted:</strong> SMS text, phone number.</li>
+        <li><strong>Destination:</strong> via your carrier's SMS gateway.</li>
+        <li><strong>Policy:</strong> depends on the carrier.</li>
+    </ul>
+
+    <h3>5.7. GitHub (updates)</h3>
+    <ul>
+        <li><strong>Data transmitted:</strong> app version (to check for updates).</li>
+        <li><strong>Destination:</strong> GitHub API.</li>
+        <li><strong>Policy:</strong> <a href="https://docs.github.com/en/site-policy/privacy-policies">https://docs.github.com/en/site-policy/privacy-policies</a></li>
+    </ul>
+
+    <h2>6. Security</h2>
+    <ul>
+        <li>Data encryption (AES-256, SecureStorage)</li>
+        <li>Secure transmission protocols (HTTPS, MQTT over TLS — if configured)</li>
+        <li>Regular security updates</li>
+        <li>Local storage (no developer cloud services)</li>
+    </ul>
+
+    <h2>7. Analytics and crash logs</h2>
+    <p><strong>We do not use</strong> Firebase Analytics, Crashlytics, or other external analytics services.</p>
+    <p>Error logs are stored <strong>locally</strong> on the device (via <code>Talker</code>) and are <strong>not</strong> transmitted to the developer. You can view them in the App settings.</p>
+
+    <h2>8. User rights</h2>
+    <ul>
+        <li><strong>Obtain</strong> a copy of your data (export configuration in settings).</li>
+        <li><strong>Delete</strong> your data (uninstalling the App removes all local data).</li>
+        <li><strong>Withdraw</strong> consent (uninstall the App).</li>
+        <li><strong>Disable</strong> geolocation, notifications, cloud — in the App settings.</li>
+        <li><strong>Submit</strong> a complaint to Roskomnadzor (<a href="https://rkn.gov.ru">https://rkn.gov.ru</a>).</li>
+    </ul>
+
+    <h2>9. Children's data</h2>
+    <p>The App is not intended for children under 13. We do not knowingly collect children's data.</p>
+
+    <h2>10. Consent to processing</h2>
+    <p>By using the App, you consent to the processing of the following data:</p>
+    <ul>
+        <li><code>androidId</code> (for Pro licensing)</li>
+        <li>Geolocation (for presence, if enabled)</li>
+        <li>Mail.ru Cloud login/password (for backups, if configured)</li>
+        <li>VK token (for notifications, if configured)</li>
+        <li>Phone number (for SMS, if configured)</li>
+        <li>Device IP addresses (for control)</li>
+    </ul>
+    <p>Consent is valid until the App is uninstalled. You can withdraw consent by uninstalling the App.</p>
+
+    <h2>11. Changes to this policy</h2>
+    <p>We may update this policy. We will notify users in the App about significant changes. The last updated date is shown at the beginning of this document.</p>
+
+    <h2>12. Contact</h2>
+    <p>For privacy questions, contact: <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a></p>
+
+</section>
+
+<footer style="margin-top: 60px; padding-top: 20px; border-top: 1px solid #ddd; color: #666; font-size: 12px;">
+    © 2026 votsurX · SHome 8.6.0
+</footer>
+
+</body>
+</html>
