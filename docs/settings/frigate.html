@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Настройка Frigate — SHome</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+    <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <img src="../assets/logo.png" alt="SHome" onerror="this.style.display='none'">
+        <h1>SHome</h1>
+    </a>
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../philosophy.html">Философия</a>
+    <a href="../readme.html">Описание</a>
+    <a href="tuya.html">Документация</a>
+    <a href="../licenses.html">Лицензии</a>
+    <a href="../privacy.html">Политика</a>
+    <a href="https://github.com/votsurx/SHome-Releases" target="_blank">GitHub</a>
+</nav>
+
+<h1>Настройка Frigate</h1>
+
+<p><strong>Frigate</strong> — это NVR (Network Video Recorder) с детекцией объектов в реальном времени (person, car, dog, cat и т.д.). SHome подключается к Frigate и показывает камеры, события, статистику.</p>
+
+<div class="highlight">
+    <strong>Схема:</strong> IP-камера (RTSP) → Frigate → MQTT + API → SHome
+</div>
+
+<h2>Что нужно</h2>
+<ul>
+    <li><strong>Сервер</strong>: Raspberry Pi 4+ (с Coral USB), Intel NUC, Synology, мини-ПК.</li>
+    <li><strong>IP-камеры</strong> с RTSP (Hikvision, Dahua, Reolink, Tapo и т.п.).</li>
+    <li><strong>MQTT-брокер</strong>: Mosquitto (см. <a href="mqtt.html">настройку MQTT</a>).</li>
+    <li><strong>Docker</strong> + Docker Compose.</li>
+</ul>
+
+<h2>Шаг 1. Установить Frigate</h2>
+
+<p>Создайте папку для Frigate:</p>
+<pre><code>mkdir -p /opt/frigate/config /opt/frigate/media
+cd /opt/frigate</code></pre>
+
+<p><code>docker-compose.yml</code>:</p>
+<pre><code>version: '3.9'
+
+services:
+  frigate:
+    container_name: frigate
+    image: ghcr.io/blakeblackshear/frigate:stable
+    restart: unless-stopped
+    shm_size: "256mb"
+    ports:
+      - "5000:5000"     # веб-интерфейс
+      - "8554:8554"     # RTSP restream
+      - "8555:8555"     # WebRTC (если нужно)
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /opt/frigate/config:/config
+      - /opt/frigate/media:/media/frigate
+      - type: tmpfs
+        target: /tmp/cache
+        tmpfs:
+          size: 1000000000
+    environment:
+      FRIGATE_RTSP_PASSWORD: "your_camera_password"
+    devices:
+      - /dev/bus/usb:/dev/bus/usb   # для Coral USB (если есть)
+</code></pre>
+
+<blockquote>
+    <p><strong><code>shm_size: "256mb"</code></strong> — для 1–2 камер. Для 4+ камер увеличьте до <code>512mb</code> или <code>1gb</code>.</p>
+    <p><strong>Coral USB</strong> — ускоряет детекцию (опционально, но рекомендуется для 2+ камер).</p>
+</blockquote>
+
+<h2>Шаг 2. Настроить <code>config.yml</code></h2>
+
+<p>Файл: <code>/opt/frigate/config/config.yml</code>:</p>
+
+<pre><code>mqtt:
+  host: your-mqtt-broker
+  user: your_user
+  password: your_password
+
+detectors:
+  coral:
+    type: edgetpu
+    device: usb
+  # Или CPU (медленно, для теста):
+  # cpu:
+  #   type: cpu
+
+cameras:
+  front_door:
+    ffmpeg:
+      inputs:
+        - path: rtsp://user:password@camera-ip:554/Streaming/Channels/101
+          roles:
+            - detect
+            - record
+    detect:
+      width: 1280
+      height: 720
+      fps: 5
+    objects:
+      track:
+        - person
+        - car
+        - dog
+        - cat
+    record:
+      enabled: true
+      retain:
+        days: 7
+        mode: motion
+
+  backyard:
+    ffmpeg:
+      inputs:
+        - path: rtsp://user:password@camera-ip-2:554/Streaming/Channels/101
+          roles:
+            - detect
+            - record
+    detect:
+      width: 1280
+      height: 720
+      fps: 5
+    objects:
+      track:
+        - person
+        - car
+</code></pre>
+
+<blockquote>
+    <p><strong>RTSP-URL</strong> зависит от камеры:</p>
+    <ul>
+        <li>Hikvision: <code>rtsp://user:pass@ip:554/Streaming/Channels/101</code></li>
+        <li>Dahua: <code>rtsp://user:pass@ip:554/cam/realmonitor?channel=1&subtype=0</code></li>
+        <li>Reolink: <code>rtsp://user:pass@ip:554/h264Preview_01_main</code></li>
+        <li>Tapo: <code>rtsp://user:pass@ip:554/stream1</code></li>
+    </ul>
+</blockquote>
+
+<h2>Шаг 3. Запустить Frigate</h2>
+
+<pre><code>docker compose up -d</code></pre>
+
+<p>Проверьте логи:</p>
+<pre><code>docker logs -f frigate</code></pre>
+
+<p>Должно быть:</p>
+<pre><code>Frigate started
+MQTT connected
+Camera front_door: initialized
+Detector coral: ready
+</code></pre>
+
+<p>Откройте веб-интерфейс: <code>http://your-server:5000</code>.</p>
+
+<h2>Шаг 4. Настроить SHome</h2>
+
+<ol>
+    <li>Откройте SHome → <strong>Настройки</strong> → <strong>Frigate</strong>.</li>
+    <li>Введите:
+        <ul>
+            <li><strong>URL</strong>: <code>http://your-server:5000</code></li>
+            <li><strong>Логин/пароль</strong> (если настроена аутентификация Frigate).</li>
+        </ul>
+    </li>
+    <li>Сохраните.</li>
+    <li>Откройте <strong>Меню</strong> → <strong>Frigate</strong>.</li>
+    <li>SHome покажет камеры и последние события.</li>
+</ol>
+
+<h2>Шаг 5. Настроить уведомления</h2>
+
+<ol>
+    <li>Настройки → <strong>Уведомления</strong> → <strong>VK</strong> (или SMS).</li>
+    <li>Включите <strong>Frigate: person</strong>, <strong>Frigate: car</strong> и т.д.</li>
+    <li>При детекции SHome отправит уведомление.</li>
+</ol>
+
+<h2>Шаг 6. Проверить</h2>
+<ul>
+    <li>В SHome: меню → Frigate → камеры (превью).</li>
+    <li>События (person, car) — список.</li>
+    <li>Уведомления приходят.</li>
+</ul>
+
+<h2>Частые проблемы</h2>
+
+<h3>Frigate не запускается</h3>
+<ul>
+    <li>Проверьте <code>docker logs frigate</code> — там ошибка.</li>
+    <li>Проверьте <code>config.yml</code> — YAML чувствителен к отступам.</li>
+    <li>Проверьте <code>shm_size</code> — если мало, увеличьте.</li>
+</ul>
+
+<h3>Нет событий</h3>
+<ul>
+    <li>Проверьте <code>detect</code> в <code>config.yml</code> — камера включена?</li>
+    <li>Проверьте, что объекты в кадре (person, car) — Frigate их видит.</li>
+    <li>Проверьте веб-интерфейс Frigate (<code>:5000</code>) — там видны события?</li>
+</ul>
+
+<h3>SHome не подключается к Frigate</h3>
+<ul>
+    <li>Проверьте URL (<code>http://your-server:5000</code>).</li>
+    <li>Проверьте firewall (порт 5000).</li>
+    <li>Проверьте, что SHome (телефон) в той же сети, что Frigate.</li>
+</ul>
+
+<h3>Уведомления не приходят</h3>
+<ul>
+    <li>Проверьте VK-токен / SMS-настройки.</li>
+    <li>Проверьте, что в настройках SHome включены Frigate-уведомления (person, car).</li>
+    <li>Проверьте, что Frigate публикует события в MQTT.</li>
+</ul>
+
+<h3>Coral USB не найден</h3>
+<ul>
+    <li>Проверьте <code>lsusb</code> — устройство видно?</li>
+    <li>Проверьте права: <code>sudo usermod -a -G dialout $USER</code>.</li>
+    <li>Проверьте, что <code>devices: /dev/bus/usb</code> в <code>docker-compose.yml</code>.</li>
+</ul>
+
+<h2>Ссылки</h2>
+<ul>
+    <li><a href="https://frigate.video/" target="_blank">Frigate — официальный сайт</a></li>
+    <li><a href="https://docs.frigate.video/" target="_blank">Frigate — документация</a></li>
+    <li><a href="https://docs.frigate.video/configuration/" target="_blank">Frigate — конфигурация</a></li>
+    <li><a href="https://coral.ai/" target="_blank">Google Coral (USB Accelerator)</a></li>
+</ul>
+
+<footer>
+    © 2026 votsurX · SHome 8.6.0 · <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a>
+</footer>
+</body>
+</html>

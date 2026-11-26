@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Настройка Tuya — SHome</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+    <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <img src="../assets/logo.png" alt="SHome" onerror="this.style.display='none'">
+        <h1>SHome</h1>
+    </a>
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../philosophy.html">Философия</a>
+    <a href="../readme.html">Описание</a>
+    <a href="tuya.html">Документация</a>
+    <a href="../licenses.html">Лицензии</a>
+    <a href="../privacy.html">Политика</a>
+    <a href="https://github.com/votsurx/SHome-Releases" target="_blank">GitHub</a>
+</nav>
+
+<h1>Настройка Tuya</h1>
+
+<p>Tuya-устройства (розетки, выключатели, шторы, свет, HVAC, пылесосы) работают в SHome <strong>локально</strong> — по LAN, без облака Tuya. Для этого нужны <code>deviceId</code> и <code>localKey</code>.</p>
+
+<div class="highlight">
+    <strong>Важно:</strong> SHome общается с Tuya-устройствами напрямую по локальной сети (порт 6668). Устройство и телефон должны быть в <strong>одной сети</strong>.
+</div>
+
+<h2>Что нужно</h2>
+<ul>
+    <li>Tuya-устройство, добавленное в приложение <strong>Tuya Smart</strong> или <strong>Smart Life</strong>.</li>
+    <li>Аккаунт Tuya (для получения <code>localKey</code>).</li>
+    <li>Телефон и устройство в одной Wi-Fi сети.</li>
+</ul>
+
+<h2>Шаг 1. Получить <code>deviceId</code></h2>
+
+<h3>Способ A: приложение Tuya Smart / Smart Life</h3>
+<ol>
+    <li>Откройте приложение Tuya Smart (или Smart Life).</li>
+    <li>Выберите устройство.</li>
+    <li>Нажмите на <strong>«⋮»</strong> (или «Настройки») → <strong>«Информация об устройстве»</strong>.</li>
+    <li>Скопируйте <strong>Device ID</strong> (длинная строка вида <code>bf1234567890abcdef</code>).</li>
+</ol>
+
+<h3>Способ B: Tuya IoT Platform</h3>
+<ol>
+    <li>Зарегистрируйтесь на <a href="https://iot.tuya.com" target="_blank">iot.tuya.com</a>.</li>
+    <li>Создайте <strong>Cloud Project</strong> (Data Center — выберите ближайший, например «Central Europe»).</li>
+    <li>В проекте: <strong>Devices</strong> → <strong>Link Tuya App Account</strong> → отсканируйте QR-код из приложения Tuya Smart (Настройки → Аккаунт → «Link Tuya App Account»).</li>
+    <li>После привязки: <strong>Devices</strong> → выберите устройство → <strong>Device ID</strong>.</li>
+</ol>
+
+<h2>Шаг 2. Получить <code>localKey</code></h2>
+
+<h3>Способ A: Tuya IoT Platform (рекомендую)</h3>
+<ol>
+    <li>В <a href="https://iot.tuya.com" target="_blank">iot.tuya.com</a> → ваш проект → <strong>Devices</strong>.</li>
+    <li>Выберите устройство → <strong>Device Details</strong>.</li>
+    <li>Найдите поле <strong>Local Key</strong> — это и есть <code>localKey</code> (16 символов, буквы и цифры).</li>
+</ol>
+
+<h3>Способ B: tinytuya (CLI)</h3>
+<ol>
+    <li>Установите Python 3.8+.</li>
+    <li>Установите tinytuya:
+        <pre><code>pip install tinytuya</code></pre>
+    </li>
+    <li>Запустите мастер:
+        <pre><code>python -m tinytuya wizard</code></pre>
+    </li>
+    <li>Введите <strong>API Key</strong> и <strong>API Secret</strong> из Tuya IoT Platform (Project → Overview → Access ID/Secret).</li>
+    <li>Мастер просканирует сеть и выдаст файл <code>devices.json</code> с <code>id</code>, <code>key</code> (localKey), <code>ip</code>.</li>
+</ol>
+
+<h3>Способ C: сканер SHome</h3>
+<p>SHome имеет встроенный сканер Tuya (меню → «Сканер Tuya»). Если устройство в сети, SHome может получить <code>localKey</code> автоматически (если устройство поддерживает Tuya 3.3+ и ещё не привязано к другому аккаунту).</p>
+
+<div class="highlight">
+    <strong>Совет:</strong> если <code>localKey</code> не подходит — перепривяжите устройство в Tuya Smart (удалить → добавить заново). После перепривязки <code>localKey</code> меняется.
+</div>
+
+<h2>Шаг 3. Добавить устройство в SHome</h2>
+<ol>
+    <li>Откройте SHome → главный экран → <strong>«+»</strong> (Floating Action Button).</li>
+    <li>Заполните:
+        <ul>
+            <li><strong>Название</strong> — любое (например, «Розетка в спальне»).</li>
+            <li><strong>Тип устройства</strong> — розетка / выключатель / штора / свет / HVAC / пылесос.</li>
+            <li><strong>Device ID</strong> — из шага 1.</li>
+            <li><strong>Local Key</strong> — из шага 2.</li>
+            <li><strong>IP-адрес</strong> — опционально (если не указан, SHome найдёт по LAN).</li>
+        </ul>
+    </li>
+    <li>Нажмите <strong>«Добавить»</strong>.</li>
+    <li>Устройство появится на главном экране. Проверьте вкл/выкл.</li>
+</ol>
+
+<h2>Шаг 4. Проверить</h2>
+<ul>
+    <li>Устройство <strong>online</strong> (зелёная точка).</li>
+    <li>Вкл/выкл работает.</li>
+    <li>Если устройство offline — см. «Частые проблемы».</li>
+</ul>
+
+<h2>Частые проблемы</h2>
+
+<h3>Устройство offline</h3>
+<ul>
+    <li>Проверьте, что телефон и устройство в одной Wi-Fi сети.</li>
+    <li>Проверьте IP-адрес устройства (сканер сети, роутер).</li>
+    <li>Проверьте firewall на роутере (порт 6668).</li>
+    <li>Перезагрузите устройство (выключите/включите питание).</li>
+</ul>
+
+<h3><code>localKey</code> не подходит</h3>
+<ul>
+    <li><code>localKey</code> меняется при перепривязке устройства в Tuya Smart.</li>
+    <li>Удалите устройство из Tuya Smart и добавьте заново — получите новый <code>localKey</code>.</li>
+    <li>Убедитесь, что не используете <code>localKey</code> от другого устройства.</li>
+</ul>
+
+<h3>Устройство Tuya 3.4+ / 3.5</h3>
+<ul>
+    <li>Новые устройства Tuya (3.4+) используют <strong>protocol 3.4/3.5</strong> — SHome поддерживает (через <code>tinytuya</code>).</li>
+    <li>Если не работает — проверьте версию протокола в Tuya IoT Platform (Device Details → Protocol Version).</li>
+</ul>
+
+<h3>«Device ID не найден»</h3>
+<ul>
+    <li>Убедитесь, что устройство привязано к аккаунту Tuya.</li>
+    <li>В Tuya IoT Platform: <strong>Devices</strong> → <strong>Link Tuya App Account</strong> → привяжите аккаунт.</li>
+</ul>
+
+<h2>Ссылки</h2>
+<ul>
+    <li><a href="https://iot.tuya.com" target="_blank">Tuya IoT Platform</a></li>
+    <li><a href="https://github.com/jasonacox/tinytuya" target="_blank">tinytuya (GitHub)</a></li>
+    <li><a href="https://developer.tuya.com/en/docs/iot" target="_blank">Tuya Developer Docs</a></li>
+</ul>
+
+<footer>
+    © 2026 votsurX · SHome 8.6.0 · <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a>
+</footer>
+</body>
+</html>

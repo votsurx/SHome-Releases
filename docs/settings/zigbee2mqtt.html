@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Настройка Zigbee2MQTT — SHome</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+    <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <img src="../assets/logo.png" alt="SHome" onerror="this.style.display='none'">
+        <h1>SHome</h1>
+    </a>
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../philosophy.html">Философия</a>
+    <a href="../readme.html">Описание</a>
+    <a href="tuya.html">Документация</a>
+    <a href="../licenses.html">Лицензии</a>
+    <a href="../privacy.html">Политика</a>
+    <a href="https://github.com/votsurx/SHome-Releases" target="_blank">GitHub</a>
+</nav>
+
+<h1>Настройка Zigbee2MQTT (Z2M)</h1>
+
+<p>SHome поддерживает Zigbee-устройства через <strong>Zigbee2MQTT</strong> (Z2M). Z2M — это мост между Zigbee-координатором и MQTT-брокером. SHome подключается к MQTT и получает список устройств.</p>
+
+<div class="highlight">
+    <strong>Схема:</strong> Zigbee-устройство → Zigbee-координатор → Z2M → MQTT-брокер → SHome
+</div>
+
+<h2>Что нужно</h2>
+<ul>
+    <li><strong>Zigbee-координатор</strong>: CC2652, ConBee II, Sonoff Zigbee 3.0, SkyConnect и т.п.</li>
+    <li><strong>Сервер</strong>: Raspberry Pi 4+, Intel NUC, Synology, мини-ПК.</li>
+    <li><strong>MQTT-брокер</strong>: Mosquitto (рекомендую).</li>
+    <li><strong>Docker</strong> (опционально, но проще).</li>
+</ul>
+
+<h2>Шаг 1. Установить MQTT-брокер (Mosquitto)</h2>
+
+<p>Если у вас ещё нет MQTT-брокера — установите Mosquitto:</p>
+
+<pre><code>docker run -d \
+  --name mosquitto \
+  --restart=unless-stopped \
+  -p 1883:1883 \
+  -p 9001:9001 \
+  -v /path/to/mosquitto.conf:/mosquitto/config/mosquitto.conf \
+  -v /path/to/mosquitto/data:/mosquitto/data \
+  eclipse-mosquitto</code></pre>
+
+<p>Минимальный <code>mosquitto.conf</code>:</p>
+<pre><code>listener 1883
+allow_anonymous false
+password_file /mosquitto/data/passwd</code></pre>
+
+<p>Создайте пользователя:</p>
+<pre><code>docker exec -it mosquitto mosquitto_passwd -c /mosquitto/data/passwd your_user</code></pre>
+
+<h2>Шаг 2. Установить Zigbee2MQTT</h2>
+
+<h3>Docker (рекомендую)</h3>
+<pre><code>docker run -d \
+  --name zigbee2mqtt \
+  --restart=unless-stopped \
+  -p 8080:8080 \
+  -v /path/to/zigbee2mqtt/data:/app/data \
+  --device=/dev/ttyUSB0 \
+  koenkk/zigbee2mqtt</code></pre>
+
+<blockquote>
+    <p><strong>Порт <code>/dev/ttyUSB0</code></strong> — путь к Zigbee-координатору. На Linux обычно <code>/dev/ttyUSB0</code> или <code>/dev/ttyACM0</code>. Проверьте:</p>
+    <pre><code>ls /dev/ttyUSB* /dev/ttyACM*</code></pre>
+    <p>На Windows — <code>COM3</code> и т.п. (но Z2M лучше ставить на Linux/Raspberry Pi).</p>
+</blockquote>
+
+<h3>Или по официальной инструкции</h3>
+<p><a href="https://www.zigbee2mqtt.io/guide/installation/" target="_blank">https://www.zigbee2mqtt.io/guide/installation/</a></p>
+
+<h2>Шаг 3. Настроить <code>configuration.yaml</code></h2>
+
+<p>Файл: <code>/path/to/zigbee2mqtt/data/configuration.yaml</code>:</p>
+
+<pre><code>mqtt:
+  server: mqtt://your-mqtt-broker:1883
+  user: your_user
+  password: your_password
+
+serial:
+  port: /dev/ttyUSB0
+  adapter: zstack  # или deconz, ezsp и т.п.
+
+frontend:
+  port: 8080
+
+homeassistant: false  # SHome не требует Home Assistant
+
+permit_join: false  # включайте вручную при сопряжении
+
+advanced:
+  network_key: GENERATE  # или ваш ключ
+</code></pre>
+
+<blockquote>
+    <p><strong><code>adapter</code></strong> — тип координатора:</p>
+    <ul>
+        <li><code>zstack</code> — CC2652, CC2531, Sonoff Zigbee 3.0</li>
+        <li><code>deconz</code> — ConBee II</li>
+        <li><code>ezsp</code> — SkyConnect, EFR32</li>
+    </ul>
+</blockquote>
+
+<h2>Шаг 4. Запустить Z2M</h2>
+
+<pre><code>docker restart zigbee2mqtt</code></pre>
+
+<p>Проверьте логи:</p>
+<pre><code>docker logs -f zigbee2mqtt</code></pre>
+
+<p>Должно быть:</p>
+<pre><code>Zigbee2MQTT started!
+MQTT connected
+Coordinator: CC2652P (firmware 20220219)
+</code></pre>
+
+<p>Откройте веб-интерфейс: <code>http://your-server:8080</code>.</p>
+
+<h2>Шаг 5. Сопрячь Zigbee-устройства</h2>
+
+<ol>
+    <li>В Z2M: <strong>Permit join (all)</strong> → включите (или <code>permit_join: true</code> в конфиге).</li>
+    <li>Переведите Zigbee-устройство в режим сопряжения (обычно: удерживайте кнопку 5–10 сек).</li>
+    <li>В Z2M появится новое устройство. Дайте ему имя (например, <code>living_room_lamp</code>).</li>
+    <li>Выключите <strong>Permit join</strong>.</li>
+</ol>
+
+<h2>Шаг 6. Настроить SHome</h2>
+
+<ol>
+    <li>Откройте SHome → <strong>Настройки</strong> → <strong>MQTT</strong>.</li>
+    <li>Введите:
+        <ul>
+            <li><strong>URL</strong>: <code>mqtt://your-mqtt-broker:1883</code></li>
+            <li><strong>Логин</strong>: <code>your_user</code></li>
+            <li><strong>Пароль</strong>: <code>your_password</code></li>
+        </ul>
+    </li>
+    <li>Сохраните. SHome подключится к брокеру.</li>
+    <li>Откройте <strong>Меню</strong> → <strong>Zigbee</strong> → <strong>«Сканировать»</strong>.</li>
+    <li>SHome получит список устройств из Z2M. Добавьте нужные на главный экран.</li>
+</ol>
+
+<h2>Шаг 7. Проверить</h2>
+<ul>
+    <li>В SHome: меню → Zigbee → список устройств.</li>
+    <li>Добавьте устройство на главный экран (вкл/выкл, яркость и т.д.).</li>
+    <li>Проверьте управление.</li>
+</ul>
+
+<h2>Частые проблемы</h2>
+
+<h3>Z2M не подключается к MQTT</h3>
+<ul>
+    <li>Проверьте <code>mqtt.server</code>, <code>user</code>, <code>password</code> в <code>configuration.yaml</code>.</li>
+    <li>Проверьте, что MQTT-брокер запущен (<code>docker ps</code>).</li>
+    <li>Проверьте firewall (порт 1883).</li>
+</ul>
+
+<h3>Z2M не видит координатор</h3>
+<ul>
+    <li>Проверьте <code>/dev/ttyUSB0</code> (или <code>/dev/ttyACM0</code>).</li>
+    <li>Права доступа: <code>sudo usermod -a -G dialout $USER</code>, перезагрузка.</li>
+    <li>Проверьте, что координатор не занят другим процессом.</li>
+</ul>
+
+<h3>SHome не видит Z2M</h3>
+<ul>
+    <li>Проверьте MQTT-настройки в SHome (URL, логин, пароль).</li>
+    <li>Проверьте, что Z2M публикует топики: <code>zigbee2mqtt/bridge/devices</code>.</li>
+    <li>Проверьте firewall между SHome (телефон) и MQTT-брокером.</li>
+</ul>
+
+<h3>Устройства не сопрягаются</h3>
+<ul>
+    <li><strong>Permit join</strong> включён?</li>
+    <li>Устройство в режиме сопряжения? (см. инструкцию устройства)</li>
+    <li>Устройство рядом с координатором (для сопряжения).</li>
+    <li>Проверьте логи Z2M: <code>docker logs -f zigbee2mqtt</code>.</li>
+</ul>
+
+<h3>«Network key» ошибка</h3>
+<ul>
+    <li>При первом запуске Z2M генерирует <code>network_key</code>. Если меняли — все устройства нужно сопрячь заново.</li>
+    <li>Сохраните <code>network_key</code> в надёжном месте.</li>
+</ul>
+
+<h2>Ссылки</h2>
+<ul>
+    <li><a href="https://www.zigbee2mqtt.io/" target="_blank">Zigbee2MQTT — официальный сайт</a></li>
+    <li><a href="https://www.zigbee2mqtt.io/guide/installation/" target="_blank">Установка Z2M</a></li>
+    <li><a href="https://www.zigbee2mqtt.io/supported-devices/" target="_blank">Поддерживаемые устройства</a></li>
+    <li><a href="https://mosquitto.org/" target="_blank">Mosquitto MQTT</a></li>
+</ul>
+
+<footer>
+    © 2026 votsurX · SHome 8.6.0 · <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a>
+</footer>
+</body>
+</html>

@@ -1,0 +1,19 @@
+Что нужно: Mosquitto (или другой брокер).
+
+Установка (Docker):
+
+bash
+docker run -d --name mosquitto -p 1883:1883 -p 9001:9001 \
+-v /path/to/mosquitto.conf:/mosquitto/config/mosquitto.conf \
+eclipse-mosquitto
+Настройка mosquitto.conf:
+
+text
+listener 1883
+allow_anonymous false
+password_file /mosquitto/config/passwd
+Создать пользователя:
+
+bash
+mosquitto_passwd -c /mosquitto/config/passwd your_user
+В SHome: Настройки → MQTT → mqtt://your-broker:1883 + логин/пароль.
