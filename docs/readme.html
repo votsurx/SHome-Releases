@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>README — SHome</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header>
+    <a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <img src="assets/logo.png" alt="SHome" onerror="this.style.display='none'">
+        <h1>SHome</h1>
+    </a>
+</header>
+
+<nav>
+    <a href="index.html">Главная</a>
+    <a href="philosophy.html">Философия</a>
+    <a href="readme.html">Описание</a>
+    <a href="settings/tuya.html">Документация</a>
+    <a href="licenses.html">Лицензии</a>
+    <a href="privacy.html">Политика</a>
+    <a href="https://github.com/votsurx/SHome-Releases" target="_blank">GitHub</a>
+</nav>
+
+<h1>README — SHome</h1>
+
+<p><strong>SHome</strong> — приложение для управления умным домом: Tuya, Zigbee (через Zigbee2MQTT), Frigate. Работает <strong>локально</strong>, без обязательного облака. Поддерживает сцены, таймеры, статистику, уведомления, presence, MQTT.</p>
+
+<div class="highlight">
+    <strong>Версия:</strong> 8.6.0 (82600)<br>
+    <strong>Платформа:</strong> Android 10+ (minSdk 29)<br>
+    <strong>Разработчик:</strong> ArchitectCO<br>
+    <strong>Владелец:</strong> votsurX<br>
+    <strong>Лицензия:</strong> Проприетарная (см. <a href="licenses.html">EULA</a>)
+</div>
+
+<h2>Скачать</h2>
+<ul>
+    <li><a href="https://github.com/votsurx/SHome-Releases/releases/latest" target="_blank">GitHub Releases</a> (APK, последний релиз).</li>
+    <li><strong>RuStore</strong> — скоро.</li>
+</ul>
+
+<p><strong>Установка:</strong></p>
+<ol>
+    <li>Скачайте APK.</li>
+    <li>Разрешите установку из неизвестных источников (Настройки Android → Безопасность).</li>
+    <li>Установите APK.</li>
+    <li>Откройте SHome → пройдите онбординг.</li>
+</ol>
+
+<h2>Возможности</h2>
+
+<h3>Устройства</h3>
+<ul>
+    <li><strong>Tuya</strong>: розетки, выключатели, шторы, свет, HVAC, пылесосы. Локально, без облака Tuya.</li>
+    <li><strong>Zigbee</strong>: через Zigbee2MQTT. Датчики, лампы, выключатели, реле.</li>
+    <li><strong>Frigate</strong>: камеры, детекция объектов (person, car), события, статистика.</li>
+</ul>
+
+<h3>Автоматизация</h3>
+<ul>
+    <li><strong>Сцены</strong>: запуск по времени, событиям, вручную.</li>
+    <li><strong>Таймеры</strong>: включение/выключение по расписанию.</li>
+    <li><strong>Presence</strong>: «дома / не дома» по геолокации телефона.</li>
+</ul>
+
+<h3>Аналитика</h3>
+<ul>
+    <li><strong>Статистика</strong>: uptime, алерты, действия по устройствам.</li>
+    <li><strong>Энергия</strong>: энергопотребление, тарифы, история.</li>
+    <li><strong>События</strong>: полный журнал с фильтрами (дата, устройство, тип).</li>
+</ul>
+
+<h3>Интеграции</h3>
+<ul>
+    <li><strong>Облако</strong>: Mail.ru Cloud — зашифрованные бэкапы (опционально).</li>
+    <li><strong>Уведомления</strong>: VK, SMS. С расписанием и cooldown.</li>
+    <li><strong>MQTT</strong>: подключение к брокеру (Mosquitto и др.).</li>
+</ul>
+
+<h3>Интерфейс</h3>
+<ul>
+    <li><strong>Главный экран</strong>: адаптивная сетка устройств, фильтр по комнатам.</li>
+    <li><strong>Меню</strong>: плитки с возможностью сортировки (long-press).</li>
+    <li><strong>Настройки</strong>: сортировка строк (long-press), темы (день/ночь/авто).</li>
+    <li><strong>Screen Saver</strong>: Lottie-анимация при простое.</li>
+    <li><strong>Локализация</strong>: русский, английский.</li>
+</ul>
+
+<h2>Требования</h2>
+<ul>
+    <li><strong>Android</strong>: 10+ (API 29+).</li>
+    <li><strong>Интернет</strong>: опционально (для обновлений, уведомлений, облака).</li>
+    <li><strong>Локальная сеть</strong>: для Tuya (LAN), Zigbee (MQTT), Frigate (HTTP).</li>
+    <li><strong>Разрешения</strong>: интернет, сеть, геолокация (presence), уведомления (Android 13+).</li>
+</ul>
+
+<h2>Первый запуск</h2>
+<ol>
+    <li>Онбординг: приветствие → сканирование устройств → комнаты.</li>
+    <li>После онбординга — <strong>триал 14 дней</strong> (snackbar).</li>
+    <li>Добавьте устройство («+» на главном экране).</li>
+    <li>Настройте (см. <a href="settings/tuya.html">Tuya</a>, <a href="settings/zigbee2mqtt.html">Z2M</a>, <a href="settings/frigate.html">Frigate</a>).</li>
+</ol>
+
+<h2>Лицензия</h2>
+<p>SHome распространяется в трёх режимах:</p>
+<ul>
+    <li><strong>Демо</strong> (бесплатно): 1 устройство, вкл/выкл.</li>
+    <li><strong>Триал</strong> (14 дней): все функции, автоматически.</li>
+    <li><strong>Pro</strong> (платно, бессрочно): все функции, ключ, привязка к устройству.</li>
+</ul>
+<p>Подробнее: <a href="settings/pro.html">Pro-лицензия</a>.</p>
+
+<h2>Приватность</h2>
+<ul>
+    <li>Данные хранятся <strong>локально</strong> (SQLite, SecureStorage).</li>
+    <li><code>androidId</code> — только для привязки Pro-ключа.</li>
+    <li>Геолокация — только для presence, не передаётся.</li>
+    <li>Без Firebase Analytics / Crashlytics.</li>
+</ul>
+<p>Подробнее: <a href="privacy.html">Политика конфиденциальности</a>.</p>
+
+<h2>Архитектура (для разработчиков)</h2>
+
+<h3>Стек</h3>
+<ul>
+    <li><strong>Flutter</strong> + <strong>Dart 3</strong>.</li>
+    <li><strong>Riverpod</strong> — управление состоянием.</li>
+    <li><strong>GoRouter</strong> — навигация.</li>
+    <li><strong>getIt</strong> — DI.</li>
+    <li><strong>sqflite</strong> — SQLite.</li>
+    <li><strong>flutter_secure_storage</strong> — SecureStorage.</li>
+</ul>
+
+<h3>Структура</h3>
+<pre><code>lib/
+├── application/   # провайдеры, модели, сервисы, роутер
+├── data/          # БД, протоколы (Tuya, Zigbee), сервисы
+├── domain/        # модели, репозитории (интерфейсы)
+├── di/            # getIt (DI)
+├── presentation/  # экраны, виджеты, тема
+├── l10n/          # локализация
+└── PRO/           # лицензирование (изолированный модуль)</code></pre>
+
+<h3>Модуль PRO</h3>
+<pre><code>lib/PRO/
+├── domain/models/license.dart          # LicenseType, AppFeature, LicenseState
+├── data/services/
+│   ├── device_id_service.dart          # androidId
+│   ├── license_key_validator.dart      # HMAC-проверка
+│   └── license_service.dart            # initialize/startTrial/activate
+├── application/state/license_provider.dart
+└── presentation/
+    ├── widgets/                        # ProGuard, ProLockedScreen, ...
+    └── screens/pro_activate_screen.dart</code></pre>
+
+<h3>Тесты</h3>
+<pre><code>flutter test test/PRO/    # 52 теста</code></pre>
+
+<h2>Документация</h2>
+<ul>
+    <li><a href="settings/tuya.html">Настройка Tuya</a></li>
+    <li><a href="settings/zigbee2mqtt.html">Настройка Zigbee2MQTT</a></li>
+    <li><a href="settings/frigate.html">Настройка Frigate</a></li>
+    <li><a href="settings/mqtt.html">Настройка MQTT</a></li>
+    <li><a href="settings/cloud.html">Настройка облака (Mail.ru)</a></li>
+    <li><a href="settings/notifications.html">Уведомления (VK/SMS)</a></li>
+    <li><a href="settings/presence.html">Присутствие</a></li>
+    <li><a href="settings/pro.html">Pro-лицензия</a></li>
+    <li><a href="settings/faq.html">FAQ</a></li>
+</ul>
+
+<h2>Ссылки</h2>
+<ul>
+    <li><a href="https://github.com/votsurx/SHome-Releases" target="_blank">GitHub (релизы)</a></li>
+    <li><a href="philosophy.html">Философия SHome</a></li>
+    <li><a href="licenses.html">Лицензии (EULA, Terms)</a></li>
+    <li><a href="privacy.html">Политика конфиденциальности</a></li>
+    <li><a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a></li>
+</ul>
+
+<h2>Благодарности</h2>
+<p>Спасибо всем авторам open-source пакетов, которые сделали SHome возможным. Особая благодарность:</p>
+<ul>
+    <li><strong>Flutter Team</strong> — за фреймворк</li>
+    <li><strong>Riverpod</strong> — за управление состоянием</li>
+    <li><strong>tinytuya</strong> (jasonacox) — за протокол Tuya</li>
+    <li><strong>Zigbee2MQTT</strong> (Koenkk) — за мост Zigbee</li>
+    <li><strong>Frigate</strong> (Blake Blackshear) — за NVR</li>
+</ul>
+
+<footer>
+    © 2026 votsurX · SHome 8.6.0 · <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a>
+</footer>
+</body>
+</html>
