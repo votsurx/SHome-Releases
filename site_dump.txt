@@ -1,0 +1,3383 @@
+DUMP FOLDER: C:\SHome-Releases\docs
+FILES: 16
+
+===== FILE MANIFEST =====
+assets\logo.png	398975 bytes
+assets\style.css	1876 bytes
+index.html	9923 bytes
+licenses.html	18834 bytes
+philosophy.html	3392 bytes
+privacy.html	22143 bytes
+readme.html	10432 bytes
+settings\cloud.html	11592 bytes
+settings\faq.html	13627 bytes
+settings\frigate.html	8928 bytes
+settings\mqtt.html	9236 bytes
+settings\notifications.html	12344 bytes
+settings\presence.html	12311 bytes
+settings\pro.html	15270 bytes
+settings\tuya.html	8610 bytes
+settings\zigbee2mqtt.html	9244 bytes
+
+===== TEXT FILE CONTENTS =====
+
+===== BEGIN: assets\style.css =====
+* { box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  line-height: 1.6;
+  color: #333;
+  background: #fafafa;
+}
+header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 0;
+  border-bottom: 2px solid #1a73e8;
+  margin-bottom: 24px;
+}
+header img { width: 48px; height: 48px; border-radius: 12px; }
+header h1 { margin: 0; font-size: 24px; color: #1a73e8; }
+nav { margin: 16px 0; }
+nav a {
+  display: inline-block;
+  margin-right: 16px;
+  color: #1a73e8;
+  text-decoration: none;
+  font-weight: 500;
+}
+nav a:hover { text-decoration: underline; }
+h1 { color: #1a73e8; border-bottom: 2px solid #1a73e8; padding-bottom: 8px; }
+h2 { color: #333; margin-top: 28px; }
+h3 { color: #555; }
+a { color: #1a73e8; }
+code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+pre {
+  background: #2d2d2d;
+  color: #f0f0f0;
+  padding: 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+pre code { background: transparent; color: inherit; }
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background: #1a73e8;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  margin: 8px 8px 8px 0;
+}
+.btn:hover { background: #1557b0; }
+.btn-secondary {
+  background: #fff;
+  color: #1a73e8;
+  border: 2px solid #1a73e8;
+}
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 16px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.highlight {
+  background: #fff3cd;
+  padding: 16px;
+  border-left: 4px solid #ffc107;
+  border-radius: 4px;
+  margin: 16px 0;
+}
+footer {
+  margin-top: 48px;
+  padding-top: 16px;
+  border-top: 1px solid #ddd;
+  color: #666;
+  font-size: 13px;
+  text-align: center;
+}
+===== END: assets\style.css =====
+
+===== BEGIN: index.html =====
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SHome — умный дом без облака. Tuya, Zigbee, Frigate. Локально, безопасно, с Pro-лицензией.">
+    <title>SHome — умный дом без облака</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header>
+    <a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <img src="assets/logo.png" alt="SHome" onerror="this.style.display='none'">
+        <h1>SHome</h1>
+    </a>
+</header>
+
+<nav>
+    <a href="index.html">Главная</a>
+    <a href="philosophy.html">Философия</a>
+    <a href="readme.html">Описание</a>
+    <a href="settings/tuya.html">Документация</a>
+    <a href="licenses.html">Лицензии</a>
+    <a href="privacy.html">Политика</a>
+    <a href="https://github.com/votsurx/SHome-Releases" target="_blank">GitHub</a>
+</nav>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section style="text-align:center; padding: 40px 0;">
+    <img src="assets/logo.png" alt="SHome" style="width:120px;height:120px;border-radius:24px;margin-bottom:16px;" onerror="this.style.display='none'">
+    <h1 style="font-size: 42px; margin: 0 0 8px; border: none;">SHome</h1>
+    <p style="font-size: 20px; color: #555; margin: 0 0 24px;">
+        Умный дом <strong>без облака</strong>. Tuya, Zigbee, Frigate.<br>
+        Локально. Безопасно. С Pro-лицензией.
+    </p>
+
+    <a class="btn" href="https://github.com/votsurx/SHome-Releases/releases/latest" target="_blank">
+        ⬇ Скачать APK (последний релиз)
+    </a>
+    <a class="btn btn-secondary" href="settings/tuya.html">
+        📖 Документация
+    </a>
+</section>
+
+<!-- ═══════════════ ВОЗМОЖНОСТИ ═══════════════ -->
+<div class="card">
+    <h2>Возможности</h2>
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div>
+            <h3>🔌 Tuya</h3>
+            <p>Розетки, выключатели, шторы, свет, HVAC, пылесосы. <strong>Локально</strong>, без облака Tuya.</p>
+        </div>
+        <div>
+            <h3>🐝 Zigbee</h3>
+            <p>Через <strong>Zigbee2MQTT</strong>. Датчики, лампы, выключатели, реле.</p>
+        </div>
+        <div>
+            <h3>📹 Frigate</h3>
+            <p>Камеры, детекция объектов (person, car), события, статистика.</p>
+        </div>
+        <div>
+            <h3>🎬 Сцены и таймеры</h3>
+            <p>Автоматизация: запуск по времени, событиям, вручную.</p>
+        </div>
+        <div>
+            <h3>📊 Статистика и энергия</h3>
+            <p>Uptime, алерты, действия, энергопотребление, тарифы.</p>
+        </div>
+        <div>
+            <h3>📜 События</h3>
+            <p>Полный журнал с фильтрами по дате, устройству, типу.</p>
+        </div>
+        <div>
+            <h3>☁ Облако</h3>
+            <p><strong>Mail.ru Cloud</strong> — зашифрованные бэкапы (опционально).</p>
+        </div>
+        <div>
+            <h3>🔔 Уведомления</h3>
+            <p><strong>VK</strong> и <strong>SMS</strong>. С расписанием и cooldown.</p>
+        </div>
+        <div>
+            <h3>📍 Presence</h3>
+            <p>«Дома / не дома» по геолокации телефона (опционально).</p>
+        </div>
+        <div>
+            <h3>🔗 MQTT</h3>
+            <p>Интеграции с MQTT-брокером (Mosquitto и др.).</p>
+        </div>
+        <div>
+            <h3>🔒 Локально</h3>
+            <p>Данные на вашем устройстве. Без обязательного облака.</p>
+        </div>
+        <div>
+            <h3>🚫 Без рекламы</h3>
+            <p>Никакой рекламы, Firebase Analytics, Crashlytics.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════ ЛИЦЕНЗИЯ ═══════════════ -->
+<div class="card">
+    <h2>Лицензия</h2>
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div style="padding:16px; background:#f9f9f9; border-radius:8px;">
+            <h3 style="margin-top:0;">🆓 Демо</h3>
+            <p><strong>Бесплатно</strong></p>
+            <ul>
+                <li>1 устройство</li>
+                <li>Вкл/выкл</li>
+                <li>Остальное — под замком</li>
+            </ul>
+        </div>
+        <div style="padding:16px; background:#fff3cd; border-radius:8px; border:2px solid #ffc107;">
+            <h3 style="margin-top:0;">⏳ Триал</h3>
+            <p><strong>14 дней</strong></p>
+            <ul>
+                <li>Все функции</li>
+                <li>Автоматически после онбординга</li>
+                <li>Без регистрации</li>
+            </ul>
+        </div>
+        <div style="padding:16px; background:#d4edda; border-radius:8px; border:2px solid #28a745;">
+            <h3 style="margin-top:0;">⭐ Pro</h3>
+            <p><strong>Бессрочно</strong></p>
+            <ul>
+                <li>Все функции</li>
+                <li>Неограниченные устройства</li>
+                <li>Ключ, привязка к устройству</li>
+            </ul>
+        </div>
+    </div>
+    <p style="text-align:center; margin-top:24px;">
+        <a class="btn" href="settings/pro.html">Подробнее о Pro →</a>
+    </p>
+</div>
+
+<!-- ═══════════════ ССЫЛКИ ═══════════════ -->
+<div class="card">
+    <h2>Документация</h2>
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 8px;">
+        <a href="settings/tuya.html" style="padding:12px; background:#f9f9f9; border-radius:8px; text-decoration:none; color:#333;">🔌 Настройка Tuya</a>
+        <a href="settings/zigbee2mqtt.html" style="padding:12px; background:#f9f9f9; border-radius:8px; text-decoration:none; color:#333;">🐝 Настройка Zigbee2MQTT</a>
+        <a href="settings/frigate.html" style="padding:12px; background:#f9f9f9; border-radius:8px; text-decoration:none; color:#333;">📹 Настройка Frigate</a>
+        <a href="settings/mqtt.html" style="padding:12px; background:#f9f9f9; border-radius:8px; text-decoration:none; color:#333;">🔗 Настройка MQTT</a>
+        <a href="settings/cloud.html" style="padding:12px; background:#f9f9f9; border-radius:8px; text-decoration:none; color:#333;">☁ Настройка облака</a>
+        <a href="settings/notifications.html" style="padding:12px; background:#f9f9f9; border-radius:8px; text-decoration:none; color:#333;">🔔 Уведомления (VK/SMS)</a>
+        <a href="settings/presence.html" style="padding:12px; background:#f9f9f9; border-radius:8px; text-decoration:none; color:#333;">📍 Присутствие</a>
+        <a href="settings/pro.html" style="padding:12px; background:#f9f9f9; border-radius:8px; text-decoration:none; color:#333;">⭐ Pro-лицензия</a>
+        <a href="settings/faq.html" style="padding:12px; background:#f9f9f9; border-radius:8px; text-decoration:none; color:#333;">❓ FAQ</a>
+    </div>
+</div>
+
+<!-- ═══════════════ ЮРИДИЧЕСКОЕ ═══════════════ -->
+<div class="card">
+    <h2>Юридическая информация</h2>
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 8px;">
+        <a href="philosophy.html" style="padding:12px; background:#f9f9f9; border-radius:8px; text-decoration:none; color:#333;">💡 Философия SHome</a>
+        <a href="readme.html" style="padding:12px; background:#f9f9f9; border-radius:8px; text-decoration:none; color:#333;">📄 README / Описание</a>
+        <a href="licenses.html" style="padding:12px; background:#f9f9f9; border-radius:8px; text-decoration:none; color:#333;">⚖️ Лицензии (EULA, Terms)</a>
+        <a href="privacy.html" style="padding:12px; background:#f9f9f9; border-radius:8px; text-decoration:none; color:#333;">🔒 Политика конфиденциальности</a>
+    </div>
+</div>
+
+<!-- ═══════════════ КОНТАКТЫ ═══════════════ -->
+<div class="card">
+    <h2>Контакты</h2>
+    <ul>
+        <li><strong>Разработчик:</strong> ArchitectCO</li>
+        <li><strong>Владелец:</strong> votsurX</li>
+        <li><strong>Email:</strong> <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a></li>
+        <li><strong>GitHub:</strong> <a href="https://github.com/votsurx/SHome-Releases" target="_blank">votsurx/SHome-Releases</a></li>
+    </ul>
+</div>
+
+<footer>
+    © 2026 votsurX · SHome 8.6.0 · <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a>
+</footer>
+</body>
+</html>
+===== END: index.html =====
+
+===== BEGIN: licenses.html =====
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лицензии — SHome</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header>
+    <a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <img src="assets/logo.png" alt="SHome" onerror="this.style.display='none'">
+        <h1>SHome</h1>
+    </a>
+</header>
+
+<nav>
+    <a href="index.html">Главная</a>
+    <a href="philosophy.html">Философия</a>
+    <a href="readme.html">Описание</a>
+    <a href="settings/tuya.html">Документация</a>
+    <a href="licenses.html">Лицензии</a>
+    <a href="privacy.html">Политика</a>
+    <a href="https://github.com/votsurx/SHome-Releases" target="_blank">GitHub</a>
+</nav>
+
+<h1>Лицензии</h1>
+
+<p>Юридические документы SHome: EULA, Terms of Service, Open Source лицензии. Политика конфиденциальности — <a href="privacy.html">отдельная страница</a>.</p>
+
+<div class="highlight">
+    <strong>Версия приложения:</strong> 8.6.0<br>
+    <strong>Разработчик:</strong> ArchitectCO<br>
+    <strong>Владелец:</strong> votsurX<br>
+    <strong>Контакт:</strong> <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a><br>
+    <strong>Последнее обновление:</strong> 25 Ноября 2026
+</div>
+
+<!-- ═══════════════ EULA ═══════════════ -->
+<h2 id="eula">1. EULA (End User License Agreement)</h2>
+
+<p><em>Полный текст также доступен в приложении: Настройки → О приложении → EULA.</em></p>
+
+<h3>1.1. Принятие условий</h3>
+<p>Устанавливая и используя приложение SHome ("Приложение"), вы соглашаетесь с условиями данного Соглашения. Если вы не согласны с условиями, не устанавливайте и не используйте Приложение.</p>
+
+<h3>1.2. Лицензия</h3>
+<p>ArchitectCO ("Разработчик") предоставляет вам:</p>
+<ul>
+    <li>Неисключительную лицензию</li>
+    <li>Непередаваемую лицензию</li>
+    <li>Ограниченную лицензию</li>
+</ul>
+<p>На использование Приложения на устройствах, которыми вы владеете или управляете.</p>
+
+<h3>1.3. Ограничения</h3>
+<p>Вы не имеете права:</p>
+<ul>
+    <li>Копировать, модифицировать или создавать производные работы</li>
+    <li>Декомпилировать, дизассемблировать или реверс-инжинирить Приложение</li>
+    <li>Сдавать в аренду, лизинг или сублицензировать Приложение</li>
+    <li>Удалять или изменять уведомления об авторских правах</li>
+    <li>Использовать Приложение в незаконных целях</li>
+    <li>Передавать свои учётные данные третьим лицам</li>
+    <li>Распространять лицензионные ключи Pro (ключ привязан к устройству)</li>
+</ul>
+
+<h3>1.4. Pro-лицензия и пробный период</h3>
+
+<h4>1.4.1. Демо-режим (бесплатно)</h4>
+<ul>
+    <li>Доступно управление <strong>одним</strong> устройством (включение/выключение).</li>
+    <li>Остальные функции недоступны.</li>
+</ul>
+
+<h4>1.4.2. Пробный период (14 дней)</h4>
+<ul>
+    <li>Автоматически активируется при первом запуске после онбординга.</li>
+    <li>Предоставляет <strong>полный</strong> доступ ко всем функциям.</li>
+    <li>По истечении 14 дней приложение переходит в демо-режим.</li>
+</ul>
+
+<h4>1.4.3. Pro-лицензия (платно)</h4>
+<ul>
+    <li>Активируется <strong>лицензионным ключом</strong>, который приобретается отдельно.</li>
+    <li>Привязывается к <strong><code>androidId</code></strong> устройства (жёсткая привязка).</li>
+    <li>При смене устройства требуется <strong>новый</strong> ключ.</li>
+    <li>Срок действия ключа — бессрочный (если не указано иное при покупке).</li>
+</ul>
+
+<h4>1.4.4. Возврат средств</h4>
+<ul>
+    <li>Возврат средств за Pro-ключ регулируется условиями продавца (бота/сайта).</li>
+    <li>Ключ считается использованным после активации.</li>
+</ul>
+
+<h3>1.5. Интеллектуальная собственность</h3>
+<p>Все права на Приложение, включая:</p>
+<ul>
+    <li>Исходный код</li>
+    <li>Дизайн</li>
+    <li>Логотипы</li>
+    <li>Торговые марки</li>
+    <li>Документацию</li>
+</ul>
+<p>Принадлежат votsurX и ArchitectCO.</p>
+
+<h3>1.6. Отказ от гарантий</h3>
+<p>Приложение предоставляется "КАК ЕСТЬ" без каких-либо гарантий, явных или подразумеваемых, включая, но не ограничиваясь:</p>
+<ul>
+    <li>Гарантии товарной пригодности</li>
+    <li>Гарантии пригодности для конкретной цели</li>
+    <li>Гарантии ненарушения прав</li>
+</ul>
+
+<h3>1.7. Ограничение ответственности</h3>
+<p>ArchitectCO не несёт ответственности за:</p>
+<ul>
+    <li>Прямые или косвенные убытки</li>
+    <li>Потерю данных</li>
+    <li>Потерю прибыли</li>
+    <li>Прерывание бизнеса</li>
+    <li>Ущерб оборудованию</li>
+    <li>Неправильную работу устройств умного дома</li>
+</ul>
+<p>Даже если была уведомлена о возможности таких убытков.</p>
+
+<h3>1.8. Обновления</h3>
+<p>Разработчик может выпускать обновления Приложения. Вы соглашаетесь получать такие обновления автоматически.</p>
+
+<h3>1.9. Прекращение действия</h3>
+<p>Лицензия действует до её прекращения. Она прекращается автоматически если:</p>
+<ul>
+    <li>Вы нарушаете условия Соглашения</li>
+    <li>Вы удаляете Приложение</li>
+    <li>Разработчик прекращает поддержку Приложения</li>
+    <li>Вы распространяете Pro-ключи третьим лицам</li>
+</ul>
+
+<h3>1.10. Применимое право</h3>
+<p>Настоящее Соглашение регулируется законодательством Российской Федерации.</p>
+
+<h3>1.11. Контакты</h3>
+<p>По вопросам обращаться: <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a></p>
+
+<hr>
+
+<!-- ═══════════════ TERMS ═══════════════ -->
+<h2 id="terms">2. Terms of Service (Условия использования)</h2>
+
+<p><em>Полный текст также доступен в приложении: Настройки → О приложении → Условия использования.</em></p>
+
+<h3>2.1. Общие положения</h3>
+<p>Используя SHome, вы соглашаетесь:</p>
+<ul>
+    <li>Использовать приложение только в законных целях</li>
+    <li>Не нарушать права других пользователей</li>
+    <li>Не взламывать и не модифицировать приложение</li>
+    <li>Не создавать помехи в работе сервиса</li>
+    <li>Не распространять Pro-ключи третьим лицам</li>
+</ul>
+
+<h3>2.2. Аккаунт</h3>
+<p>Вы несёте ответственность за:</p>
+<ul>
+    <li>Сохранность данных вашего аккаунта</li>
+    <li>Все действия, совершённые под вашим аккаунтом</li>
+    <li>Своевременное обновление информации</li>
+</ul>
+
+<h3>2.3. Платные функции</h3>
+<ul>
+    <li><strong>Pro-лицензия</strong> активируется ключом, приобретённым отдельно.</li>
+    <li>Ключ привязывается к <code>androidId</code> устройства.</li>
+    <li>При смене устройства требуется новый ключ.</li>
+    <li>Возврат средств регулируется условиями продавца (бота/сайта).</li>
+    <li>Ключ считается использованным после активации.</li>
+</ul>
+
+<h3>2.4. Интеллектуальная собственность</h3>
+<p>Весь контент приложения защищён авторским правом:</p>
+<ul>
+    <li>Программный код</li>
+    <li>Дизайн</li>
+    <li>Графические элементы</li>
+    <li>Документация</li>
+</ul>
+
+<h3>2.5. Ограничение ответственности</h3>
+<p>ArchitectCO не несёт ответственности за:</p>
+<ul>
+    <li>Неправильную работу устройств</li>
+    <li>Потерю данных</li>
+    <li>Ущерб, причинённый использованием приложения</li>
+    <li>Сбои в работе оборудования</li>
+</ul>
+
+<h3>2.6. Гарантии</h3>
+<p>Приложение предоставляется "как есть" без каких-либо гарантий.</p>
+
+<h3>2.7. Изменения условий</h3>
+<p>Мы можем изменять условия. Продолжение использования означает согласие с изменениями.</p>
+
+<h3>2.8. Прекращение доступа</h3>
+<p>Мы можем заблокировать доступ при нарушении условий.</p>
+
+<h3>2.9. Применимое право</h3>
+<p>Настоящие условия регулируются законодательством Российской Федерации.</p>
+
+<h3>2.10. Контакты</h3>
+<p><a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a></p>
+
+<hr>
+
+<!-- ═══════════════ OPEN SOURCE ═══════════════ -->
+<h2 id="opensource">3. Open Source лицензии</h2>
+
+<p>SHome использует следующие open-source пакеты (Flutter/Dart). Полный список — в приложении: <strong>Настройки → О приложении → Open Source Licenses</strong>.</p>
+
+<h3>3.1. Основные пакеты</h3>
+
+<table style="width:100%; border-collapse:collapse; margin:16px 0;">
+    <thead>
+    <tr style="background:#1a73e8; color:white;">
+        <th style="padding:10px; text-align:left; border:1px solid #ddd;">Пакет</th>
+        <th style="padding:10px; text-align:left; border:1px solid #ddd;">Лицензия</th>
+        <th style="padding:10px; text-align:left; border:1px solid #ddd;">Назначение</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td style="padding:8px; border:1px solid #ddd;"><code>flutter</code></td>
+        <td style="padding:8px; border:1px solid #ddd;">BSD-3-Clause</td>
+        <td style="padding:8px; border:1px solid #ddd;">UI-фреймворк</td>
+    </tr>
+    <tr style="background:#f9f9f9;">
+        <td style="padding:8px; border:1px solid #ddd;"><code>flutter_riverpod</code></td>
+        <td style="padding:8px; border:1px solid #ddd;">MIT</td>
+        <td style="padding:8px; border:1px solid #ddd;">Управление состоянием</td>
+    </tr>
+    <tr>
+        <td style="padding:8px; border:1px solid #ddd;"><code>go_router</code></td>
+        <td style="padding:8px; border:1px solid #ddd;">BSD-3-Clause</td>
+        <td style="padding:8px; border:1px solid #ddd;">Навигация</td>
+    </tr>
+    <tr style="background:#f9f9f9;">
+        <td style="padding:8px; border:1px solid #ddd;"><code>sqflite</code></td>
+        <td style="padding:8px; border:1px solid #ddd;">BSD-2-Clause</td>
+        <td style="padding:8px; border:1px solid #ddd;">SQLite (локальная БД)</td>
+    </tr>
+    <tr>
+        <td style="padding:8px; border:1px solid #ddd;"><code>shared_preferences</code></td>
+        <td style="padding:8px; border:1px solid #ddd;">BSD-3-Clause</td>
+        <td style="padding:8px; border:1px solid #ddd;">Настройки (SharedPreferences)</td>
+    </tr>
+    <tr style="background:#f9f9f9;">
+        <td style="padding:8px; border:1px solid #ddd;"><code>flutter_secure_storage</code></td>
+        <td style="padding:8px; border:1px solid #ddd;">BSD-3-Clause</td>
+        <td style="padding:8px; border:1px solid #ddd;">Безопасное хранение (SecureStorage)</td>
+    </tr>
+    <tr>
+        <td style="padding:8px; border:1px solid #ddd;"><code>http</code></td>
+        <td style="padding:8px; border:1px solid #ddd;">BSD-3-Clause</td>
+        <td style="padding:8px; border:1px solid #ddd;">HTTP-клиент</td>
+    </tr>
+    <tr style="background:#f9f9f9;">
+        <td style="padding:8px; border:1px solid #ddd;"><code>crypto</code></td>
+        <td style="padding:8px; border:1px solid #ddd;">BSD-3-Clause</td>
+        <td style="padding:8px; border:1px solid #ddd;">HMAC-SHA256 (лицензии)</td>
+    </tr>
+    <tr>
+        <td style="padding:8px; border:1px solid #ddd;"><code>device_info_plus</code></td>
+        <td style="padding:8px; border:1px solid #ddd;">BSD-3-Clause</td>
+        <td style="padding:8px; border:1px solid #ddd;">androidId (Pro-привязка)</td>
+    </tr>
+    <tr style="background:#f9f9f9;">
+        <td style="padding:8px; border:1px solid #ddd;"><code>lottie</code></td>
+        <td style="padding:8px; border:1px solid #ddd;">MIT</td>
+        <td style="padding:8px; border:1px solid #ddd;">Анимации (screen saver)</td>
+    </tr>
+    <tr>
+        <td style="padding:8px; border:1px solid #ddd;"><code>qr_flutter</code></td>
+        <td style="padding:8px; border:1px solid #ddd;">BSD-3-Clause</td>
+        <td style="padding:8px; border:1px solid #ddd;">QR-коды (бэкап)</td>
+    </tr>
+    <tr style="background:#f9f9f9;">
+        <td style="padding:8px; border:1px solid #ddd;"><code>flutter_localizations</code></td>
+        <td style="padding:8px; border:1px solid #ddd;">BSD-3-Clause</td>
+        <td style="padding:8px; border:1px solid #ddd;">Локализация</td>
+    </tr>
+    <tr>
+        <td style="padding:8px; border:1px solid #ddd;"><code>talker</code></td>
+        <td style="padding:8px; border:1px solid #ddd;">MIT</td>
+        <td style="padding:8px; border:1px solid #ddd;">Логирование</td>
+    </tr>
+    <tr style="background:#f9f9f9;">
+        <td style="padding:8px; border:1px solid #ddd;"><code>github_release_apk_updater</code></td>
+        <td style="padding:8px; border:1px solid #ddd;">MIT</td>
+        <td style="padding:8px; border:1px solid #ddd;">Обновления через GitHub</td>
+    </tr>
+    <tr>
+        <td style="padding:8px; border:1px solid #ddd;"><code>restart_app</code></td>
+        <td style="padding:8px; border:1px solid #ddd;">MIT</td>
+        <td style="padding:8px; border:1px solid #ddd;">Перезапуск приложения</td>
+    </tr>
+    <tr style="background:#f9f9f9;">
+        <td style="padding:8px; border:1px solid #ddd;"><code>reorderable_grid_view</code></td>
+        <td style="padding:8px; border:1px solid #ddd;">MIT</td>
+        <td style="padding:8px; border:1px solid #ddd;">Сортировка плиток</td>
+    </tr>
+    </tbody>
+</table>
+
+<h3>3.2. Полный список</h3>
+<p>Полный список зависимостей (с версиями и лицензиями) — в файле <code>pubspec.lock</code> проекта или в приложении: <strong>Настройки → О приложении → Open Source Licenses</strong>.</p>
+
+<h3>3.3. Благодарности</h3>
+<p>Спасибо всем авторам open-source пакетов, которые сделали SHome возможным. Особая благодарность:</p>
+<ul>
+    <li><strong>Flutter Team</strong> — за фреймворк</li>
+    <li><strong>Riverpod</strong> — за управление состоянием</li>
+    <li><strong>tinytuya</strong> (jasonacox) — за протокол Tuya</li>
+    <li><strong>Zigbee2MQTT</strong> (Koenkk) — за мост Zigbee</li>
+    <li><strong>Frigate</strong> (Blake Blackshear) — за NVR</li>
+</ul>
+
+<hr>
+
+<!-- ═══════════════ КОНТАКТЫ ═══════════════ -->
+<h2 id="contact">4. Контакты</h2>
+
+<ul>
+    <li><strong>Разработчик:</strong> ArchitectCO</li>
+    <li><strong>Владелец:</strong> votsurX</li>
+    <li><strong>Email:</strong> <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a></li>
+    <li><strong>GitHub:</strong> <a href="https://github.com/votsurx/SHome-Releases" target="_blank">votsurx/SHome-Releases</a></li>
+</ul>
+
+<footer>
+    © 2026 votsurX · SHome 8.6.0 · <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a>
+</footer>
+</body>
+</html>
+===== END: licenses.html =====
+
+===== BEGIN: philosophy.html =====
+# Философия SHome
+
+## 1. Локально — значит безопасно
+
+SHome не отправляет данные на наши серверы. Все устройства, комнаты, сцены, статистика, настройки хранятся **на вашем устройстве** (SQLite, SecureStorage). Облако (Mail.ru) — **опционально** и только для резервных копий, **зашифрованных** вашим ключом.
+
+## 2. Без обязательного облака
+
+Большинство «умных домов» требуют аккаунт в облаке, подписку и постоянный интернет. SHome работает **локально**: Tuya — по LAN, Zigbee — через ваш Z2M, Frigate — через ваш сервер. Интернет нужен только для:
+- проверки обновлений (опционально);
+- уведомлений VK/SMS (опционально);
+- облачных бэкапов (опционально).
+
+## 3. Открытость и предсказуемость
+
+- **Открытый код** (частично) — вы можете проверить, что приложение делает.
+- **Прозрачные разрешения** — приложение не просит больше, чем нужно.
+- **Прозрачная лицензия** — Pro активируется **offline-ключом**, без привязки к аккаунту.
+
+## 4. Pro — за развитие, а не за «отключение боли»
+
+Демо-режим **не мешает** пользоваться базовым функционалом (1 устройство). Pro открывает **дополнительные** возможности (сцены, статистика, Zigbee, Frigate, облако), а не «отключает рекламу» или «разблокирует то, что должно быть бесплатно». Мы верим: **платить нужно за ценность**, а не за отсутствие ограничений.
+
+## 5. Без рекламы и трекинга
+
+SHome **не показывает рекламу**, **не использует Firebase Analytics / Crashlytics**, **не передаёт данные третьим лицам** (кроме сервисов, которые вы **явно** настроили: VK, Mail.ru, MQTT-брокер, Frigate).
+
+## 6. Уважение к пользователю
+
+- **Нет навязчивых подписок** — Pro покупается один раз (бессрочный ключ).
+- **Нет «тёмных паттернов»** — paywall честно говорит, что доступно в Pro.
+- **Нет сбора данных** — даже `androidId` используется **только** для привязки ключа.
+
+## 7. Российский контекст
+
+- Приложение **адаптировано** под российские сервисы: Mail.ru Cloud, VK, SMS.
+- Оплата Pro — через **Telegram-бот** (Stars / ЮKassa), **без** Google Play / App Store.
+- Публикация — **RuStore** + GitHub Releases (для энтузиастов).
+===== END: philosophy.html =====
+
+===== BEGIN: privacy.html =====
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHome — Политика конфиденциальности</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        h1 { color: #1a73e8; border-bottom: 2px solid #1a73e8; padding-bottom: 10px; }
+        h2 { color: #333; margin-top: 30px; }
+        h3 { color: #555; }
+        a { color: #1a73e8; }
+        .meta { color: #666; font-size: 14px; margin-bottom: 30px; }
+        .lang-switch { text-align: right; margin-bottom: 20px; }
+        .lang-switch a { margin-left: 10px; }
+        code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; }
+        ul { padding-left: 20px; }
+        .highlight { background: #fff3cd; padding: 15px; border-left: 4px solid #ffc107; margin: 20px 0; }
+    </style>
+</head>
+<body>
+
+<div class="lang-switch">
+    <a href="#ru">Русский</a> | <a href="#en">English</a>
+</div>
+
+<!-- ═══════════════ РУССКИЙ ═══════════════ -->
+<section id="ru">
+    <h1>Политика конфиденциальности SHome</h1>
+    <p class="meta"><strong>Версия приложения:</strong> 8.6.0<br>
+        <strong>Последнее обновление:</strong> 25 Ноября 2026</p>
+
+    <h2>1. Общие положения</h2>
+    <p>Настоящая Политика конфиденциальности описывает, какие данные собирает, использует и хранит приложение SHome («Приложение»), а также ваши права в отношении этих данных.</p>
+    <div class="highlight"><strong>Мы не продаём ваши данные третьим лицам.</strong></div>
+
+    <h2>2. Какие данные мы обрабатываем</h2>
+
+    <h3>2.1. Данные устройств умного дома</h3>
+    <ul>
+        <li>IP-адреса устройств (Tuya, Zigbee, Frigate)</li>
+        <li>Local Key (ключи шифрования Tuya) — в зашифрованном виде</li>
+        <li>Состояние устройств (вкл/выкл, температура, яркость и т.д.)</li>
+        <li>Названия устройств и комнат</li>
+        <li>DPS-параметры устройств</li>
+        <li><code>friendly_name</code> Zigbee-устройств</li>
+    </ul>
+
+    <h3>2.2. Данные лицензирования Pro</h3>
+    <ul>
+        <li><strong><code>androidId</code></strong> — уникальный идентификатор Android-устройства. Используется <strong>только</strong> для привязки Pro-лицензии к устройству.</li>
+        <li><strong>Лицензионный ключ</strong> — сохраняется в зашифрованном виде (SecureStorage).</li>
+        <li><strong>Дата активации Pro</strong> — для проверки срока действия.</li>
+        <li><strong>Дата первого запуска триала</strong> — для отслеживания 14-дневного пробного периода.</li>
+        <li><strong>Дата последнего запуска</strong> — для защиты от отката системных часов.</li>
+    </ul>
+
+    <h3>2.3. Геолокация (опционально)</h3>
+    <ul>
+        <li><strong>Координаты устройства</strong> (широта, долгота) — <strong>только</strong> если вы включили функцию «Присутствие».</li>
+        <li><strong>Радиус «дома»</strong> — задаётся вами.</li>
+    </ul>
+    <p>Геолокация используется <strong>исключительно</strong> для определения статуса «дома / не дома / рядом» и автоматизаций. <strong>Не передаётся</strong> разработчику или третьим лицам.</p>
+
+    <h3>2.4. Данные для уведомлений (опционально)</h3>
+    <ul>
+        <li><strong>VK-токен и user ID</strong> — для отправки уведомлений в VK.</li>
+        <li><strong>Номер телефона</strong> — для отправки SMS-уведомлений.</li>
+    </ul>
+
+    <h3>2.5. Данные для облачного резервного копирования (опционально)</h3>
+    <ul>
+        <li><strong>Логин и пароль Mail.ru Cloud</strong> — для загрузки/скачивания зашифрованных бэкапов.</li>
+        <li>Пароль хранится в зашифрованном виде (SecureStorage).</li>
+    </ul>
+
+    <h3>2.6. Технические данные</h3>
+    <ul>
+        <li>Версия приложения</li>
+        <li>Модель устройства (телефона)</li>
+        <li>Версия операционной системы</li>
+        <li>Логи ошибок (локально, через <code>Talker</code>)</li>
+    </ul>
+
+    <h2>3. Как мы используем данные</h2>
+    <ul>
+        <li>Для управления устройствами умного дома</li>
+        <li>Для активации и проверки Pro-лицензии</li>
+        <li>Для определения присутствия (если включено)</li>
+        <li>Для отправки уведомлений (если настроено)</li>
+        <li>Для резервного копирования (если настроено)</li>
+        <li>Для исправления ошибок</li>
+    </ul>
+
+    <h2>4. Хранение данных</h2>
+    <ul>
+        <li><strong>Локально</strong> на устройстве пользователя (SQLite, SecureStorage).</li>
+        <li>В <strong>зашифрованном</strong> виде (AES-256 для SecureStorage).</li>
+        <li>Данные <strong>не передаются</strong> на серверы разработчика.</li>
+        <li>Данные <strong>передаются</strong> только тем сервисам, которые <strong>явно</strong> настроены пользователем (см. раздел 5).</li>
+    </ul>
+
+    <h2>5. Сторонние сервисы</h2>
+    <p>Приложение может взаимодействовать со следующими сторонними сервисами <strong>по вашему выбору</strong>:</p>
+
+    <h3>5.1. Tuya (умные устройства)</h3>
+    <ul>
+        <li><strong>Что передаётся:</strong> идентификатор устройства, IP-адрес, статус.</li>
+        <li><strong>Куда:</strong> локально (LAN) или через Tuya Cloud (если настроено).</li>
+        <li><strong>Политика:</strong> <a href="https://www.tuya.com/privacy">https://www.tuya.com/privacy</a></li>
+    </ul>
+
+    <h3>5.2. Zigbee2MQTT (Zigbee-устройства)</h3>
+    <ul>
+        <li><strong>Что передаётся:</strong> MQTT-сообщения с состоянием устройств.</li>
+        <li><strong>Куда:</strong> ваш MQTT-брокер (локально или удалённо).</li>
+        <li><strong>Политика:</strong> зависит от вашего брокера.</li>
+    </ul>
+
+    <h3>5.3. Frigate (видеонаблюдение)</h3>
+    <ul>
+        <li><strong>Что передаётся:</strong> события детекции (person, car), статистика.</li>
+        <li><strong>Куда:</strong> ваш сервер Frigate (локально или удалённо).</li>
+        <li><strong>Политика:</strong> зависит от вашего сервера.</li>
+    </ul>
+
+    <h3>5.4. Mail.ru Cloud (резервное копирование)</h3>
+    <ul>
+        <li><strong>Что передаётся:</strong> зашифрованный файл конфигурации.</li>
+        <li><strong>Куда:</strong> Mail.ru Cloud.</li>
+        <li><strong>Политика:</strong> <a href="https://help.mail.ru/cloud/legal/privacy">https://help.mail.ru/cloud/legal/privacy</a></li>
+    </ul>
+
+    <h3>5.5. VK (уведомления)</h3>
+    <ul>
+        <li><strong>Что передаётся:</strong> текст уведомления, ваш VK user ID.</li>
+        <li><strong>Куда:</strong> VK API.</li>
+        <li><strong>Политика:</strong> <a href="https://vk.com/privacy">https://vk.com/privacy</a></li>
+    </ul>
+
+    <h3>5.6. SMS-шлюз (уведомления)</h3>
+    <ul>
+        <li><strong>Что передаётся:</strong> текст SMS, номер телефона.</li>
+        <li><strong>Куда:</strong> через SMS-шлюз вашего оператора.</li>
+        <li><strong>Политика:</strong> зависит от оператора.</li>
+    </ul>
+
+    <h3>5.7. GitHub (обновления)</h3>
+    <ul>
+        <li><strong>Что передаётся:</strong> версия приложения (для проверки обновлений).</li>
+        <li><strong>Куда:</strong> GitHub API.</li>
+        <li><strong>Политика:</strong> <a href="https://docs.github.com/en/site-policy/privacy-policies">https://docs.github.com/en/site-policy/privacy-policies</a></li>
+    </ul>
+
+    <h2>6. Безопасность</h2>
+    <ul>
+        <li>Шифрование данных (AES-256, SecureStorage)</li>
+        <li>Безопасные протоколы передачи (HTTPS, MQTT over TLS — если настроено)</li>
+        <li>Регулярные обновления безопасности</li>
+        <li>Локальное хранение (без облачных сервисов разработчика)</li>
+    </ul>
+
+    <h2>7. Аналитика и crash-логи</h2>
+    <p><strong>Мы не используем</strong> Firebase Analytics, Crashlytics или иные внешние сервисы аналитики.</p>
+    <p>Логи ошибок хранятся <strong>локально</strong> на устройстве (через <code>Talker</code>) и <strong>не передаются</strong> разработчику. Вы можете просмотреть их в настройках приложения.</p>
+
+    <h2>8. Права пользователя</h2>
+    <ul>
+        <li><strong>Получить</strong> копию своих данных (экспорт конфигурации в настройках).</li>
+        <li><strong>Удалить</strong> данные (удаление приложения = удаление всех локальных данных).</li>
+        <li><strong>Отозвать</strong> согласие (удаление приложения).</li>
+        <li><strong>Отключить</strong> геолокацию, уведомления, облако — в настройках приложения.</li>
+        <li><strong>Обратиться</strong> с жалобой в Роскомнадзор (<a href="https://rkn.gov.ru">https://rkn.gov.ru</a>).</li>
+    </ul>
+
+    <h2>9. Данные детей</h2>
+    <p>Приложение не предназначено для детей младше 13 лет. Мы сознательно не собираем данные детей.</p>
+
+    <h2>10. Согласие на обработку</h2>
+    <p>Используя приложение, вы даёте согласие на обработку следующих данных:</p>
+    <ul>
+        <li><code>androidId</code> (для лицензирования Pro)</li>
+        <li>Геолокация (для presence, если включено)</li>
+        <li>Логин/пароль Mail.ru Cloud (для бэкапов, если настроено)</li>
+        <li>VK-токен (для уведомлений, если настроено)</li>
+        <li>Номер телефона (для SMS, если настроено)</li>
+        <li>IP-адреса устройств (для управления)</li>
+    </ul>
+    <p>Согласие действует до удаления приложения. Вы можете отозвать согласие, удалив приложение.</p>
+
+    <h2>11. Изменения политики</h2>
+    <p>Мы можем обновлять политику. О значительных изменениях будем уведомлять в приложении. Дата последнего обновления указана в начале документа.</p>
+
+    <h2>12. Контакты</h2>
+    <p>По вопросам конфиденциальности: <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a></p>
+
+</section>
+
+<hr style="margin: 60px 0;">
+
+<!-- ═══════════════ ENGLISH ═══════════════ -->
+<section id="en">
+    <h1>SHome Privacy Policy</h1>
+    <p class="meta"><strong>App version:</strong> 8.6.0<br>
+        <strong>Last updated:</strong> November 25, 2026</p>
+
+    <h2>1. General</h2>
+    <p>This Privacy Policy describes what data the SHome application (the “App”) collects, uses, and stores, as well as your rights regarding this data.</p>
+    <div class="highlight"><strong>We do not sell your data to third parties.</strong></div>
+
+    <h2>2. Data we process</h2>
+
+    <h3>2.1. Smart home device data</h3>
+    <ul>
+        <li>Device IP addresses (Tuya, Zigbee, Frigate)</li>
+        <li>Local Keys (Tuya encryption keys) — encrypted</li>
+        <li>Device state (on/off, temperature, brightness, etc.)</li>
+        <li>Device and room names</li>
+        <li>Device DPS parameters</li>
+        <li>Zigbee device <code>friendly_name</code></li>
+    </ul>
+
+    <h3>2.2. Pro licensing data</h3>
+    <ul>
+        <li><strong><code>androidId</code></strong> — unique Android device identifier. Used <strong>only</strong> to bind a Pro license to the device.</li>
+        <li><strong>License key</strong> — stored encrypted (SecureStorage).</li>
+        <li><strong>Pro activation date</strong> — to verify the license validity.</li>
+        <li><strong>Trial start date</strong> — to track the 14-day trial period.</li>
+        <li><strong>Last seen date</strong> — to protect against system clock rollback.</li>
+    </ul>
+
+    <h3>2.3. Geolocation (optional)</h3>
+    <ul>
+        <li><strong>Device coordinates</strong> (latitude, longitude) — <strong>only</strong> if you enable the “Presence” feature.</li>
+        <li><strong>Home radius</strong> — set by you.</li>
+    </ul>
+    <p>Geolocation is used <strong>solely</strong> to determine “home / away / near” status for automations. It is <strong>not</strong> transmitted to the developer or third parties.</p>
+
+    <h3>2.4. Notification data (optional)</h3>
+    <ul>
+        <li><strong>VK token and user ID</strong> — to send VK notifications.</li>
+        <li><strong>Phone number</strong> — to send SMS notifications.</li>
+    </ul>
+
+    <h3>2.5. Cloud backup data (optional)</h3>
+    <ul>
+        <li><strong>Mail.ru Cloud login and password</strong> — to upload/download encrypted backups.</li>
+        <li>Password is stored encrypted (SecureStorage).</li>
+    </ul>
+
+    <h3>2.6. Technical data</h3>
+    <ul>
+        <li>App version</li>
+        <li>Device model</li>
+        <li>Operating system version</li>
+        <li>Error logs (locally, via <code>Talker</code>)</li>
+    </ul>
+
+    <h2>3. How we use data</h2>
+    <ul>
+        <li>To control smart home devices</li>
+        <li>To activate and verify the Pro license</li>
+        <li>To determine presence (if enabled)</li>
+        <li>To send notifications (if configured)</li>
+        <li>To perform backups (if configured)</li>
+        <li>To fix errors</li>
+    </ul>
+
+    <h2>4. Data storage</h2>
+    <ul>
+        <li><strong>Locally</strong> on the user's device (SQLite, SecureStorage).</li>
+        <li><strong>Encrypted</strong> (AES-256 for SecureStorage).</li>
+        <li>Data is <strong>not</strong> transmitted to the developer's servers.</li>
+        <li>Data is <strong>transmitted</strong> only to services <strong>explicitly</strong> configured by the user (see Section 5).</li>
+    </ul>
+
+    <h2>5. Third-party services</h2>
+    <p>The App may interact with the following third-party services <strong>at your choice</strong>:</p>
+
+    <h3>5.1. Tuya (smart devices)</h3>
+    <ul>
+        <li><strong>Data transmitted:</strong> device ID, IP address, status.</li>
+        <li><strong>Destination:</strong> locally (LAN) or via Tuya Cloud (if configured).</li>
+        <li><strong>Policy:</strong> <a href="https://www.tuya.com/privacy">https://www.tuya.com/privacy</a></li>
+    </ul>
+
+    <h3>5.2. Zigbee2MQTT (Zigbee devices)</h3>
+    <ul>
+        <li><strong>Data transmitted:</strong> MQTT messages with device state.</li>
+        <li><strong>Destination:</strong> your MQTT broker (local or remote).</li>
+        <li><strong>Policy:</strong> depends on your broker.</li>
+    </ul>
+
+    <h3>5.3. Frigate (video surveillance)</h3>
+    <ul>
+        <li><strong>Data transmitted:</strong> detection events (person, car), statistics.</li>
+        <li><strong>Destination:</strong> your Frigate server (local or remote).</li>
+        <li><strong>Policy:</strong> depends on your server.</li>
+    </ul>
+
+    <h3>5.4. Mail.ru Cloud (backup)</h3>
+    <ul>
+        <li><strong>Data transmitted:</strong> encrypted configuration file.</li>
+        <li><strong>Destination:</strong> Mail.ru Cloud.</li>
+        <li><strong>Policy:</strong> <a href="https://help.mail.ru/cloud/legal/privacy">https://help.mail.ru/cloud/legal/privacy</a></li>
+    </ul>
+
+    <h3>5.5. VK (notifications)</h3>
+    <ul>
+        <li><strong>Data transmitted:</strong> notification text, your VK user ID.</li>
+        <li><strong>Destination:</strong> VK API.</li>
+        <li><strong>Policy:</strong> <a href="https://vk.com/privacy">https://vk.com/privacy</a></li>
+    </ul>
+
+    <h3>5.6. SMS gateway (notifications)</h3>
+    <ul>
+        <li><strong>Data transmitted:</strong> SMS text, phone number.</li>
+        <li><strong>Destination:</strong> via your carrier's SMS gateway.</li>
+        <li><strong>Policy:</strong> depends on the carrier.</li>
+    </ul>
+
+    <h3>5.7. GitHub (updates)</h3>
+    <ul>
+        <li><strong>Data transmitted:</strong> app version (to check for updates).</li>
+        <li><strong>Destination:</strong> GitHub API.</li>
+        <li><strong>Policy:</strong> <a href="https://docs.github.com/en/site-policy/privacy-policies">https://docs.github.com/en/site-policy/privacy-policies</a></li>
+    </ul>
+
+    <h2>6. Security</h2>
+    <ul>
+        <li>Data encryption (AES-256, SecureStorage)</li>
+        <li>Secure transmission protocols (HTTPS, MQTT over TLS — if configured)</li>
+        <li>Regular security updates</li>
+        <li>Local storage (no developer cloud services)</li>
+    </ul>
+
+    <h2>7. Analytics and crash logs</h2>
+    <p><strong>We do not use</strong> Firebase Analytics, Crashlytics, or other external analytics services.</p>
+    <p>Error logs are stored <strong>locally</strong> on the device (via <code>Talker</code>) and are <strong>not</strong> transmitted to the developer. You can view them in the App settings.</p>
+
+    <h2>8. User rights</h2>
+    <ul>
+        <li><strong>Obtain</strong> a copy of your data (export configuration in settings).</li>
+        <li><strong>Delete</strong> your data (uninstalling the App removes all local data).</li>
+        <li><strong>Withdraw</strong> consent (uninstall the App).</li>
+        <li><strong>Disable</strong> geolocation, notifications, cloud — in the App settings.</li>
+        <li><strong>Submit</strong> a complaint to Roskomnadzor (<a href="https://rkn.gov.ru">https://rkn.gov.ru</a>).</li>
+    </ul>
+
+    <h2>9. Children's data</h2>
+    <p>The App is not intended for children under 13. We do not knowingly collect children's data.</p>
+
+    <h2>10. Consent to processing</h2>
+    <p>By using the App, you consent to the processing of the following data:</p>
+    <ul>
+        <li><code>androidId</code> (for Pro licensing)</li>
+        <li>Geolocation (for presence, if enabled)</li>
+        <li>Mail.ru Cloud login/password (for backups, if configured)</li>
+        <li>VK token (for notifications, if configured)</li>
+        <li>Phone number (for SMS, if configured)</li>
+        <li>Device IP addresses (for control)</li>
+    </ul>
+    <p>Consent is valid until the App is uninstalled. You can withdraw consent by uninstalling the App.</p>
+
+    <h2>11. Changes to this policy</h2>
+    <p>We may update this policy. We will notify users in the App about significant changes. The last updated date is shown at the beginning of this document.</p>
+
+    <h2>12. Contact</h2>
+    <p>For privacy questions, contact: <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a></p>
+
+</section>
+
+<footer style="margin-top: 60px; padding-top: 20px; border-top: 1px solid #ddd; color: #666; font-size: 12px;">
+    © 2026 votsurX · SHome 8.6.0
+</footer>
+
+</body>
+</html>
+===== END: privacy.html =====
+
+===== BEGIN: readme.html =====
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>README — SHome</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header>
+    <a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <img src="assets/logo.png" alt="SHome" onerror="this.style.display='none'">
+        <h1>SHome</h1>
+    </a>
+</header>
+
+<nav>
+    <a href="index.html">Главная</a>
+    <a href="philosophy.html">Философия</a>
+    <a href="readme.html">Описание</a>
+    <a href="settings/tuya.html">Документация</a>
+    <a href="licenses.html">Лицензии</a>
+    <a href="privacy.html">Политика</a>
+    <a href="https://github.com/votsurx/SHome-Releases" target="_blank">GitHub</a>
+</nav>
+
+<h1>README — SHome</h1>
+
+<p><strong>SHome</strong> — приложение для управления умным домом: Tuya, Zigbee (через Zigbee2MQTT), Frigate. Работает <strong>локально</strong>, без обязательного облака. Поддерживает сцены, таймеры, статистику, уведомления, presence, MQTT.</p>
+
+<div class="highlight">
+    <strong>Версия:</strong> 8.6.0 (82600)<br>
+    <strong>Платформа:</strong> Android 10+ (minSdk 29)<br>
+    <strong>Разработчик:</strong> ArchitectCO<br>
+    <strong>Владелец:</strong> votsurX<br>
+    <strong>Лицензия:</strong> Проприетарная (см. <a href="licenses.html">EULA</a>)
+</div>
+
+<h2>Скачать</h2>
+<ul>
+    <li><a href="https://github.com/votsurx/SHome-Releases/releases/latest" target="_blank">GitHub Releases</a> (APK, последний релиз).</li>
+    <li><strong>RuStore</strong> — скоро.</li>
+</ul>
+
+<p><strong>Установка:</strong></p>
+<ol>
+    <li>Скачайте APK.</li>
+    <li>Разрешите установку из неизвестных источников (Настройки Android → Безопасность).</li>
+    <li>Установите APK.</li>
+    <li>Откройте SHome → пройдите онбординг.</li>
+</ol>
+
+<h2>Возможности</h2>
+
+<h3>Устройства</h3>
+<ul>
+    <li><strong>Tuya</strong>: розетки, выключатели, шторы, свет, HVAC, пылесосы. Локально, без облака Tuya.</li>
+    <li><strong>Zigbee</strong>: через Zigbee2MQTT. Датчики, лампы, выключатели, реле.</li>
+    <li><strong>Frigate</strong>: камеры, детекция объектов (person, car), события, статистика.</li>
+</ul>
+
+<h3>Автоматизация</h3>
+<ul>
+    <li><strong>Сцены</strong>: запуск по времени, событиям, вручную.</li>
+    <li><strong>Таймеры</strong>: включение/выключение по расписанию.</li>
+    <li><strong>Presence</strong>: «дома / не дома» по геолокации телефона.</li>
+</ul>
+
+<h3>Аналитика</h3>
+<ul>
+    <li><strong>Статистика</strong>: uptime, алерты, действия по устройствам.</li>
+    <li><strong>Энергия</strong>: энергопотребление, тарифы, история.</li>
+    <li><strong>События</strong>: полный журнал с фильтрами (дата, устройство, тип).</li>
+</ul>
+
+<h3>Интеграции</h3>
+<ul>
+    <li><strong>Облако</strong>: Mail.ru Cloud — зашифрованные бэкапы (опционально).</li>
+    <li><strong>Уведомления</strong>: VK, SMS. С расписанием и cooldown.</li>
+    <li><strong>MQTT</strong>: подключение к брокеру (Mosquitto и др.).</li>
+</ul>
+
+<h3>Интерфейс</h3>
+<ul>
+    <li><strong>Главный экран</strong>: адаптивная сетка устройств, фильтр по комнатам.</li>
+    <li><strong>Меню</strong>: плитки с возможностью сортировки (long-press).</li>
+    <li><strong>Настройки</strong>: сортировка строк (long-press), темы (день/ночь/авто).</li>
+    <li><strong>Screen Saver</strong>: Lottie-анимация при простое.</li>
+    <li><strong>Локализация</strong>: русский, английский.</li>
+</ul>
+
+<h2>Требования</h2>
+<ul>
+    <li><strong>Android</strong>: 10+ (API 29+).</li>
+    <li><strong>Интернет</strong>: опционально (для обновлений, уведомлений, облака).</li>
+    <li><strong>Локальная сеть</strong>: для Tuya (LAN), Zigbee (MQTT), Frigate (HTTP).</li>
+    <li><strong>Разрешения</strong>: интернет, сеть, геолокация (presence), уведомления (Android 13+).</li>
+</ul>
+
+<h2>Первый запуск</h2>
+<ol>
+    <li>Онбординг: приветствие → сканирование устройств → комнаты.</li>
+    <li>После онбординга — <strong>триал 14 дней</strong> (snackbar).</li>
+    <li>Добавьте устройство («+» на главном экране).</li>
+    <li>Настройте (см. <a href="settings/tuya.html">Tuya</a>, <a href="settings/zigbee2mqtt.html">Z2M</a>, <a href="settings/frigate.html">Frigate</a>).</li>
+</ol>
+
+<h2>Лицензия</h2>
+<p>SHome распространяется в трёх режимах:</p>
+<ul>
+    <li><strong>Демо</strong> (бесплатно): 1 устройство, вкл/выкл.</li>
+    <li><strong>Триал</strong> (14 дней): все функции, автоматически.</li>
+    <li><strong>Pro</strong> (платно, бессрочно): все функции, ключ, привязка к устройству.</li>
+</ul>
+<p>Подробнее: <a href="settings/pro.html">Pro-лицензия</a>.</p>
+
+<h2>Приватность</h2>
+<ul>
+    <li>Данные хранятся <strong>локально</strong> (SQLite, SecureStorage).</li>
+    <li><code>androidId</code> — только для привязки Pro-ключа.</li>
+    <li>Геолокация — только для presence, не передаётся.</li>
+    <li>Без Firebase Analytics / Crashlytics.</li>
+</ul>
+<p>Подробнее: <a href="privacy.html">Политика конфиденциальности</a>.</p>
+
+<h2>Архитектура (для разработчиков)</h2>
+
+<h3>Стек</h3>
+<ul>
+    <li><strong>Flutter</strong> + <strong>Dart 3</strong>.</li>
+    <li><strong>Riverpod</strong> — управление состоянием.</li>
+    <li><strong>GoRouter</strong> — навигация.</li>
+    <li><strong>getIt</strong> — DI.</li>
+    <li><strong>sqflite</strong> — SQLite.</li>
+    <li><strong>flutter_secure_storage</strong> — SecureStorage.</li>
+</ul>
+
+<h3>Структура</h3>
+<pre><code>lib/
+├── application/   # провайдеры, модели, сервисы, роутер
+├── data/          # БД, протоколы (Tuya, Zigbee), сервисы
+├── domain/        # модели, репозитории (интерфейсы)
+├── di/            # getIt (DI)
+├── presentation/  # экраны, виджеты, тема
+├── l10n/          # локализация
+└── PRO/           # лицензирование (изолированный модуль)</code></pre>
+
+<h3>Модуль PRO</h3>
+<pre><code>lib/PRO/
+├── domain/models/license.dart          # LicenseType, AppFeature, LicenseState
+├── data/services/
+│   ├── device_id_service.dart          # androidId
+│   ├── license_key_validator.dart      # HMAC-проверка
+│   └── license_service.dart            # initialize/startTrial/activate
+├── application/state/license_provider.dart
+└── presentation/
+    ├── widgets/                        # ProGuard, ProLockedScreen, ...
+    └── screens/pro_activate_screen.dart</code></pre>
+
+<h3>Тесты</h3>
+<pre><code>flutter test test/PRO/    # 52 теста</code></pre>
+
+<h2>Документация</h2>
+<ul>
+    <li><a href="settings/tuya.html">Настройка Tuya</a></li>
+    <li><a href="settings/zigbee2mqtt.html">Настройка Zigbee2MQTT</a></li>
+    <li><a href="settings/frigate.html">Настройка Frigate</a></li>
+    <li><a href="settings/mqtt.html">Настройка MQTT</a></li>
+    <li><a href="settings/cloud.html">Настройка облака (Mail.ru)</a></li>
+    <li><a href="settings/notifications.html">Уведомления (VK/SMS)</a></li>
+    <li><a href="settings/presence.html">Присутствие</a></li>
+    <li><a href="settings/pro.html">Pro-лицензия</a></li>
+    <li><a href="settings/faq.html">FAQ</a></li>
+</ul>
+
+<h2>Ссылки</h2>
+<ul>
+    <li><a href="https://github.com/votsurx/SHome-Releases" target="_blank">GitHub (релизы)</a></li>
+    <li><a href="philosophy.html">Философия SHome</a></li>
+    <li><a href="licenses.html">Лицензии (EULA, Terms)</a></li>
+    <li><a href="privacy.html">Политика конфиденциальности</a></li>
+    <li><a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a></li>
+</ul>
+
+<h2>Благодарности</h2>
+<p>Спасибо всем авторам open-source пакетов, которые сделали SHome возможным. Особая благодарность:</p>
+<ul>
+    <li><strong>Flutter Team</strong> — за фреймворк</li>
+    <li><strong>Riverpod</strong> — за управление состоянием</li>
+    <li><strong>tinytuya</strong> (jasonacox) — за протокол Tuya</li>
+    <li><strong>Zigbee2MQTT</strong> (Koenkk) — за мост Zigbee</li>
+    <li><strong>Frigate</strong> (Blake Blackshear) — за NVR</li>
+</ul>
+
+<footer>
+    © 2026 votsurX · SHome 8.6.0 · <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a>
+</footer>
+</body>
+</html>
+===== END: readme.html =====
+
+===== BEGIN: settings\cloud.html =====
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Настройка облака (Mail.ru) — SHome</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+    <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <img src="../assets/logo.png" alt="SHome" onerror="this.style.display='none'">
+        <h1>SHome</h1>
+    </a>
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../philosophy.html">Философия</a>
+    <a href="../readme.html">Описание</a>
+    <a href="tuya.html">Документация</a>
+    <a href="../licenses.html">Лицензии</a>
+    <a href="../privacy.html">Политика</a>
+    <a href="https://github.com/votsurx/SHome-Releases" target="_blank">GitHub</a>
+</nav>
+
+<h1>Настройка облака (Mail.ru Cloud)</h1>
+
+<p>SHome может сохранять <strong>зашифрованные резервные копии</strong> в <strong>Mail.ru Cloud</strong>. Это опционально — приложение полностью работает без облака.</p>
+
+<div class="highlight">
+    <strong>Важно:</strong> бэкап <strong>шифруется</strong> вашим ключом <strong>до</strong> загрузки. Mail.ru Cloud хранит только зашифрованный файл — без ключа восстановить данные невозможно.
+</div>
+
+<h2>Что нужно</h2>
+<ul>
+    <li>Аккаунт Mail.ru (бесплатный).</li>
+    <li><strong>Пароль приложения</strong> (не основной пароль!) — создаётся в настройках безопасности Mail.ru.</li>
+    <li>Функция доступна в <strong>Pro</strong> (после триала).</li>
+</ul>
+
+<h2>Шаг 1. Создать пароль приложения</h2>
+
+<p>Mail.ru требует <strong>отдельный пароль</strong> для внешних приложений (SHome). Основной пароль <strong>не</strong> подойдёт.</p>
+
+<ol>
+    <li>Откройте <a href="https://id.mail.ru/security" target="_blank">id.mail.ru/security</a>.</li>
+    <li>Войдите в аккаунт Mail.ru.</li>
+    <li>Раздел <strong>«Пароли для внешних приложений»</strong>.</li>
+    <li>Нажмите <strong>«Создать пароль»</strong>.</li>
+    <li>Выберите тип: <strong>«Другое»</strong> → введите название <code>SHome</code>.</li>
+    <li>Скопируйте сгенерированный пароль (16 символов, например <code>abcd efgh ijkl mnop</code>).</li>
+</ol>
+
+<blockquote>
+    <p><strong>Сохраните пароль</strong> — Mail.ru показывает его <strong>только один раз</strong>. Если потеряете — создайте новый.</p>
+</blockquote>
+
+<h2>Шаг 2. Подключить облако в SHome</h2>
+
+<ol>
+    <li>Откройте SHome → <strong>Меню</strong> → <strong>Облако</strong>.</li>
+    <li>Введите:
+        <ul>
+            <li><strong>Логин</strong>: ваш email Mail.ru (например, <code>user@mail.ru</code>).</li>
+            <li><strong>Пароль приложения</strong>: 16-символьный пароль из шага 1.</li>
+        </ul>
+    </li>
+    <li>Нажмите <strong>«Подключить»</strong>.</li>
+    <li>SHome проверит подключение (через Mail.ru Cloud API).</li>
+    <li>Если успешно — статус <strong>«Подключено»</strong>.</li>
+</ol>
+
+<blockquote>
+    <p><strong>Пароль хранится</strong> в <code>SecureStorage</code> (AES-256) на устройстве. Не передаётся разработчику.</p>
+</blockquote>
+
+<h2>Шаг 3. Сгенерировать ключ шифрования</h2>
+
+<p>Перед первым бэкапом нужно <strong>сгенерировать ключ шифрования</strong> — он используется для шифрования/дешифрования бэкапов.</p>
+
+<ol>
+    <li>В разделе <strong>«Облако»</strong> → <strong>«Ключ бэкапа»</strong>.</li>
+    <li>Нажмите <strong>«Сгенерировать ключ»</strong>.</li>
+    <li>SHome создаст случайный ключ (256 бит) и покажет <strong>QR-код</strong>.</li>
+    <li><strong>Сохраните QR-код</strong> (скриншот, распечатка) — без него восстановить бэкап <strong>невозможно</strong>.</li>
+</ol>
+
+<blockquote>
+    <p><strong>Ключ хранится</strong> в <code>SecureStorage</code>. Если вы удалите приложение — ключ <strong>потеряется</strong>. Восстановить бэкап можно <strong>только</strong> по QR-коду.</p>
+</blockquote>
+
+<h2>Шаг 4. Загрузить бэкап</h2>
+
+<ol>
+    <li>В разделе <strong>«Облако»</strong> → <strong>«Резервное копирование»</strong>.</li>
+    <li>Нажмите <strong>«Загрузить бэкап»</strong>.</li>
+    <li>SHome:
+        <ul>
+            <li>соберёт конфигурацию (устройства, комнаты, сцены, настройки);</li>
+            <li>зашифрует ключом;</li>
+            <li>загрузит в Mail.ru Cloud.</li>
+        </ul>
+    </li>
+    <li>Готово. Дата последней синхронизации отобразится в разделе.</li>
+</ol>
+
+<h2>Шаг 5. Восстановить бэкап</h2>
+
+<ol>
+    <li>В разделе <strong>«Облако»</strong> → <strong>«Резервное копирование»</strong>.</li>
+    <li>Нажмите <strong>«Скачать бэкап»</strong>.</li>
+    <li>SHome покажет список бэкапов (по дате).</li>
+    <li>Выберите нужный.</li>
+    <li>SHome:
+        <ul>
+            <li>скачает файл;</li>
+            <li>расшифрует ключом;</li>
+            <li>восстановит конфигурацию.</li>
+        </ul>
+    </li>
+    <li>Перезапустите приложение (опционально).</li>
+</ol>
+
+<blockquote>
+    <p><strong>Если ключ потерян</strong> — восстановить бэкап <strong>невозможно</strong>. Файл в облаке зашифрован, без ключа это мусор.</p>
+</blockquote>
+
+<h2>Шаг 6. Импорт ключа по QR-коду</h2>
+
+<p>Если вы переустановили приложение (или хотите восстановить на другом устройстве) — нужно <strong>импортировать ключ</strong> из QR-кода.</p>
+
+<ol>
+    <li>В разделе <strong>«Облако»</strong> → <strong>«Ключ бэкапа»</strong>.</li>
+    <li>Нажмите <strong>«Сканировать QR»</strong>.</li>
+    <li>Отсканируйте QR-код (со скриншота или распечатки).</li>
+    <li>Ключ импортируется в <code>SecureStorage</code>.</li>
+    <li>Теперь можно скачать бэкап и восстановить.</li>
+</ol>
+
+<h2>Безопасность</h2>
+
+<h3>Что защищено</h3>
+<ul>
+    <li><strong>Пароль Mail.ru</strong> — хранится в <code>SecureStorage</code> (AES-256).</li>
+    <li><strong>Ключ шифрования</strong> — хранится в <code>SecureStorage</code>.</li>
+    <li><strong>Бэкап</strong> — шифруется <strong>до</strong> загрузки (AES-256-GCM).</li>
+    <li><strong>Передача</strong> — HTTPS (Mail.ru Cloud API).</li>
+</ul>
+
+<h3>Что <strong>не</strong> защищено</h3>
+<ul>
+    <li>Если злоумышленник получил доступ к вашему телефону (разблокирован) — он может использовать сохранённый пароль.</li>
+    <li>Если вы потеряли QR-код — бэкап <strong>невосстановим</strong>.</li>
+</ul>
+
+<h3>Рекомендации</h3>
+<ul>
+    <li>Используйте <strong>пароль приложения</strong> Mail.ru (не основной).</li>
+    <li>Храните QR-код в надёжном месте (не в облаке!).</li>
+    <li>Не делитесь QR-кодом с третьими лицами.</li>
+    <li>Периодически делайте бэкапы (раз в неделю/месяц).</li>
+</ul>
+
+<h2>Частые проблемы</h2>
+
+<h3>«Неверный пароль»</h3>
+<ul>
+    <li>Используйте <strong>пароль приложения</strong>, не основной пароль Mail.ru.</li>
+    <li>Проверьте, что скопировали пароль <strong>полностью</strong> (16 символов).</li>
+    <li>Создайте новый пароль приложения в <a href="https://id.mail.ru/security" target="_blank">id.mail.ru/security</a>.</li>
+</ul>
+
+<h3>«Не удалось подключиться»</h3>
+<ul>
+    <li>Проверьте интернет на телефоне.</li>
+    <li>Проверьте, что Mail.ru Cloud доступен (не заблокирован).</li>
+    <li>Попробуйте позже (возможны сбои Mail.ru).</li>
+</ul>
+
+<h3>«Нет бэкапов»</h3>
+<ul>
+    <li>Вы ещё не загружали бэкап — нажмите «Загрузить бэкап».</li>
+    <li>Проверьте, что вошли в <strong>тот же</strong> аккаунт Mail.ru.</li>
+    <li>Проверьте папку в Mail.ru Cloud (SHome создаёт папку <code>SHome/</code>).</li>
+</ul>
+
+<h3>«Ошибка расшифровки»</h3>
+<ul>
+    <li>Ключ шифрования не совпадает с тем, которым зашифрован бэкап.</li>
+    <li>Импортируйте правильный QR-код (тот, что был при создании бэкапа).</li>
+    <li>Если ключ потерян — бэкап <strong>невосстановим</strong>.</li>
+</ul>
+
+<h3>«Ключ не найден»</h3>
+<ul>
+    <li>Сгенерируйте ключ (раздел «Ключ бэкапа» → «Сгенерировать»).</li>
+    <li>Или импортируйте QR-код (если ключ уже был).</li>
+</ul>
+
+<h2>Ссылки</h2>
+<ul>
+    <li><a href="https://cloud.mail.ru/" target="_blank">Mail.ru Cloud</a></li>
+    <li><a href="https://id.mail.ru/security" target="_blank">Пароли приложений Mail.ru</a></li>
+    <li><a href="https://help.mail.ru/cloud/legal/privacy" target="_blank">Политика Mail.ru Cloud</a></li>
+</ul>
+
+<footer>
+    © 2026 votsurX · SHome 8.6.0 · <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a>
+</footer>
+</body>
+</html>
+===== END: settings\cloud.html =====
+
+===== BEGIN: settings\faq.html =====
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ — SHome</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+    <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <img src="../assets/logo.png" alt="SHome" onerror="this.style.display='none'">
+        <h1>SHome</h1>
+    </a>
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../philosophy.html">Философия</a>
+    <a href="../readme.html">Описание</a>
+    <a href="tuya.html">Документация</a>
+    <a href="../licenses.html">Лицензии</a>
+    <a href="../privacy.html">Политика</a>
+    <a href="https://github.com/votsurx/SHome-Releases" target="_blank">GitHub</a>
+</nav>
+
+<h1>FAQ — Частые вопросы</h1>
+
+<p>Ответы на частые вопросы по SHome. Если не нашли ответ — напишите на <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a>.</p>
+
+<h2>Общие вопросы</h2>
+
+<h3>Что такое SHome?</h3>
+<p>SHome — приложение для управления умным домом: Tuya, Zigbee (через Zigbee2MQTT), Frigate. Работает <strong>локально</strong>, без обязательного облака. Поддерживает сцены, таймеры, статистику, уведомления, presence, MQTT.</p>
+
+<h3>На каких платформах работает SHome?</h3>
+<p>Только <strong>Android 10+</strong> (minSdk 29). iOS, Windows, macOS — не поддерживаются.</p>
+
+<h3>Где скачать SHome?</h3>
+<ul>
+    <li><a href="https://github.com/votsurx/SHome-Releases/releases/latest" target="_blank">GitHub Releases</a> (APK).</li>
+    <li><strong>RuStore</strong> (скоро).</li>
+</ul>
+
+<h3>Бесплатно ли SHome?</h3>
+<p>Да, в <strong>демо-режиме</strong> — 1 устройство, бесплатно. <strong>Триал</strong> — 14 дней полного доступа. <strong>Pro</strong> — платно (ключ), бессрочно. См. <a href="pro.html">Pro-лицензия</a>.</p>
+
+<h3>Нужен ли интернет?</h3>
+<p><strong>Нет</strong>, для базовой работы. Интернет нужен только для:</p>
+<ul>
+    <li>Проверки обновлений (опционально).</li>
+    <li>Уведомлений VK/SMS (опционально).</li>
+    <li>Облачных бэкапов (опционально).</li>
+</ul>
+
+<h3>Собираете ли вы мои данные?</h3>
+<p><strong>Нет</strong>. Все данные хранятся <strong>локально</strong>. <code>androidId</code> используется только для привязки Pro-ключа. См. <a href="../privacy.html">Политику конфиденциальности</a>.</p>
+
+<hr>
+
+<h2>Tuya</h2>
+
+<h3>Почему SHome не видит устройства Tuya?</h3>
+<ul>
+    <li>Телефон и устройство в <strong>одной Wi-Fi сети</strong>?</li>
+    <li><code>localKey</code> верный? (см. <a href="tuya.html">настройку Tuya</a>)</li>
+    <li>IP-адрес устройства верный?</li>
+    <li>Firewall на роутере (порт 6668)?</li>
+</ul>
+
+<h3>Как получить <code>localKey</code>?</h3>
+<p>Через <a href="https://iot.tuya.com" target="_blank">Tuya IoT Platform</a> (Devices → Device Details → Local Key) или через <code>tinytuya</code> (см. <a href="tuya.html">настройку Tuya</a>).</p>
+
+<h3><code>localKey</code> не подходит</h3>
+<p>Перепривяжите устройство в Tuya Smart (удалить → добавить заново). После перепривязки <code>localKey</code> меняется — получите новый.</p>
+
+<h3>Устройство Tuya 3.4+ / 3.5 — поддерживается?</h3>
+<p>Да, SHome поддерживает Tuya 3.3, 3.4, 3.5 (через <code>tinytuya</code>). Проверьте версию протокола в Tuya IoT Platform.</p>
+
+<hr>
+
+<h2>Zigbee (Z2M)</h2>
+
+<h3>SHome не видит Zigbee-устройства</h3>
+<ul>
+    <li>Z2M запущен? (<code>docker ps | grep zigbee2mqtt</code>)</li>
+    <li>MQTT-настройки в SHome верные?</li>
+    <li>Z2M публикует топики? (<code>zigbee2mqtt/bridge/devices</code>)</li>
+    <li>Устройства сопряжены с Z2M? (Permit join)</li>
+</ul>
+
+<h3>Как установить Z2M?</h3>
+<p>См. <a href="zigbee2mqtt.html">настройку Zigbee2MQTT</a>. Нужен координатор (CC2652, ConBee II, Sonoff Zigbee 3.0) + MQTT-брокер.</p>
+
+<h3>Устройства не сопрягаются</h3>
+<ul>
+    <li><strong>Permit join</strong> включён в Z2M?</li>
+    <li>Устройство в режиме сопряжения?</li>
+    <li>Устройство рядом с координатором?</li>
+</ul>
+
+<hr>
+
+<h2>Frigate</h2>
+
+<h3>SHome не подключается к Frigate</h3>
+<ul>
+    <li>URL верный? (<code>http://your-server:5000</code>)</li>
+    <li>Firewall (порт 5000)?</li>
+    <li>SHome (телефон) в той же сети, что Frigate?</li>
+</ul>
+
+<h3>Нет событий из Frigate</h3>
+<ul>
+    <li>Веб-интерфейс Frigate (<code>:5000</code>) показывает события?</li>
+    <li><code>detect</code> включён в <code>config.yml</code>?</li>
+    <li>Объекты (person, car) в кадре?</li>
+</ul>
+
+<h3>Как установить Frigate?</h3>
+<p>См. <a href="frigate.html">настройку Frigate</a>. Нужен сервер (Raspberry Pi 4+, NUC, Synology), IP-камеры (RTSP), MQTT-брокер.</p>
+
+<hr>
+
+<h2>MQTT</h2>
+
+<h3>Что такое MQTT и зачем он нужен?</h3>
+<p>MQTT — протокол обмена сообщениями. SHome использует его для связи с <strong>Zigbee2MQTT</strong> и <strong>Frigate</strong>. Нужен MQTT-брокер (Mosquitto). См. <a href="mqtt.html">настройку MQTT</a>.</p>
+
+<h3>«Connection refused»</h3>
+<ul>
+    <li>Mosquitto запущен? (<code>docker ps | grep mosquitto</code>)</li>
+    <li>Порт 1883 открыт?</li>
+    <li>Firewall?</li>
+</ul>
+
+<h3>«Not authorized»</h3>
+<ul>
+    <li>Пользователь создан? (<code>mosquitto_passwd</code>)</li>
+    <li>Пароль верный?</li>
+    <li><code>allow_anonymous false</code> в конфиге?</li>
+</ul>
+
+<hr>
+
+<h2>Облако (Mail.ru)</h2>
+
+<h3>«Неверный пароль» в облаке</h3>
+<p>Используйте <strong>пароль приложения</strong> Mail.ru (не основной). Создайте в <a href="https://id.mail.ru/security" target="_blank">id.mail.ru/security</a>.</p>
+
+<h3>«Ошибка расшифровки»</h3>
+<p>Ключ шифрования не совпадает с тем, которым зашифрован бэкап. Импортируйте правильный QR-код. Если ключ потерян — бэкап <strong>невосстановим</strong>.</p>
+
+<h3>Как настроить облако?</h3>
+<p>См. <a href="cloud.html">настройку облака</a>.</p>
+
+<hr>
+
+<h2>Уведомления (VK / SMS)</h2>
+
+<h3>VK: «Не удалось отправить»</h3>
+<ul>
+    <li><code>access_token</code> истёк — получите новый.</li>
+    <li><code>user_id</code> верный?</li>
+    <li>Приложение VK имеет права <code>messages</code>?</li>
+</ul>
+
+<h3>SMS: «Не удалось отправить»</h3>
+<ul>
+    <li>API-ключ верный?</li>
+    <li>Баланс SMS.ru пополнен?</li>
+    <li>Номер в формате <code>+79001234567</code>?</li>
+</ul>
+
+<h3>Слишком много уведомлений</h3>
+<ul>
+    <li>Увеличьте <strong>cooldown</strong> (10–30 мин).</li>
+    <li>Отключите лишние типы (например, «устройства»).</li>
+    <li>Включите <strong>расписание</strong> (ночь — тишина).</li>
+</ul>
+
+<h3>Как настроить уведомления?</h3>
+<p>См. <a href="notifications.html">настройку уведомлений</a>.</p>
+
+<hr>
+
+<h2>Presence</h2>
+
+<h3>Статус не меняется</h3>
+<ul>
+    <li>Геолокация включена в Android?</li>
+    <li>Координаты «дома» верные?</li>
+    <li>Радиус достаточный? (увеличьте до 200 м).</li>
+    <li>Телефон отправляет координаты?</li>
+</ul>
+
+<h3>Батарея быстро садится</h3>
+<ul>
+    <li>Уменьшите частоту обновления (10–15 мин).</li>
+    <li>Используйте Wi-Fi вместо GPS.</li>
+    <li>Отключите фоновый режим (если не нужен).</li>
+</ul>
+
+<h3>Как настроить presence?</h3>
+<p>См. <a href="presence.html">настройку присутствия</a>.</p>
+
+<hr>
+
+<h2>Pro-лицензия</h2>
+
+<h3>Что даёт Pro?</h3>
+<p>Все функции SHome: неограниченные устройства, сцены, таймеры, статистика, Zigbee, Frigate, presence, уведомления, MQTT, облако. См. <a href="pro.html">Pro-лицензия</a>.</p>
+
+<h3>Как купить Pro?</h3>
+<p>Через Telegram-бот (скоро) или вручную (<a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a>).</p>
+
+<h3>Как активировать ключ?</h3>
+<p>Настройки → Pro → «Активировать Pro» → ввести ключ.</p>
+
+<h3>Можно ли перенести Pro на другой телефон?</h3>
+<p>Ключ привязан к <code>androidId</code>. При смене устройства — нужен новый ключ (обратитесь к продавцу).</p>
+
+<h3>Что будет после триала?</h3>
+<p>Переход в демо-режим (1 устройство). Данные не удаляются. Активируйте Pro — всё вернётся.</p>
+
+<h3>Потерял ключ — что делать?</h3>
+<p>Если приложение удалено — ключ потерян. Обратитесь к продавцу с чеком об оплате.</p>
+
+<hr>
+
+<h2>Обновления</h2>
+
+<h3>Как обновить SHome?</h3>
+<ul>
+    <li><strong>GitHub Releases</strong>: скачайте новый APK, установите поверх.</li>
+    <li><strong>RuStore</strong> (скоро): автообновление.</li>
+    <li>В приложении: Настройки → «Проверить обновления».</li>
+</ul>
+
+<h3>Данные сохранятся при обновлении?</h3>
+<p>Да, при установке <strong>поверх</strong> (без удаления) данные сохраняются. При удалении — теряются (если нет бэкапа).</p>
+
+<hr>
+
+<h2>Проблемы и решения</h2>
+
+<h3>Приложение падает</h3>
+<ul>
+    <li>Обновите до последней версии.</li>
+    <li>Очистите кэш (Настройки Android → SHome → Очистить кэш).</li>
+    <li>Переустановите (с бэкапом!).</li>
+    <li>Если не помогает — напишите на <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a> с описанием.</li>
+</ul>
+
+<h3>«Устройство offline»</h3>
+<ul>
+    <li>Проверьте сеть (Wi-Fi, LAN).</li>
+    <li>Перезагрузите устройство.</li>
+    <li>Проверьте IP-адрес.</li>
+</ul>
+
+<h3>Данные пропали</h3>
+<ul>
+    <li>Проверьте, не удаляли ли приложение.</li>
+    <li>Восстановите из бэкапа (облако).</li>
+    <li>Если бэкапа нет — данные не восстановить.</li>
+</ul>
+
+<h3>«Demo: only one device allowed»</h3>
+<p>Это ограничение демо-режима. Активируйте Pro (см. <a href="pro.html">Pro-лицензия</a>).</p>
+
+<hr>
+
+<h2>Не нашли ответ?</h2>
+
+<p>Напишите на <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a> — постараемся ответить в течение 1–2 дней.</p>
+
+<p>Перед обращением:</p>
+<ul>
+    <li>Проверьте <a href="../readme.html">README</a> и документацию.</li>
+    <li>Укажите версию SHome (Настройки → О приложении).</li>
+    <li>Опишите проблему (что делали, что ожидали, что получилось).</li>
+    <li>Приложите скриншот / лог (если есть).</li>
+</ul>
+
+<footer>
+    © 2026 votsurX · SHome 8.6.0 · <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a>
+</footer>
+</body>
+</html>
+===== END: settings\faq.html =====
+
+===== BEGIN: settings\frigate.html =====
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Настройка Frigate — SHome</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+    <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <img src="../assets/logo.png" alt="SHome" onerror="this.style.display='none'">
+        <h1>SHome</h1>
+    </a>
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../philosophy.html">Философия</a>
+    <a href="../readme.html">Описание</a>
+    <a href="tuya.html">Документация</a>
+    <a href="../licenses.html">Лицензии</a>
+    <a href="../privacy.html">Политика</a>
+    <a href="https://github.com/votsurx/SHome-Releases" target="_blank">GitHub</a>
+</nav>
+
+<h1>Настройка Frigate</h1>
+
+<p><strong>Frigate</strong> — это NVR (Network Video Recorder) с детекцией объектов в реальном времени (person, car, dog, cat и т.д.). SHome подключается к Frigate и показывает камеры, события, статистику.</p>
+
+<div class="highlight">
+    <strong>Схема:</strong> IP-камера (RTSP) → Frigate → MQTT + API → SHome
+</div>
+
+<h2>Что нужно</h2>
+<ul>
+    <li><strong>Сервер</strong>: Raspberry Pi 4+ (с Coral USB), Intel NUC, Synology, мини-ПК.</li>
+    <li><strong>IP-камеры</strong> с RTSP (Hikvision, Dahua, Reolink, Tapo и т.п.).</li>
+    <li><strong>MQTT-брокер</strong>: Mosquitto (см. <a href="mqtt.html">настройку MQTT</a>).</li>
+    <li><strong>Docker</strong> + Docker Compose.</li>
+</ul>
+
+<h2>Шаг 1. Установить Frigate</h2>
+
+<p>Создайте папку для Frigate:</p>
+<pre><code>mkdir -p /opt/frigate/config /opt/frigate/media
+cd /opt/frigate</code></pre>
+
+<p><code>docker-compose.yml</code>:</p>
+<pre><code>version: '3.9'
+
+services:
+  frigate:
+    container_name: frigate
+    image: ghcr.io/blakeblackshear/frigate:stable
+    restart: unless-stopped
+    shm_size: "256mb"
+    ports:
+      - "5000:5000"     # веб-интерфейс
+      - "8554:8554"     # RTSP restream
+      - "8555:8555"     # WebRTC (если нужно)
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /opt/frigate/config:/config
+      - /opt/frigate/media:/media/frigate
+      - type: tmpfs
+        target: /tmp/cache
+        tmpfs:
+          size: 1000000000
+    environment:
+      FRIGATE_RTSP_PASSWORD: "your_camera_password"
+    devices:
+      - /dev/bus/usb:/dev/bus/usb   # для Coral USB (если есть)
+</code></pre>
+
+<blockquote>
+    <p><strong><code>shm_size: "256mb"</code></strong> — для 1–2 камер. Для 4+ камер увеличьте до <code>512mb</code> или <code>1gb</code>.</p>
+    <p><strong>Coral USB</strong> — ускоряет детекцию (опционально, но рекомендуется для 2+ камер).</p>
+</blockquote>
+
+<h2>Шаг 2. Настроить <code>config.yml</code></h2>
+
+<p>Файл: <code>/opt/frigate/config/config.yml</code>:</p>
+
+<pre><code>mqtt:
+  host: your-mqtt-broker
+  user: your_user
+  password: your_password
+
+detectors:
+  coral:
+    type: edgetpu
+    device: usb
+  # Или CPU (медленно, для теста):
+  # cpu:
+  #   type: cpu
+
+cameras:
+  front_door:
+    ffmpeg:
+      inputs:
+        - path: rtsp://user:password@camera-ip:554/Streaming/Channels/101
+          roles:
+            - detect
+            - record
+    detect:
+      width: 1280
+      height: 720
+      fps: 5
+    objects:
+      track:
+        - person
+        - car
+        - dog
+        - cat
+    record:
+      enabled: true
+      retain:
+        days: 7
+        mode: motion
+
+  backyard:
+    ffmpeg:
+      inputs:
+        - path: rtsp://user:password@camera-ip-2:554/Streaming/Channels/101
+          roles:
+            - detect
+            - record
+    detect:
+      width: 1280
+      height: 720
+      fps: 5
+    objects:
+      track:
+        - person
+        - car
+</code></pre>
+
+<blockquote>
+    <p><strong>RTSP-URL</strong> зависит от камеры:</p>
+    <ul>
+        <li>Hikvision: <code>rtsp://user:pass@ip:554/Streaming/Channels/101</code></li>
+        <li>Dahua: <code>rtsp://user:pass@ip:554/cam/realmonitor?channel=1&subtype=0</code></li>
+        <li>Reolink: <code>rtsp://user:pass@ip:554/h264Preview_01_main</code></li>
+        <li>Tapo: <code>rtsp://user:pass@ip:554/stream1</code></li>
+    </ul>
+</blockquote>
+
+<h2>Шаг 3. Запустить Frigate</h2>
+
+<pre><code>docker compose up -d</code></pre>
+
+<p>Проверьте логи:</p>
+<pre><code>docker logs -f frigate</code></pre>
+
+<p>Должно быть:</p>
+<pre><code>Frigate started
+MQTT connected
+Camera front_door: initialized
+Detector coral: ready
+</code></pre>
+
+<p>Откройте веб-интерфейс: <code>http://your-server:5000</code>.</p>
+
+<h2>Шаг 4. Настроить SHome</h2>
+
+<ol>
+    <li>Откройте SHome → <strong>Настройки</strong> → <strong>Frigate</strong>.</li>
+    <li>Введите:
+        <ul>
+            <li><strong>URL</strong>: <code>http://your-server:5000</code></li>
+            <li><strong>Логин/пароль</strong> (если настроена аутентификация Frigate).</li>
+        </ul>
+    </li>
+    <li>Сохраните.</li>
+    <li>Откройте <strong>Меню</strong> → <strong>Frigate</strong>.</li>
+    <li>SHome покажет камеры и последние события.</li>
+</ol>
+
+<h2>Шаг 5. Настроить уведомления</h2>
+
+<ol>
+    <li>Настройки → <strong>Уведомления</strong> → <strong>VK</strong> (или SMS).</li>
+    <li>Включите <strong>Frigate: person</strong>, <strong>Frigate: car</strong> и т.д.</li>
+    <li>При детекции SHome отправит уведомление.</li>
+</ol>
+
+<h2>Шаг 6. Проверить</h2>
+<ul>
+    <li>В SHome: меню → Frigate → камеры (превью).</li>
+    <li>События (person, car) — список.</li>
+    <li>Уведомления приходят.</li>
+</ul>
+
+<h2>Частые проблемы</h2>
+
+<h3>Frigate не запускается</h3>
+<ul>
+    <li>Проверьте <code>docker logs frigate</code> — там ошибка.</li>
+    <li>Проверьте <code>config.yml</code> — YAML чувствителен к отступам.</li>
+    <li>Проверьте <code>shm_size</code> — если мало, увеличьте.</li>
+</ul>
+
+<h3>Нет событий</h3>
+<ul>
+    <li>Проверьте <code>detect</code> в <code>config.yml</code> — камера включена?</li>
+    <li>Проверьте, что объекты в кадре (person, car) — Frigate их видит.</li>
+    <li>Проверьте веб-интерфейс Frigate (<code>:5000</code>) — там видны события?</li>
+</ul>
+
+<h3>SHome не подключается к Frigate</h3>
+<ul>
+    <li>Проверьте URL (<code>http://your-server:5000</code>).</li>
+    <li>Проверьте firewall (порт 5000).</li>
+    <li>Проверьте, что SHome (телефон) в той же сети, что Frigate.</li>
+</ul>
+
+<h3>Уведомления не приходят</h3>
+<ul>
+    <li>Проверьте VK-токен / SMS-настройки.</li>
+    <li>Проверьте, что в настройках SHome включены Frigate-уведомления (person, car).</li>
+    <li>Проверьте, что Frigate публикует события в MQTT.</li>
+</ul>
+
+<h3>Coral USB не найден</h3>
+<ul>
+    <li>Проверьте <code>lsusb</code> — устройство видно?</li>
+    <li>Проверьте права: <code>sudo usermod -a -G dialout $USER</code>.</li>
+    <li>Проверьте, что <code>devices: /dev/bus/usb</code> в <code>docker-compose.yml</code>.</li>
+</ul>
+
+<h2>Ссылки</h2>
+<ul>
+    <li><a href="https://frigate.video/" target="_blank">Frigate — официальный сайт</a></li>
+    <li><a href="https://docs.frigate.video/" target="_blank">Frigate — документация</a></li>
+    <li><a href="https://docs.frigate.video/configuration/" target="_blank">Frigate — конфигурация</a></li>
+    <li><a href="https://coral.ai/" target="_blank">Google Coral (USB Accelerator)</a></li>
+</ul>
+
+<footer>
+    © 2026 votsurX · SHome 8.6.0 · <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a>
+</footer>
+</body>
+</html>
+===== END: settings\frigate.html =====
+
+===== BEGIN: settings\mqtt.html =====
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Настройка MQTT — SHome</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+    <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <img src="../assets/logo.png" alt="SHome" onerror="this.style.display='none'">
+        <h1>SHome</h1>
+    </a>
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../philosophy.html">Философия</a>
+    <a href="../readme.html">Описание</a>
+    <a href="tuya.html">Документация</a>
+    <a href="../licenses.html">Лицензии</a>
+    <a href="../privacy.html">Политика</a>
+    <a href="https://github.com/votsurx/SHome-Releases" target="_blank">GitHub</a>
+</nav>
+
+<h1>Настройка MQTT-брокера</h1>
+
+<p><strong>MQTT</strong> — протокол обмена сообщениями, который SHome использует для связи с <strong>Zigbee2MQTT</strong> и <strong>Frigate</strong>. Вам нужен MQTT-брокер (сервер), к которому подключатся и SHome, и Z2M/Frigate.</p>
+
+<div class="highlight">
+    <strong>Схема:</strong> SHome ← MQTT → Zigbee2MQTT / Frigate
+</div>
+
+<h2>Что нужно</h2>
+<ul>
+    <li><strong>Сервер</strong>: Raspberry Pi, Intel NUC, Synology, мини-ПК (или тот же, где Z2M/Frigate).</li>
+    <li><strong>Docker</strong> (рекомендую) или нативная установка.</li>
+    <li>Свободный порт <strong>1883</strong> (MQTT) и <strong>9001</strong> (WebSocket, опционально).</li>
+</ul>
+
+<h2>Шаг 1. Установить Mosquitto (Docker)</h2>
+
+<p><strong>Mosquitto</strong> — самый популярный MQTT-брокер. Установка через Docker:</p>
+
+<pre><code>docker run -d \
+  --name mosquitto \
+  --restart=unless-stopped \
+  -p 1883:1883 \
+  -p 9001:9001 \
+  -v /opt/mosquitto/config:/mosquitto/config \
+  -v /opt/mosquitto/data:/mosquitto/data \
+  -v /opt/mosquitto/log:/mosquitto/log \
+  eclipse-mosquitto</code></pre>
+
+<p>Создайте папки:</p>
+<pre><code>mkdir -p /opt/mosquitto/{config,data,log}</code></pre>
+
+<h2>Шаг 2. Настроить <code>mosquitto.conf</code></h2>
+
+<p>Файл: <code>/opt/mosquitto/config/mosquitto.conf</code>:</p>
+
+<pre><code># Основной listener
+listener 1883
+protocol mqtt
+
+# WebSocket (для веб-клиентов, опционально)
+listener 9001
+protocol websockets
+
+# Аутентификация
+allow_anonymous false
+password_file /mosquitto/config/passwd
+
+# Логи
+log_dest file /mosquitto/log/mosquitto.log
+log_type error
+log_type warning
+log_type notice
+log_type information</code></pre>
+
+<h2>Шаг 3. Создать пользователя</h2>
+
+<p>Создайте файл <code>passwd</code> с пользователем:</p>
+
+<pre><code>docker exec -it mosquitto mosquitto_passwd -c /mosquitto/config/passwd your_user</code></pre>
+
+<p>Введите пароль (дважды). Файл <code>passwd</code> создастся с хешем пароля.</p>
+
+<blockquote>
+    <p><strong>Добавить ещё пользователя:</strong></p>
+    <pre><code>docker exec -it mosquitto mosquitto_passwd /mosquitto/config/passwd another_user</code></pre>
+    <p>(без <code>-c</code>, чтобы не перезаписать файл)</p>
+</blockquote>
+
+<h2>Шаг 4. Перезапустить Mosquitto</h2>
+
+<pre><code>docker restart mosquitto</code></pre>
+
+<p>Проверьте логи:</p>
+<pre><code>docker logs -f mosquitto</code></pre>
+
+<p>Должно быть:</p>
+<pre><code>mosquitto version 2.x.x starting
+Opening ipv4 listen socket on port 1883.
+Opening websockets listen socket on port 9001.
+</code></pre>
+
+<h2>Шаг 5. Проверить подключение</h2>
+
+<h3>Через mosquitto_pub / mosquitto_sub (CLI)</h3>
+
+<pre><code># Подписаться на топик
+docker exec -it mosquitto mosquitto_sub -h localhost -u your_user -P your_password -t "test/topic"
+
+# В другом терминале — опубликовать
+docker exec -it mosquitto mosquitto_pub -h localhost -u your_user -P your_password -t "test/topic" -m "Hello SHome"</code></pre>
+
+<h3>Через MQTT Explorer (GUI)</h3>
+<ol>
+    <li>Скачайте <a href="https://mqtt-explorer.com/" target="_blank">MQTT Explorer</a>.</li>
+    <li>Подключитесь: <code>your-server:1883</code>, логин/пароль.</li>
+    <li>Опубликуйте тестовое сообщение → проверьте, что оно приходит.</li>
+</ol>
+
+<h2>Шаг 6. Настроить SHome</h2>
+
+<ol>
+    <li>Откройте SHome → <strong>Настройки</strong> → <strong>MQTT</strong>.</li>
+    <li>Введите:
+        <ul>
+            <li><strong>URL</strong>: <code>mqtt://your-server:1883</code></li>
+            <li><strong>Логин</strong>: <code>your_user</code></li>
+            <li><strong>Пароль</strong>: <code>your_password</code></li>
+        </ul>
+    </li>
+    <li>Сохраните. SHome подключится к брокеру.</li>
+</ol>
+
+<h2>Шаг 7. Проверить в SHome</h2>
+<ul>
+    <li>Меню → Zigbee → «Сканировать» — SHome получит список устройств (если Z2M настроен).</li>
+    <li>Меню → Frigate — SHome получит камеры (если Frigate настроен).</li>
+</ul>
+
+<h2>Безопасность (рекомендую)</h2>
+
+<h3>1. Не используйте <code>allow_anonymous true</code></h3>
+<p>Всегда создавайте пользователя и пароль.</p>
+
+<h3>2. Ограничьте доступ по IP</h3>
+<p>В <code>mosquitto.conf</code>:</p>
+<pre><code>listener 1883
+allow_anonymous false
+password_file /mosquitto/config/passwd
+
+# Разрешить только локальную сеть
+# (если брокер в той же сети, что SHome)
+# Используйте firewall (ufw / iptables) для ограничения</code></pre>
+
+<h3>3. TLS (опционально)</h3>
+<p>Для шифрования трафика:</p>
+<pre><code>listener 8883
+protocol mqtt
+cafile /mosquitto/config/ca.crt
+certfile /mosquitto/config/server.crt
+keyfile /mosquitto/config/server.key
+require_certificate false</code></pre>
+
+<p>В SHome: <code>mqtts://your-server:8883</code> (с TLS).</p>
+
+<h3>4. Firewall</h3>
+<p>Откройте порт 1883 только для локальной сети:</p>
+<pre><code>sudo ufw allow from 192.168.0.0/16 to any port 1883</code></pre>
+
+<h2>Частые проблемы</h2>
+
+<h3>SHome не подключается к MQTT</h3>
+<ul>
+    <li>Проверьте URL: <code>mqtt://your-server:1883</code> (не <code>http://</code>!).</li>
+    <li>Проверьте логин/пароль.</li>
+    <li>Проверьте, что порт 1883 открыт (firewall).</li>
+    <li>Проверьте логи Mosquitto: <code>docker logs mosquitto</code>.</li>
+</ul>
+
+<h3>«Connection refused»</h3>
+<ul>
+    <li>Mosquitto запущен? <code>docker ps | grep mosquitto</code>.</li>
+    <li>Порт 1883 слушается? <code>netstat -tlnp | grep 1883</code>.</li>
+    <li>Firewall блокирует? Проверьте <code>ufw status</code>.</li>
+</ul>
+
+<h3>«Not authorized»</h3>
+<ul>
+    <li>Пользователь создан? <code>docker exec -it mosquitto cat /mosquitto/config/passwd</code>.</li>
+    <li>Пароль верный? Пересоздайте: <code>mosquitto_passwd -c ...</code>.</li>
+    <li><code>allow_anonymous false</code> в конфиге?</li>
+</ul>
+
+<h3>Z2M / Frigate не подключаются к MQTT</h3>
+<ul>
+    <li>Проверьте <code>mqtt.server</code> в конфиге Z2M / Frigate.</li>
+    <li>Проверьте логин/пароль (те же, что в SHome).</li>
+    <li>Проверьте, что Z2M / Frigate в той же сети, что MQTT-брокер.</li>
+</ul>
+
+<h3>Сообщения не доходят</h3>
+<ul>
+    <li>Проверьте топики (MQTT Explorer).</li>
+    <li>Проверьте QoS (0, 1, 2).</li>
+    <li>Проверьте retain-флаг.</li>
+</ul>
+
+<h2>Ссылки</h2>
+<ul>
+    <li><a href="https://mosquitto.org/" target="_blank">Mosquitto — официальный сайт</a></li>
+    <li><a href="https://mosquitto.org/man/mosquitto-conf-5.html" target="_blank">mosquitto.conf — документация</a></li>
+    <li><a href="https://mqtt-explorer.com/" target="_blank">MQTT Explorer (GUI)</a></li>
+    <li><a href="https://mqtt.org/" target="_blank">MQTT.org</a></li>
+</ul>
+
+<footer>
+    © 2026 votsurX · SHome 8.6.0 · <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a>
+</footer>
+</body>
+</html>
+===== END: settings\mqtt.html =====
+
+===== BEGIN: settings\notifications.html =====
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Уведомления (VK / SMS) — SHome</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+    <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <img src="../assets/logo.png" alt="SHome" onerror="this.style.display='none'">
+        <h1>SHome</h1>
+    </a>
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../philosophy.html">Философия</a>
+    <a href="../readme.html">Описание</a>
+    <a href="tuya.html">Документация</a>
+    <a href="../licenses.html">Лицензии</a>
+    <a href="../privacy.html">Политика</a>
+    <a href="https://github.com/votsurx/SHome-Releases" target="_blank">GitHub</a>
+</nav>
+
+<h1>Уведомления (VK / SMS)</h1>
+
+<p>SHome может отправлять уведомления о событиях (алерты, offline, сцены, Frigate, Zigbee) в <strong>VK</strong> и по <strong>SMS</strong>. Это опционально — работает только если настроено.</p>
+
+<div class="highlight">
+    <strong>Схема:</strong> SHome → VK API / SMS-шлюз → ваше устройство
+</div>
+
+<h2>Что нужно</h2>
+<ul>
+    <li><strong>VK</strong>: аккаунт VK, Standalone-приложение (для access_token).</li>
+    <li><strong>SMS</strong>: SMS-шлюз с API (например, SMS.ru, Twilio) или встроенный SMS-сервис телефона.</li>
+    <li>Функция доступна в <strong>Pro</strong> (после триала).</li>
+</ul>
+
+<hr>
+
+<h2>Часть 1. VK-уведомления</h2>
+
+<h3>Шаг 1. Создать Standalone-приложение VK</h3>
+
+<ol>
+    <li>Откройте <a href="https://vk.com/dev" target="_blank">vk.com/dev</a> → <strong>«Мои приложения»</strong>.</li>
+    <li>Нажмите <strong>«Создать приложение»</strong>.</li>
+    <li>Выберите тип <strong>«Standalone-приложение»</strong>.</li>
+    <li>Название: <code>SHome</code>.</li>
+    <li>Подтвердите.</li>
+</ol>
+
+<h3>Шаг 2. Получить access_token</h3>
+
+<p>Есть <strong>два способа</strong>:</p>
+
+<h4>Способ A: Implicit Flow (через браузер)</h4>
+
+<ol>
+    <li>В настройках приложения VK найдите <strong>ID приложения</strong> (например, <code>12345678</code>).</li>
+    <li>Откройте в браузере URL:
+        <pre><code>https://oauth.vk.com/authorize?client_id=ВАШ_APP_ID&display=page&redirect_uri=https://oauth.vk.com/blank.html&scope=messages&response_type=token&v=5.131</code></pre>
+        (замените <code>ВАШ_APP_ID</code> на ID приложения)
+    </li>
+    <li>Разрешите доступ.</li>
+    <li>Вас перебросит на <code>https://oauth.vk.com/blank.html#access_token=...&expires_in=...&user_id=...</code>.</li>
+    <li>Скопируйте <code>access_token</code> (длинная строка) и <code>user_id</code>.</li>
+</ol>
+
+<h4>Способ B: Сервисный ключ (для сообществ)</h4>
+
+<p>Если у вас есть <strong>сообщество VK</strong>:</p>
+<ol>
+    <li>Управление сообществом → <strong>Работа с API</strong> → <strong>Создать ключ</strong>.</li>
+    <li>Выберите права: <code>messages</code>, <code>manage</code>.</li>
+    <li>Скопируйте <strong>сервисный ключ</strong> и <strong>ID сообщества</strong>.</li>
+</ol>
+
+<h3>Шаг 3. Настроить VK в SHome</h3>
+
+<ol>
+    <li>Откройте SHome → <strong>Настройки</strong> → <strong>Уведомления</strong>.</li>
+    <li>Включите <strong>«Уведомления включены»</strong>.</li>
+    <li>Включите <strong>«VK»</strong>.</li>
+    <li>Введите:
+        <ul>
+            <li><strong>VK Token</strong>: <code>access_token</code> из шага 2.</li>
+            <li><strong>VK User ID</strong>: ваш <code>user_id</code> (число).</li>
+        </ul>
+    </li>
+    <li>Сохраните.</li>
+</ol>
+
+<h3>Шаг 4. Настроить типы уведомлений</h3>
+
+<p>В разделе <strong>«Уведомления»</strong> → <strong>«Типы»</strong>:</p>
+
+<ul>
+    <li><strong>Сцены</strong> — уведомления при выполнении сцен.</li>
+    <li><strong>Устройства</strong> — вкл/выкл, изменения состояния.</li>
+    <li><strong>Алерты</strong> — вода, дым, газ, движение, контакт (Zigbee).</li>
+    <li><strong>Ошибки</strong> — offline, online, ошибки подключения.</li>
+    <li><strong>Zigbee</strong> — water_leak, smoke, gas, motion, contact.</li>
+    <li><strong>Frigate</strong> — person, car, dog, cat, bird.</li>
+    <li><strong>Offline</strong> — Zigbee offline, Frigate offline.</li>
+</ul>
+
+<h3>Шаг 5. Проверить</h3>
+<ol>
+    <li>Нажмите <strong>«Тест»</strong> (если есть) — SHome отправит тестовое сообщение в VK.</li>
+    <li>Или вызовите событие (вкл/выкл устройство, алерт) — проверьте, что уведомление пришло.</li>
+</ol>
+
+<blockquote>
+    <p><strong>Если уведомления не приходят</strong> — проверьте <code>access_token</code> (не истёк?), <code>user_id</code>, права приложения (<code>messages</code>).</p>
+</blockquote>
+
+<hr>
+
+<h2>Часть 2. SMS-уведомления</h2>
+
+<h3>Шаг 1. Выбрать SMS-шлюз</h3>
+
+<p>Варианты:</p>
+<ul>
+    <li><strong>SMS.ru</strong> — российский, API, доступные цены.</li>
+    <li><strong>Twilio</strong> — международный, надёжный.</li>
+    <li><strong>Встроенный SMS</strong> — через SIM-карту телефона (бесплатно, но только с телефона).</li>
+</ul>
+
+<h3>Шаг 2. Настроить SMS.ru (пример)</h3>
+
+<ol>
+    <li>Зарегистрируйтесь на <a href="https://sms.ru" target="_blank">sms.ru</a>.</li>
+    <li>Пополните баланс (от 100 ₽).</li>
+    <li>Получите <strong>API-ключ</strong> в личном кабинете.</li>
+</ol>
+
+<h3>Шаг 3. Настроить SMS в SHome</h3>
+
+<ol>
+    <li>Откройте SHome → <strong>Настройки</strong> → <strong>Уведомления</strong>.</li>
+    <li>Включите <strong>«SMS»</strong>.</li>
+    <li>Введите:
+        <ul>
+            <li><strong>Номер телефона</strong>: ваш номер (например, <code>+79001234567</code>).</li>
+            <li><strong>API-ключ</strong> (если требуется): из SMS.ru / Twilio.</li>
+        </ul>
+    </li>
+    <li>Сохраните.</li>
+</ol>
+
+<blockquote>
+    <p><strong>Внимание:</strong> SMS-шлюз <strong>платный</strong> (за каждое сообщение). Убедитесь, что баланс пополнен.</p>
+</blockquote>
+
+<h3>Шаг 4. Настроить типы уведомлений</h3>
+
+<p>Аналогично VK (см. выше). По умолчанию SMS <strong>только для алертов</strong> (вода, дым, газ) — чтобы не тратить деньги на всё подряд.</p>
+
+<h3>Шаг 5. Проверить</h3>
+<ol>
+    <li>Нажмите <strong>«Тест SMS»</strong> (если есть).</li>
+    <li>Или вызовите алерт — проверьте, что SMS пришло.</li>
+</ol>
+
+<hr>
+
+<h2>Расписание уведомлений</h2>
+
+<p>Чтобы не получать уведомления ночью — настройте <strong>расписание</strong>:</p>
+
+<ol>
+    <li>В разделе <strong>«Уведомления»</strong> → <strong>«Расписание»</strong>.</li>
+    <li>Включите <strong>«Использовать расписание»</strong>.</li>
+    <li>Задайте:
+        <ul>
+            <li><strong>С</strong>: <code>09:00</code></li>
+            <li><strong>По</strong>: <code>21:00</code></li>
+            <li><strong>Дни недели</strong>: Пн–Вс (или выборочно).</li>
+        </ul>
+    </li>
+    <li>Опция <strong>«Только алерты»</strong> — если включена, вне расписания приходят <strong>только</strong> алерты (вода, дым, газ), остальное — подавляется.</li>
+</ol>
+
+<h2>Cooldown (защита от спама)</h2>
+
+<p>Чтобы не получать <strong>100 одинаковых</strong> уведомлений — настройте <strong>cooldown</strong>:</p>
+
+<ol>
+    <li>В разделе <strong>«Уведомления»</strong> → <strong>«Cooldown»</strong>.</li>
+    <li>Задайте <strong>минуты</strong>: например, <code>5</code> — повторное уведомление того же типа не отправится в течение 5 минут.</li>
+</ol>
+
+<h2>Частые проблемы</h2>
+
+<h3>VK: «Не удалось отправить»</h3>
+<ul>
+    <li><code>access_token</code> истёк — получите новый (Implicit Flow).</li>
+    <li><code>user_id</code> неверный — проверьте (число).</li>
+    <li>Приложение VK не имеет прав <code>messages</code> — пересоздайте.</li>
+    <li>VK API недоступен — попробуйте позже.</li>
+</ul>
+
+<h3>VK: «Forbidden»</h3>
+<ul>
+    <li>Пользователь запретил сообщения от приложения — разрешите в настройках VK.</li>
+    <li>Приложение заблокировано VK — проверьте статус.</li>
+</ul>
+
+<h3>SMS: «Не удалось отправить»</h3>
+<ul>
+    <li>API-ключ неверный — проверьте в личном кабинете SMS.ru.</li>
+    <li>Баланс SMS.ru = 0 — пополните.</li>
+    <li>Номер неверный — проверьте формат (<code>+79001234567</code>).</li>
+</ul>
+
+<h3>Уведомления не приходят вообще</h3>
+<ul>
+    <li>«Уведомления включены» = true?</li>
+    <li>Типы уведомлений включены (сцены, алерты и т.д.)?</li>
+    <li>Расписание не блокирует? (если «только алерты» — обычные уведомления не придут вне расписания).</li>
+    <li>Cooldown не подавляет? (проверьте <code>5 мин</code>).</li>
+</ul>
+
+<h3>Слишком много уведомлений</h3>
+<ul>
+    <li>Увеличьте <strong>cooldown</strong> (10–30 мин).</li>
+    <li>Отключите лишние <strong>типы</strong> (например, «устройства»).</li>
+    <li>Включите <strong>расписание</strong> (ночь — тишина).</li>
+</ul>
+
+<h2>Ссылки</h2>
+<ul>
+    <li><a href="https://vk.com/dev" target="_blank">VK для разработчиков</a></li>
+    <li><a href="https://dev.vk.com/method/messages.send" target="_blank">VK API messages.send</a></li>
+    <li><a href="https://sms.ru" target="_blank">SMS.ru</a></li>
+    <li><a href="https://www.twilio.com/sms" target="_blank">Twilio SMS</a></li>
+</ul>
+
+<footer>
+    © 2026 votsurX · SHome 8.6.0 · <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a>
+</footer>
+</body>
+</html>
+===== END: settings\notifications.html =====
+
+===== BEGIN: settings\presence.html =====
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Присутствие (Presence Detection) — SHome</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+    <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <img src="../assets/logo.png" alt="SHome" onerror="this.style.display='none'">
+        <h1>SHome</h1>
+    </a>
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../philosophy.html">Философия</a>
+    <a href="../readme.html">Описание</a>
+    <a href="tuya.html">Документация</a>
+    <a href="../licenses.html">Лицензии</a>
+    <a href="../privacy.html">Политика</a>
+    <a href="https://github.com/votsurx/SHome-Releases" target="_blank">GitHub</a>
+</nav>
+
+<h1>Присутствие (Presence Detection)</h1>
+
+<p><strong>Presence Detection</strong> — определение статуса «дома / не дома / рядом» по геолокации телефонов. Используется для автоматизаций (например, «включить свет, когда я дома»).</p>
+
+<div class="highlight">
+    <strong>Важно:</strong> геолокация используется <strong>только</strong> для presence. Не передаётся разработчику или третьим лицам. Можно отключить в любой момент.
+</div>
+
+<h2>Что нужно</h2>
+<ul>
+    <li>Телефон с GPS и интернетом.</li>
+    <li>Разрешение <strong>«Геолокация»</strong> (Android: <code>ACCESS_FINE_LOCATION</code>).</li>
+    <li>Разрешение <strong>«Фоновый режим»</strong> (опционально, для работы в фоне).</li>
+    <li>Функция доступна в <strong>Pro</strong> (после триала).</li>
+</ul>
+
+<h2>Как это работает</h2>
+
+<ol>
+    <li>Телефон отправляет координаты (широта, долгота) в SHome.</li>
+    <li>SHome сравнивает с координатами «дома» + радиусом.</li>
+    <li>Если телефон в радиусе — статус <code>home</code>.</li>
+    <li>Если вне радиуса + прошло <code>awayTimeout</code> — статус <code>away</code>.</li>
+    <li>Если рядом с радиусом — статус <code>near</code>.</li>
+</ol>
+
+<blockquote>
+    <p><strong>Координаты</strong> хранятся локально (SQLite). <strong>Не передаются</strong> разработчику.</p>
+</blockquote>
+
+<h2>Шаг 1. Включить геолокацию в Android</h2>
+
+<ol>
+    <li>Настройки Android → <strong>Приложения</strong> → <strong>SHome</strong> → <strong>Разрешения</strong>.</li>
+    <li>Включите <strong>«Геолокация»</strong> → <strong>«Разрешить всегда»</strong> (или «Только при использовании»).</li>
+    <li>Опционально: <strong>«Фоновая работа»</strong> (если хотите, чтобы presence работал в фоне).</li>
+</ol>
+
+<h2>Шаг 2. Настроить координаты «дома»</h2>
+
+<ol>
+    <li>Откройте SHome → <strong>Меню</strong> → <strong>Присутствие</strong>.</li>
+    <li>Включите <strong>«Включить присутствие»</strong>.</li>
+    <li>Задайте <strong>«Координаты дома»</strong>:
+        <ul>
+            <li><strong>Широта</strong> (latitude): например, <code>55.7558</code></li>
+            <li><strong>Долгота</strong> (longitude): например, <code>37.6173</code></li>
+        </ul>
+    </li>
+    <li><strong>Радиус «дома»</strong>: например, <code>100</code> метров (по умолчанию).</li>
+    <li><strong>Таймаут «away»</strong>: например, <code>5</code> минут (сколько ждать перед тем, как считать «не дома»).</li>
+</ol>
+
+<blockquote>
+    <p><strong>Как узнать координаты дома?</strong></p>
+    <ul>
+        <li>Откройте Google Maps → найдите свой дом → долгое нажатие → скопируйте координаты.</li>
+        <li>Или на <a href="https://www.latlong.net/" target="_blank">latlong.net</a>.</li>
+    </ul>
+</blockquote>
+
+<h2>Шаг 3. Добавить телефоны</h2>
+
+<p>Presence работает по <strong>телефонам</strong> (каждому — свой ID).</p>
+
+<ol>
+    <li>В разделе <strong>«Присутствие»</strong> → <strong>«Телефоны»</strong>.</li>
+    <li>Нажмите <strong>«Добавить телефон»</strong>.</li>
+    <li>Заполните:
+        <ul>
+            <li><strong>ID телефона</strong>: уникальный (например, <code>phone_1</code>).</li>
+            <li><strong>Имя</strong>: «Мой телефон».</li>
+            <li><strong>IP-адрес</strong> (опционально, если телефон в той же сети).</li>
+            <li><strong>Включён</strong>: да.</li>
+        </ul>
+    </li>
+    <li>Сохраните.</li>
+</ol>
+
+<blockquote>
+    <p><strong>Несколько телефонов</strong> — presence учитывает <strong>все</strong>. Если хотя бы один дома — статус <code>home</code>.</p>
+</blockquote>
+
+<h2>Шаг 4. Как телефон отправляет координаты</h2>
+
+<p>Есть <strong>два способа</strong>:</p>
+
+<h3>Способ A: приложение SHome на телефоне</h3>
+<p>Если SHome установлен на телефоне — он <strong>сам</strong> отправляет координаты (через foreground service). Просто включите presence — и SHome начнёт отслеживать.</p>
+
+<h3>Способ B: HTTP-запрос (для интеграций)</h3>
+<p>Можно отправлять координаты <strong>вручную</strong> (или через Tasker / Automate):</p>
+
+<pre><code>POST http://your-phone-ip:8080/presence
+Content-Type: application/json
+
+{
+  "phoneId": "phone_1",
+  "latitude": 55.7558,
+  "longitude": 37.6173,
+  "timestamp": "2026-11-25T15:00:00Z"
+}</code></pre>
+
+<blockquote>
+    <p><strong>Примечание:</strong> SHome слушает HTTP на порту 8080 (если включено в настройках). Проверьте <strong>«Присутствие» → «HTTP-сервер»</strong>.</p>
+</blockquote>
+
+<h2>Шаг 5. Проверить</h2>
+
+<ol>
+    <li>В разделе <strong>«Присутствие»</strong> отображается статус (<code>home</code> / <code>away</code> / <code>near</code>).</li>
+    <li>Проверьте: вы дома → статус <code>home</code>.</li>
+    <li>Выйдите из радиуса → через <code>awayTimeout</code> статус <code>away</code>.</li>
+    <li>Вернитесь → статус <code>home</code>.</li>
+</ol>
+
+<h2>Использование в автоматизациях</h2>
+
+<p>Presence можно использовать в <strong>сценах</strong>:</p>
+
+<ul>
+    <li><strong>«Когда я дома»</strong> → включить свет, открыть шторы.</li>
+    <li><strong>«Когда я ушёл»</strong> → выключить всё, включить охрану.</li>
+    <li><strong>«Когда рядом»</strong> → включить свет на улице.</li>
+</ul>
+
+<p>В настройках сцены выберите триггер <strong>«Присутствие»</strong> → статус (<code>home</code> / <code>away</code> / <code>near</code>).</p>
+
+<h2>Приватность</h2>
+
+<h3>Что собирается</h3>
+<ul>
+    <li>Координаты (широта, долгота) — <strong>только</strong> при включённом presence.</li>
+    <li>ID телефона (локальный).</li>
+    <li>Timestamp (время).</li>
+</ul>
+
+<h3>Где хранится</h3>
+<ul>
+    <li>Локально в SQLite на телефоне.</li>
+    <li><strong>Не передаётся</strong> разработчику.</li>
+    <li><strong>Не передаётся</strong> третьим лицам.</li>
+</ul>
+
+<h3>Как отключить</h3>
+<ul>
+    <li>В SHome: <strong>«Присутствие»</strong> → выключить.</li>
+    <li>Или отозвать разрешение «Геолокация» в настройках Android.</li>
+    <li>Или удалить приложение (все данные удаляются).</li>
+</ul>
+
+<h2>Энергопотребление</h2>
+
+<p>Presence использует GPS — это <strong>расходует батарею</strong>. Рекомендации:</p>
+
+<ul>
+    <li>Используйте <strong>«Только при использовании»</strong> (не «Всегда»), если не нужен фоновый режим.</li>
+    <li>Увеличьте <strong>интервал</strong> обновления (например, раз в 5 минут).</li>
+    <li>Используйте <strong>Wi-Fi</strong> вместо GPS (если телефон в сети — статус <code>home</code>).</li>
+</ul>
+
+<h2>Частые проблемы</h2>
+
+<h3>Статус не меняется</h3>
+<ul>
+    <li>Геолокация включена в Android?</li>
+    <li>Координаты «дома» верные?</li>
+    <li>Радиус достаточный? (например, 100 м — может быть мало, увеличьте до 200).</li>
+    <li>Телефон отправляет координаты? (проверьте логи SHome).</li>
+</ul>
+
+<h3>«Не могу определить местоположение»</h3>
+<ul>
+    <li>GPS выключен — включите в шторке Android.</li>
+    <li>Нет сигнала GPS (в помещении) — выйдите на улицу.</li>
+    <li>Разрешение «Геолокация» не дано — проверьте настройки.</li>
+</ul>
+
+<h3>Батарея быстро садится</h3>
+<ul>
+    <li>Уменьшите частоту обновления (интервал 10–15 мин).</li>
+    <li>Используйте Wi-Fi вместо GPS.</li>
+    <li>Отключите фоновый режим (если не нужен).</li>
+</ul>
+
+<h3>Presence не работает в фоне</h3>
+<ul>
+    <li>Android: разрешение «Фоновая работа» включено?</li>
+    <li>Батарея: «Без ограничений» для SHome?</li>
+    <li>Некоторые прошивки (MIUI, EMUI) убивают фоновые приложения — добавьте SHome в исключения.</li>
+</ul>
+
+<h3>Несколько телефонов — статус неверный</h3>
+<ul>
+    <li>Presence учитывает <strong>все</strong> телефоны. Если хотя бы один дома — <code>home</code>.</li>
+    <li>Если нужно по-другому — настройте сцены с конкретным телефоном.</li>
+</ul>
+
+<h2>Ссылки</h2>
+<ul>
+    <li><a href="https://developer.android.com/develop/sensors-and-location/location/permissions" target="_blank">Android Location Permissions</a></li>
+    <li><a href="https://www.latlong.net/" target="_blank">LatLong.net (координаты)</a></li>
+</ul>
+
+<footer>
+    © 2026 votsurX · SHome 8.6.0 · <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a>
+</footer>
+</body>
+</html>
+===== END: settings\presence.html =====
+
+===== BEGIN: settings\pro.html =====
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro-лицензия — SHome</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+    <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <img src="../assets/logo.png" alt="SHome" onerror="this.style.display='none'">
+        <h1>SHome</h1>
+    </a>
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../philosophy.html">Философия</a>
+    <a href="../readme.html">Описание</a>
+    <a href="tuya.html">Документация</a>
+    <a href="../licenses.html">Лицензии</a>
+    <a href="../privacy.html">Политика</a>
+    <a href="https://github.com/votsurx/SHome-Releases" target="_blank">GitHub</a>
+</nav>
+
+<h1>Pro-лицензия</h1>
+
+<p>SHome распространяется в трёх режимах: <strong>Демо</strong> (бесплатно), <strong>Триал</strong> (14 дней), <strong>Pro</strong> (платно, бессрочно).</p>
+
+<div class="highlight">
+    <strong>Кратко:</strong> Демо — 1 устройство. Триал — 14 дней полного доступа. Pro — всё, бессрочно, по ключу.
+</div>
+
+<h2>Сравнение режимов</h2>
+
+<table style="width:100%; border-collapse:collapse; margin:16px 0;">
+    <thead>
+    <tr style="background:#1a73e8; color:white;">
+        <th style="padding:12px; text-align:left; border:1px solid #ddd;">Функция</th>
+        <th style="padding:12px; text-align:center; border:1px solid #ddd;">Демо</th>
+        <th style="padding:12px; text-align:center; border:1px solid #ddd;">Триал</th>
+        <th style="padding:12px; text-align:center; border:1px solid #ddd;">Pro</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td style="padding:10px; border:1px solid #ddd;">Устройства (вкл/выкл)</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">1</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">∞</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">∞</td>
+    </tr>
+    <tr style="background:#f9f9f9;">
+        <td style="padding:10px; border:1px solid #ddd;">Комнаты</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">—</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">✅</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">✅</td>
+    </tr>
+    <tr>
+        <td style="padding:10px; border:1px solid #ddd;">Сцены</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">—</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">✅</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">✅</td>
+    </tr>
+    <tr style="background:#f9f9f9;">
+        <td style="padding:10px; border:1px solid #ddd;">Таймеры</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">—</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">✅</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">✅</td>
+    </tr>
+    <tr>
+        <td style="padding:10px; border:1px solid #ddd;">Статистика, энергия</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">—</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">✅</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">✅</td>
+    </tr>
+    <tr style="background:#f9f9f9;">
+        <td style="padding:10px; border:1px solid #ddd;">События (фильтры)</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">—</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">✅</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">✅</td>
+    </tr>
+    <tr>
+        <td style="padding:10px; border:1px solid #ddd;">Zigbee (Z2M)</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">—</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">✅</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">✅</td>
+    </tr>
+    <tr style="background:#f9f9f9;">
+        <td style="padding:10px; border:1px solid #ddd;">Frigate (камеры)</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">—</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">✅</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">✅</td>
+    </tr>
+    <tr>
+        <td style="padding:10px; border:1px solid #ddd;">Presence</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">—</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">✅</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">✅</td>
+    </tr>
+    <tr style="background:#f9f9f9;">
+        <td style="padding:10px; border:1px solid #ddd;">Уведомления (VK/SMS)</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">—</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">✅</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">✅</td>
+    </tr>
+    <tr>
+        <td style="padding:10px; border:1px solid #ddd;">MQTT</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">—</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">✅</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">✅</td>
+    </tr>
+    <tr style="background:#f9f9f9;">
+        <td style="padding:10px; border:1px solid #ddd;">Облако (Mail.ru)</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">—</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">✅</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">✅</td>
+    </tr>
+    <tr>
+        <td style="padding:10px; border:1px solid #ddd;">Срок</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">∞</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">14 дней</td>
+        <td style="padding:10px; text-align:center; border:1px solid #ddd;">∞</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Демо-режим (бесплатно)</h2>
+
+<p>Доступен <strong>всегда</strong>, без регистрации.</p>
+
+<ul>
+    <li><strong>1 устройство</strong> — первое добавленное.</li>
+    <li>Вкл/выкл устройства.</li>
+    <li>Всё остальное — <strong>под замком</strong> (paywall).</li>
+    <li>Устройства, добавленные в триале, <strong>не удаляются</strong> — показываются с замком.</li>
+</ul>
+
+<h2>Триал (14 дней)</h2>
+
+<p>Активируется <strong>автоматически</strong> при первом запуске после онбординга.</p>
+
+<ul>
+    <li><strong>14 дней</strong> полного доступа ко всем функциям.</li>
+    <li>По истечении — переход в демо-режим.</li>
+    <li><strong>Один триал</strong> на устройство (привязка к <code>androidId</code>).</li>
+    <li>Защита от отката часов: если время устройства откатили — триал считается истёкшим.</li>
+</ul>
+
+<div class="highlight">
+    <strong>Совет:</strong> используйте триал, чтобы протестировать все функции (Zigbee, Frigate, облако) перед покупкой Pro.
+</div>
+
+<h2>Pro (бессрочно)</h2>
+
+<p>Активируется <strong>лицензионным ключом</strong>, который приобретается отдельно.</p>
+
+<h3>Что даёт</h3>
+<ul>
+    <li><strong>Все функции</strong> SHome (см. таблицу выше).</li>
+    <li><strong>Неограниченное</strong> количество устройств.</li>
+    <li><strong>Бессрочно</strong> (если в ключе не указан срок).</li>
+    <li><strong>Привязка к устройству</strong> — ключ работает на одном <code>androidId</code>.</li>
+</ul>
+
+<h3>Как купить</h3>
+
+<p><strong>Способ 1: Telegram-бот</strong> (скоро)</p>
+<ul>
+    <li>Бот: <code>@SHomeProBot</code> (плейсхолдер, уточните у продавца).</li>
+    <li>Команда <code>/buy</code> → оплата (Stars / ЮKassa) → ключ в чат.</li>
+</ul>
+
+<p><strong>Способ 2: вручную</strong></p>
+<ul>
+    <li>Напишите на <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a>.</li>
+    <li>Укажите, что хотите купить Pro.</li>
+    <li>Оплатите (реквизиты вышлет продавец).</li>
+    <li>Получите ключ.</li>
+</ul>
+
+<h3>Как активировать</h3>
+
+<ol>
+    <li>Откройте SHome → <strong>Настройки</strong> → <strong>Pro</strong>.</li>
+    <li>Нажмите <strong>«Активировать Pro»</strong>.</li>
+    <li>Введите ключ (формат <code>SHOME-PRO-...-...</code>).</li>
+    <li>Нажмите <strong>«Активировать»</strong>.</li>
+    <li>Если ключ валиден — статус <strong>«Pro активен»</strong>.</li>
+</ol>
+
+<h3>Проверка ключа</h3>
+
+<p>Ключ проверяется <strong>offline</strong> (HMAC-SHA256) — интернет не нужен. SHome проверяет:</p>
+<ul>
+    <li><strong>Формат</strong> ключа.</li>
+    <li><strong>Подпись</strong> (HMAC).</li>
+    <li><strong>Срок действия</strong> (если указан).</li>
+    <li><strong>Привязку</strong> к <code>androidId</code>.</li>
+</ul>
+
+<h3>Привязка к устройству</h3>
+
+<div class="highlight">
+    <strong>Важно:</strong> Pro-ключ привязан к <code>androidId</code> вашего телефона. При смене устройства (или сбросе <code>androidId</code>) потребуется <strong>новый</strong> ключ.
+</div>
+
+<ul>
+    <li><strong>Смена телефона</strong> → новый ключ (обратитесь к продавцу).</li>
+    <li><strong>Сброс прошивки</strong> → <code>androidId</code> может измениться → новый ключ.</li>
+    <li><strong>Удаление приложения</strong> → ключ <strong>сохраняется</strong> (в SecureStorage), при переустановке — активируется заново (если <code>androidId</code> тот же).</li>
+</ul>
+
+<h3>Возврат средств</h3>
+
+<ul>
+    <li>Возврат регулируется условиями продавца.</li>
+    <li>Ключ считается <strong>использованным</strong> после активации.</li>
+    <li>Если ключ не активировался (ошибка) — обратитесь к продавцу для замены.</li>
+</ul>
+
+<h2>Что будет после триала</h2>
+
+<ul>
+    <li>Автоматический переход в <strong>демо-режим</strong>.</li>
+    <li>Все функции (кроме 1 устройства) — под замком.</li>
+    <li>Устройства, добавленные в триале, <strong>остаются</strong> (с замком).</li>
+    <li>Данные (сцены, комнаты, настройки) <strong>не удаляются</strong>.</li>
+    <li>Вы можете активировать Pro в любой момент — всё вернётся.</li>
+</ul>
+
+<h2>FAQ</h2>
+
+<h3>Можно ли перенести Pro на другой телефон?</h3>
+<p>Технически — нужен новый ключ (привязка к <code>androidId</code>). Обратитесь к продавцу, объясните ситуацию — возможно, выдадут новый ключ бесплатно (по усмотрению).</p>
+
+<h3>Что если я потерял ключ?</h3>
+<p>Ключ хранится в <code>SecureStorage</code> на устройстве. Если приложение удалено — ключ потерян. Обратитесь к продавцу (с чеком об оплате) — выдадут новый.</p>
+
+<h3>Можно ли активировать ключ на нескольких устройствах?</h3>
+<p>Нет, ключ привязан к одному <code>androidId</code>. Для второго устройства — второй ключ.</p>
+
+<h3>Работает ли Pro без интернета?</h3>
+<p>Да. Проверка ключа — <strong>offline</strong> (HMAC). Интернет нужен только для покупки и обновлений.</p>
+
+<h3>Что если ключ с expiry (сроком)?</h3>
+<p>Если в ключе указан срок — после истечения Pro переходит в демо. Обычно ключи <strong>бессрочные</strong>.</p>
+
+<h3>Как отключить Pro (для теста)?</h3>
+<p>В <strong>debug-сборке</strong> — скрытая кнопка над «SHome» на главном экране (сброс лицензии). В release — нет.</p>
+
+<h2>Безопасность</h2>
+
+<ul>
+    <li><strong>Offline-проверка</strong> — HMAC-SHA256, без сервера.</li>
+    <li><strong>Привязка к <code>androidId</code></strong> — защита от копирования ключа.</li>
+    <li><strong>SecureStorage</strong> — ключ хранится зашифрованным (AES-256).</li>
+    <li><strong>Обфускация</strong> — release-сборка обфусцирована.</li>
+</ul>
+
+<h2>Ссылки</h2>
+<ul>
+    <li><a href="../philosophy.html">Философия SHome</a></li>
+    <li><a href="../privacy.html">Политика конфиденциальности</a></li>
+    <li><a href="../licenses.html">Лицензии (EULA, Terms)</a></li>
+</ul>
+
+<footer>
+    © 2026 votsurX · SHome 8.6.0 · <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a>
+</footer>
+</body>
+</html>
+===== END: settings\pro.html =====
+
+===== BEGIN: settings\tuya.html =====
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Настройка Tuya — SHome</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+    <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <img src="../assets/logo.png" alt="SHome" onerror="this.style.display='none'">
+        <h1>SHome</h1>
+    </a>
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../philosophy.html">Философия</a>
+    <a href="../readme.html">Описание</a>
+    <a href="tuya.html">Документация</a>
+    <a href="../licenses.html">Лицензии</a>
+    <a href="../privacy.html">Политика</a>
+    <a href="https://github.com/votsurx/SHome-Releases" target="_blank">GitHub</a>
+</nav>
+
+<h1>Настройка Tuya</h1>
+
+<p>Tuya-устройства (розетки, выключатели, шторы, свет, HVAC, пылесосы) работают в SHome <strong>локально</strong> — по LAN, без облака Tuya. Для этого нужны <code>deviceId</code> и <code>localKey</code>.</p>
+
+<div class="highlight">
+    <strong>Важно:</strong> SHome общается с Tuya-устройствами напрямую по локальной сети (порт 6668). Устройство и телефон должны быть в <strong>одной сети</strong>.
+</div>
+
+<h2>Что нужно</h2>
+<ul>
+    <li>Tuya-устройство, добавленное в приложение <strong>Tuya Smart</strong> или <strong>Smart Life</strong>.</li>
+    <li>Аккаунт Tuya (для получения <code>localKey</code>).</li>
+    <li>Телефон и устройство в одной Wi-Fi сети.</li>
+</ul>
+
+<h2>Шаг 1. Получить <code>deviceId</code></h2>
+
+<h3>Способ A: приложение Tuya Smart / Smart Life</h3>
+<ol>
+    <li>Откройте приложение Tuya Smart (или Smart Life).</li>
+    <li>Выберите устройство.</li>
+    <li>Нажмите на <strong>«⋮»</strong> (или «Настройки») → <strong>«Информация об устройстве»</strong>.</li>
+    <li>Скопируйте <strong>Device ID</strong> (длинная строка вида <code>bf1234567890abcdef</code>).</li>
+</ol>
+
+<h3>Способ B: Tuya IoT Platform</h3>
+<ol>
+    <li>Зарегистрируйтесь на <a href="https://iot.tuya.com" target="_blank">iot.tuya.com</a>.</li>
+    <li>Создайте <strong>Cloud Project</strong> (Data Center — выберите ближайший, например «Central Europe»).</li>
+    <li>В проекте: <strong>Devices</strong> → <strong>Link Tuya App Account</strong> → отсканируйте QR-код из приложения Tuya Smart (Настройки → Аккаунт → «Link Tuya App Account»).</li>
+    <li>После привязки: <strong>Devices</strong> → выберите устройство → <strong>Device ID</strong>.</li>
+</ol>
+
+<h2>Шаг 2. Получить <code>localKey</code></h2>
+
+<h3>Способ A: Tuya IoT Platform (рекомендую)</h3>
+<ol>
+    <li>В <a href="https://iot.tuya.com" target="_blank">iot.tuya.com</a> → ваш проект → <strong>Devices</strong>.</li>
+    <li>Выберите устройство → <strong>Device Details</strong>.</li>
+    <li>Найдите поле <strong>Local Key</strong> — это и есть <code>localKey</code> (16 символов, буквы и цифры).</li>
+</ol>
+
+<h3>Способ B: tinytuya (CLI)</h3>
+<ol>
+    <li>Установите Python 3.8+.</li>
+    <li>Установите tinytuya:
+        <pre><code>pip install tinytuya</code></pre>
+    </li>
+    <li>Запустите мастер:
+        <pre><code>python -m tinytuya wizard</code></pre>
+    </li>
+    <li>Введите <strong>API Key</strong> и <strong>API Secret</strong> из Tuya IoT Platform (Project → Overview → Access ID/Secret).</li>
+    <li>Мастер просканирует сеть и выдаст файл <code>devices.json</code> с <code>id</code>, <code>key</code> (localKey), <code>ip</code>.</li>
+</ol>
+
+<h3>Способ C: сканер SHome</h3>
+<p>SHome имеет встроенный сканер Tuya (меню → «Сканер Tuya»). Если устройство в сети, SHome может получить <code>localKey</code> автоматически (если устройство поддерживает Tuya 3.3+ и ещё не привязано к другому аккаунту).</p>
+
+<div class="highlight">
+    <strong>Совет:</strong> если <code>localKey</code> не подходит — перепривяжите устройство в Tuya Smart (удалить → добавить заново). После перепривязки <code>localKey</code> меняется.
+</div>
+
+<h2>Шаг 3. Добавить устройство в SHome</h2>
+<ol>
+    <li>Откройте SHome → главный экран → <strong>«+»</strong> (Floating Action Button).</li>
+    <li>Заполните:
+        <ul>
+            <li><strong>Название</strong> — любое (например, «Розетка в спальне»).</li>
+            <li><strong>Тип устройства</strong> — розетка / выключатель / штора / свет / HVAC / пылесос.</li>
+            <li><strong>Device ID</strong> — из шага 1.</li>
+            <li><strong>Local Key</strong> — из шага 2.</li>
+            <li><strong>IP-адрес</strong> — опционально (если не указан, SHome найдёт по LAN).</li>
+        </ul>
+    </li>
+    <li>Нажмите <strong>«Добавить»</strong>.</li>
+    <li>Устройство появится на главном экране. Проверьте вкл/выкл.</li>
+</ol>
+
+<h2>Шаг 4. Проверить</h2>
+<ul>
+    <li>Устройство <strong>online</strong> (зелёная точка).</li>
+    <li>Вкл/выкл работает.</li>
+    <li>Если устройство offline — см. «Частые проблемы».</li>
+</ul>
+
+<h2>Частые проблемы</h2>
+
+<h3>Устройство offline</h3>
+<ul>
+    <li>Проверьте, что телефон и устройство в одной Wi-Fi сети.</li>
+    <li>Проверьте IP-адрес устройства (сканер сети, роутер).</li>
+    <li>Проверьте firewall на роутере (порт 6668).</li>
+    <li>Перезагрузите устройство (выключите/включите питание).</li>
+</ul>
+
+<h3><code>localKey</code> не подходит</h3>
+<ul>
+    <li><code>localKey</code> меняется при перепривязке устройства в Tuya Smart.</li>
+    <li>Удалите устройство из Tuya Smart и добавьте заново — получите новый <code>localKey</code>.</li>
+    <li>Убедитесь, что не используете <code>localKey</code> от другого устройства.</li>
+</ul>
+
+<h3>Устройство Tuya 3.4+ / 3.5</h3>
+<ul>
+    <li>Новые устройства Tuya (3.4+) используют <strong>protocol 3.4/3.5</strong> — SHome поддерживает (через <code>tinytuya</code>).</li>
+    <li>Если не работает — проверьте версию протокола в Tuya IoT Platform (Device Details → Protocol Version).</li>
+</ul>
+
+<h3>«Device ID не найден»</h3>
+<ul>
+    <li>Убедитесь, что устройство привязано к аккаунту Tuya.</li>
+    <li>В Tuya IoT Platform: <strong>Devices</strong> → <strong>Link Tuya App Account</strong> → привяжите аккаунт.</li>
+</ul>
+
+<h2>Ссылки</h2>
+<ul>
+    <li><a href="https://iot.tuya.com" target="_blank">Tuya IoT Platform</a></li>
+    <li><a href="https://github.com/jasonacox/tinytuya" target="_blank">tinytuya (GitHub)</a></li>
+    <li><a href="https://developer.tuya.com/en/docs/iot" target="_blank">Tuya Developer Docs</a></li>
+</ul>
+
+<footer>
+    © 2026 votsurX · SHome 8.6.0 · <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a>
+</footer>
+</body>
+</html>
+===== END: settings\tuya.html =====
+
+===== BEGIN: settings\zigbee2mqtt.html =====
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Настройка Zigbee2MQTT — SHome</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+    <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <img src="../assets/logo.png" alt="SHome" onerror="this.style.display='none'">
+        <h1>SHome</h1>
+    </a>
+</header>
+
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../philosophy.html">Философия</a>
+    <a href="../readme.html">Описание</a>
+    <a href="tuya.html">Документация</a>
+    <a href="../licenses.html">Лицензии</a>
+    <a href="../privacy.html">Политика</a>
+    <a href="https://github.com/votsurx/SHome-Releases" target="_blank">GitHub</a>
+</nav>
+
+<h1>Настройка Zigbee2MQTT (Z2M)</h1>
+
+<p>SHome поддерживает Zigbee-устройства через <strong>Zigbee2MQTT</strong> (Z2M). Z2M — это мост между Zigbee-координатором и MQTT-брокером. SHome подключается к MQTT и получает список устройств.</p>
+
+<div class="highlight">
+    <strong>Схема:</strong> Zigbee-устройство → Zigbee-координатор → Z2M → MQTT-брокер → SHome
+</div>
+
+<h2>Что нужно</h2>
+<ul>
+    <li><strong>Zigbee-координатор</strong>: CC2652, ConBee II, Sonoff Zigbee 3.0, SkyConnect и т.п.</li>
+    <li><strong>Сервер</strong>: Raspberry Pi 4+, Intel NUC, Synology, мини-ПК.</li>
+    <li><strong>MQTT-брокер</strong>: Mosquitto (рекомендую).</li>
+    <li><strong>Docker</strong> (опционально, но проще).</li>
+</ul>
+
+<h2>Шаг 1. Установить MQTT-брокер (Mosquitto)</h2>
+
+<p>Если у вас ещё нет MQTT-брокера — установите Mosquitto:</p>
+
+<pre><code>docker run -d \
+  --name mosquitto \
+  --restart=unless-stopped \
+  -p 1883:1883 \
+  -p 9001:9001 \
+  -v /path/to/mosquitto.conf:/mosquitto/config/mosquitto.conf \
+  -v /path/to/mosquitto/data:/mosquitto/data \
+  eclipse-mosquitto</code></pre>
+
+<p>Минимальный <code>mosquitto.conf</code>:</p>
+<pre><code>listener 1883
+allow_anonymous false
+password_file /mosquitto/data/passwd</code></pre>
+
+<p>Создайте пользователя:</p>
+<pre><code>docker exec -it mosquitto mosquitto_passwd -c /mosquitto/data/passwd your_user</code></pre>
+
+<h2>Шаг 2. Установить Zigbee2MQTT</h2>
+
+<h3>Docker (рекомендую)</h3>
+<pre><code>docker run -d \
+  --name zigbee2mqtt \
+  --restart=unless-stopped \
+  -p 8080:8080 \
+  -v /path/to/zigbee2mqtt/data:/app/data \
+  --device=/dev/ttyUSB0 \
+  koenkk/zigbee2mqtt</code></pre>
+
+<blockquote>
+    <p><strong>Порт <code>/dev/ttyUSB0</code></strong> — путь к Zigbee-координатору. На Linux обычно <code>/dev/ttyUSB0</code> или <code>/dev/ttyACM0</code>. Проверьте:</p>
+    <pre><code>ls /dev/ttyUSB* /dev/ttyACM*</code></pre>
+    <p>На Windows — <code>COM3</code> и т.п. (но Z2M лучше ставить на Linux/Raspberry Pi).</p>
+</blockquote>
+
+<h3>Или по официальной инструкции</h3>
+<p><a href="https://www.zigbee2mqtt.io/guide/installation/" target="_blank">https://www.zigbee2mqtt.io/guide/installation/</a></p>
+
+<h2>Шаг 3. Настроить <code>configuration.yaml</code></h2>
+
+<p>Файл: <code>/path/to/zigbee2mqtt/data/configuration.yaml</code>:</p>
+
+<pre><code>mqtt:
+  server: mqtt://your-mqtt-broker:1883
+  user: your_user
+  password: your_password
+
+serial:
+  port: /dev/ttyUSB0
+  adapter: zstack  # или deconz, ezsp и т.п.
+
+frontend:
+  port: 8080
+
+homeassistant: false  # SHome не требует Home Assistant
+
+permit_join: false  # включайте вручную при сопряжении
+
+advanced:
+  network_key: GENERATE  # или ваш ключ
+</code></pre>
+
+<blockquote>
+    <p><strong><code>adapter</code></strong> — тип координатора:</p>
+    <ul>
+        <li><code>zstack</code> — CC2652, CC2531, Sonoff Zigbee 3.0</li>
+        <li><code>deconz</code> — ConBee II</li>
+        <li><code>ezsp</code> — SkyConnect, EFR32</li>
+    </ul>
+</blockquote>
+
+<h2>Шаг 4. Запустить Z2M</h2>
+
+<pre><code>docker restart zigbee2mqtt</code></pre>
+
+<p>Проверьте логи:</p>
+<pre><code>docker logs -f zigbee2mqtt</code></pre>
+
+<p>Должно быть:</p>
+<pre><code>Zigbee2MQTT started!
+MQTT connected
+Coordinator: CC2652P (firmware 20220219)
+</code></pre>
+
+<p>Откройте веб-интерфейс: <code>http://your-server:8080</code>.</p>
+
+<h2>Шаг 5. Сопрячь Zigbee-устройства</h2>
+
+<ol>
+    <li>В Z2M: <strong>Permit join (all)</strong> → включите (или <code>permit_join: true</code> в конфиге).</li>
+    <li>Переведите Zigbee-устройство в режим сопряжения (обычно: удерживайте кнопку 5–10 сек).</li>
+    <li>В Z2M появится новое устройство. Дайте ему имя (например, <code>living_room_lamp</code>).</li>
+    <li>Выключите <strong>Permit join</strong>.</li>
+</ol>
+
+<h2>Шаг 6. Настроить SHome</h2>
+
+<ol>
+    <li>Откройте SHome → <strong>Настройки</strong> → <strong>MQTT</strong>.</li>
+    <li>Введите:
+        <ul>
+            <li><strong>URL</strong>: <code>mqtt://your-mqtt-broker:1883</code></li>
+            <li><strong>Логин</strong>: <code>your_user</code></li>
+            <li><strong>Пароль</strong>: <code>your_password</code></li>
+        </ul>
+    </li>
+    <li>Сохраните. SHome подключится к брокеру.</li>
+    <li>Откройте <strong>Меню</strong> → <strong>Zigbee</strong> → <strong>«Сканировать»</strong>.</li>
+    <li>SHome получит список устройств из Z2M. Добавьте нужные на главный экран.</li>
+</ol>
+
+<h2>Шаг 7. Проверить</h2>
+<ul>
+    <li>В SHome: меню → Zigbee → список устройств.</li>
+    <li>Добавьте устройство на главный экран (вкл/выкл, яркость и т.д.).</li>
+    <li>Проверьте управление.</li>
+</ul>
+
+<h2>Частые проблемы</h2>
+
+<h3>Z2M не подключается к MQTT</h3>
+<ul>
+    <li>Проверьте <code>mqtt.server</code>, <code>user</code>, <code>password</code> в <code>configuration.yaml</code>.</li>
+    <li>Проверьте, что MQTT-брокер запущен (<code>docker ps</code>).</li>
+    <li>Проверьте firewall (порт 1883).</li>
+</ul>
+
+<h3>Z2M не видит координатор</h3>
+<ul>
+    <li>Проверьте <code>/dev/ttyUSB0</code> (или <code>/dev/ttyACM0</code>).</li>
+    <li>Права доступа: <code>sudo usermod -a -G dialout $USER</code>, перезагрузка.</li>
+    <li>Проверьте, что координатор не занят другим процессом.</li>
+</ul>
+
+<h3>SHome не видит Z2M</h3>
+<ul>
+    <li>Проверьте MQTT-настройки в SHome (URL, логин, пароль).</li>
+    <li>Проверьте, что Z2M публикует топики: <code>zigbee2mqtt/bridge/devices</code>.</li>
+    <li>Проверьте firewall между SHome (телефон) и MQTT-брокером.</li>
+</ul>
+
+<h3>Устройства не сопрягаются</h3>
+<ul>
+    <li><strong>Permit join</strong> включён?</li>
+    <li>Устройство в режиме сопряжения? (см. инструкцию устройства)</li>
+    <li>Устройство рядом с координатором (для сопряжения).</li>
+    <li>Проверьте логи Z2M: <code>docker logs -f zigbee2mqtt</code>.</li>
+</ul>
+
+<h3>«Network key» ошибка</h3>
+<ul>
+    <li>При первом запуске Z2M генерирует <code>network_key</code>. Если меняли — все устройства нужно сопрячь заново.</li>
+    <li>Сохраните <code>network_key</code> в надёжном месте.</li>
+</ul>
+
+<h2>Ссылки</h2>
+<ul>
+    <li><a href="https://www.zigbee2mqtt.io/" target="_blank">Zigbee2MQTT — официальный сайт</a></li>
+    <li><a href="https://www.zigbee2mqtt.io/guide/installation/" target="_blank">Установка Z2M</a></li>
+    <li><a href="https://www.zigbee2mqtt.io/supported-devices/" target="_blank">Поддерживаемые устройства</a></li>
+    <li><a href="https://mosquitto.org/" target="_blank">Mosquitto MQTT</a></li>
+</ul>
+
+<footer>
+    © 2026 votsurX · SHome 8.6.0 · <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a>
+</footer>
+</body>
+</html>
+===== END: settings\zigbee2mqtt.html =====
