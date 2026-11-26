@@ -1,21 +1,212 @@
-Что нужно: аккаунт Mail.ru, пароль приложения (не основной!).
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Настройка облака (Mail.ru) — SHome</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+    <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <img src="../assets/logo.png" alt="SHome" onerror="this.style.display='none'">
+        <h1>SHome</h1>
+    </a>
+</header>
 
-Шаг 1: создать пароль приложения:
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../philosophy.html">Философия</a>
+    <a href="../readme.html">Описание</a>
+    <a href="tuya.html">Документация</a>
+    <a href="../licenses.html">Лицензии</a>
+    <a href="../privacy.html">Политика</a>
+    <a href="https://github.com/votsurx/SHome-Releases" target="_blank">GitHub</a>
+</nav>
 
-id.mail.ru/security → «Пароли для внешних приложений» → «Создать».
+<h1>Настройка облака (Mail.ru Cloud)</h1>
 
-Скопировать пароль (16 символов).
+<p>SHome может сохранять <strong>зашифрованные резервные копии</strong> в <strong>Mail.ru Cloud</strong>. Это опционально — приложение полностью работает без облака.</p>
 
-Шаг 2: в SHome: Меню → Облако → логин (your@mail.ru) + пароль приложения → «Подключить».
+<div class="highlight">
+    <strong>Важно:</strong> бэкап <strong>шифруется</strong> вашим ключом <strong>до</strong> загрузки. Mail.ru Cloud хранит только зашифрованный файл — без ключа восстановить данные невозможно.
+</div>
 
-Шаг 3: бэкап:
+<h2>Что нужно</h2>
+<ul>
+    <li>Аккаунт Mail.ru (бесплатный).</li>
+    <li><strong>Пароль приложения</strong> (не основной пароль!) — создаётся в настройках безопасности Mail.ru.</li>
+    <li>Функция доступна в <strong>Pro</strong> (после триала).</li>
+</ul>
 
-Сгенерировать ключ шифрования (QR-код).
+<h2>Шаг 1. Создать пароль приложения</h2>
 
-«Загрузить бэкап» → зашифрованный файл в Mail.ru Cloud.
+<p>Mail.ru требует <strong>отдельный пароль</strong> для внешних приложений (SHome). Основной пароль <strong>не</strong> подойдёт.</p>
 
-Частые проблемы:
+<ol>
+    <li>Откройте <a href="https://id.mail.ru/security" target="_blank">id.mail.ru/security</a>.</li>
+    <li>Войдите в аккаунт Mail.ru.</li>
+    <li>Раздел <strong>«Пароли для внешних приложений»</strong>.</li>
+    <li>Нажмите <strong>«Создать пароль»</strong>.</li>
+    <li>Выберите тип: <strong>«Другое»</strong> → введите название <code>SHome</code>.</li>
+    <li>Скопируйте сгенерированный пароль (16 символов, например <code>abcd efgh ijkl mnop</code>).</li>
+</ol>
 
-«Неверный пароль» → используйте пароль приложения, не основной.
+<blockquote>
+    <p><strong>Сохраните пароль</strong> — Mail.ru показывает его <strong>только один раз</strong>. Если потеряете — создайте новый.</p>
+</blockquote>
 
-«Нет бэкапов» → проверьте, что загрузили.
+<h2>Шаг 2. Подключить облако в SHome</h2>
+
+<ol>
+    <li>Откройте SHome → <strong>Меню</strong> → <strong>Облако</strong>.</li>
+    <li>Введите:
+        <ul>
+            <li><strong>Логин</strong>: ваш email Mail.ru (например, <code>user@mail.ru</code>).</li>
+            <li><strong>Пароль приложения</strong>: 16-символьный пароль из шага 1.</li>
+        </ul>
+    </li>
+    <li>Нажмите <strong>«Подключить»</strong>.</li>
+    <li>SHome проверит подключение (через Mail.ru Cloud API).</li>
+    <li>Если успешно — статус <strong>«Подключено»</strong>.</li>
+</ol>
+
+<blockquote>
+    <p><strong>Пароль хранится</strong> в <code>SecureStorage</code> (AES-256) на устройстве. Не передаётся разработчику.</p>
+</blockquote>
+
+<h2>Шаг 3. Сгенерировать ключ шифрования</h2>
+
+<p>Перед первым бэкапом нужно <strong>сгенерировать ключ шифрования</strong> — он используется для шифрования/дешифрования бэкапов.</p>
+
+<ol>
+    <li>В разделе <strong>«Облако»</strong> → <strong>«Ключ бэкапа»</strong>.</li>
+    <li>Нажмите <strong>«Сгенерировать ключ»</strong>.</li>
+    <li>SHome создаст случайный ключ (256 бит) и покажет <strong>QR-код</strong>.</li>
+    <li><strong>Сохраните QR-код</strong> (скриншот, распечатка) — без него восстановить бэкап <strong>невозможно</strong>.</li>
+</ol>
+
+<blockquote>
+    <p><strong>Ключ хранится</strong> в <code>SecureStorage</code>. Если вы удалите приложение — ключ <strong>потеряется</strong>. Восстановить бэкап можно <strong>только</strong> по QR-коду.</p>
+</blockquote>
+
+<h2>Шаг 4. Загрузить бэкап</h2>
+
+<ol>
+    <li>В разделе <strong>«Облако»</strong> → <strong>«Резервное копирование»</strong>.</li>
+    <li>Нажмите <strong>«Загрузить бэкап»</strong>.</li>
+    <li>SHome:
+        <ul>
+            <li>соберёт конфигурацию (устройства, комнаты, сцены, настройки);</li>
+            <li>зашифрует ключом;</li>
+            <li>загрузит в Mail.ru Cloud.</li>
+        </ul>
+    </li>
+    <li>Готово. Дата последней синхронизации отобразится в разделе.</li>
+</ol>
+
+<h2>Шаг 5. Восстановить бэкап</h2>
+
+<ol>
+    <li>В разделе <strong>«Облако»</strong> → <strong>«Резервное копирование»</strong>.</li>
+    <li>Нажмите <strong>«Скачать бэкап»</strong>.</li>
+    <li>SHome покажет список бэкапов (по дате).</li>
+    <li>Выберите нужный.</li>
+    <li>SHome:
+        <ul>
+            <li>скачает файл;</li>
+            <li>расшифрует ключом;</li>
+            <li>восстановит конфигурацию.</li>
+        </ul>
+    </li>
+    <li>Перезапустите приложение (опционально).</li>
+</ol>
+
+<blockquote>
+    <p><strong>Если ключ потерян</strong> — восстановить бэкап <strong>невозможно</strong>. Файл в облаке зашифрован, без ключа это мусор.</p>
+</blockquote>
+
+<h2>Шаг 6. Импорт ключа по QR-коду</h2>
+
+<p>Если вы переустановили приложение (или хотите восстановить на другом устройстве) — нужно <strong>импортировать ключ</strong> из QR-кода.</p>
+
+<ol>
+    <li>В разделе <strong>«Облако»</strong> → <strong>«Ключ бэкапа»</strong>.</li>
+    <li>Нажмите <strong>«Сканировать QR»</strong>.</li>
+    <li>Отсканируйте QR-код (со скриншота или распечатки).</li>
+    <li>Ключ импортируется в <code>SecureStorage</code>.</li>
+    <li>Теперь можно скачать бэкап и восстановить.</li>
+</ol>
+
+<h2>Безопасность</h2>
+
+<h3>Что защищено</h3>
+<ul>
+    <li><strong>Пароль Mail.ru</strong> — хранится в <code>SecureStorage</code> (AES-256).</li>
+    <li><strong>Ключ шифрования</strong> — хранится в <code>SecureStorage</code>.</li>
+    <li><strong>Бэкап</strong> — шифруется <strong>до</strong> загрузки (AES-256-GCM).</li>
+    <li><strong>Передача</strong> — HTTPS (Mail.ru Cloud API).</li>
+</ul>
+
+<h3>Что <strong>не</strong> защищено</h3>
+<ul>
+    <li>Если злоумышленник получил доступ к вашему телефону (разблокирован) — он может использовать сохранённый пароль.</li>
+    <li>Если вы потеряли QR-код — бэкап <strong>невосстановим</strong>.</li>
+</ul>
+
+<h3>Рекомендации</h3>
+<ul>
+    <li>Используйте <strong>пароль приложения</strong> Mail.ru (не основной).</li>
+    <li>Храните QR-код в надёжном месте (не в облаке!).</li>
+    <li>Не делитесь QR-кодом с третьими лицами.</li>
+    <li>Периодически делайте бэкапы (раз в неделю/месяц).</li>
+</ul>
+
+<h2>Частые проблемы</h2>
+
+<h3>«Неверный пароль»</h3>
+<ul>
+    <li>Используйте <strong>пароль приложения</strong>, не основной пароль Mail.ru.</li>
+    <li>Проверьте, что скопировали пароль <strong>полностью</strong> (16 символов).</li>
+    <li>Создайте новый пароль приложения в <a href="https://id.mail.ru/security" target="_blank">id.mail.ru/security</a>.</li>
+</ul>
+
+<h3>«Не удалось подключиться»</h3>
+<ul>
+    <li>Проверьте интернет на телефоне.</li>
+    <li>Проверьте, что Mail.ru Cloud доступен (не заблокирован).</li>
+    <li>Попробуйте позже (возможны сбои Mail.ru).</li>
+</ul>
+
+<h3>«Нет бэкапов»</h3>
+<ul>
+    <li>Вы ещё не загружали бэкап — нажмите «Загрузить бэкап».</li>
+    <li>Проверьте, что вошли в <strong>тот же</strong> аккаунт Mail.ru.</li>
+    <li>Проверьте папку в Mail.ru Cloud (SHome создаёт папку <code>SHome/</code>).</li>
+</ul>
+
+<h3>«Ошибка расшифровки»</h3>
+<ul>
+    <li>Ключ шифрования не совпадает с тем, которым зашифрован бэкап.</li>
+    <li>Импортируйте правильный QR-код (тот, что был при создании бэкапа).</li>
+    <li>Если ключ потерян — бэкап <strong>невосстановим</strong>.</li>
+</ul>
+
+<h3>«Ключ не найден»</h3>
+<ul>
+    <li>Сгенерируйте ключ (раздел «Ключ бэкапа» → «Сгенерировать»).</li>
+    <li>Или импортируйте QR-код (если ключ уже был).</li>
+</ul>
+
+<h2>Ссылки</h2>
+<ul>
+    <li><a href="https://cloud.mail.ru/" target="_blank">Mail.ru Cloud</a></li>
+    <li><a href="https://id.mail.ru/security" target="_blank">Пароли приложений Mail.ru</a></li>
+    <li><a href="https://help.mail.ru/cloud/legal/privacy" target="_blank">Политика Mail.ru Cloud</a></li>
+</ul>
+
+<footer>
+    © 2026 votsurX · SHome 8.6.0 · <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a>
+</footer>
+</body>
+</html>

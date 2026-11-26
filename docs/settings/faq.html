@@ -1,17 +1,290 @@
-Почему приложение не видит устройства Tuya? → проверьте IP, LAN, localKey.
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ — SHome</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+    <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <img src="../assets/logo.png" alt="SHome" onerror="this.style.display='none'">
+        <h1>SHome</h1>
+    </a>
+</header>
 
-Как получить localKey? → Tuya IoT Platform / tinytuya.
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../philosophy.html">Философия</a>
+    <a href="../readme.html">Описание</a>
+    <a href="tuya.html">Документация</a>
+    <a href="../licenses.html">Лицензии</a>
+    <a href="../privacy.html">Политика</a>
+    <a href="https://github.com/votsurx/SHome-Releases" target="_blank">GitHub</a>
+</nav>
 
-SHome работает без интернета? → да, локально. Интернет — только для обновлений/уведомлений/облака.
+<h1>FAQ — Частые вопросы</h1>
 
-Как перенести данные на новый телефон? → бэкап в облако (Pro) + восстановление.
+<p>Ответы на частые вопросы по SHome. Если не нашли ответ — напишите на <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a>.</p>
 
-Что будет после триала? → демо (1 устройство).
+<h2>Общие вопросы</h2>
 
-Как купить Pro? → Telegram-бот / почта.
+<h3>Что такое SHome?</h3>
+<p>SHome — приложение для управления умным домом: Tuya, Zigbee (через Zigbee2MQTT), Frigate. Работает <strong>локально</strong>, без обязательного облака. Поддерживает сцены, таймеры, статистику, уведомления, presence, MQTT.</p>
 
-Почему ключ не подходит? → ключ привязан к androidId, на другом устройстве не сработает.
+<h3>На каких платформах работает SHome?</h3>
+<p>Только <strong>Android 10+</strong> (minSdk 29). iOS, Windows, macOS — не поддерживаются.</p>
 
-Есть ли реклама? → нет.
+<h3>Где скачать SHome?</h3>
+<ul>
+    <li><a href="https://github.com/votsurx/SHome-Releases/releases/latest" target="_blank">GitHub Releases</a> (APK).</li>
+    <li><strong>RuStore</strong> (скоро).</li>
+</ul>
 
-Собираете ли вы данные? → нет, см. политику.
+<h3>Бесплатно ли SHome?</h3>
+<p>Да, в <strong>демо-режиме</strong> — 1 устройство, бесплатно. <strong>Триал</strong> — 14 дней полного доступа. <strong>Pro</strong> — платно (ключ), бессрочно. См. <a href="pro.html">Pro-лицензия</a>.</p>
+
+<h3>Нужен ли интернет?</h3>
+<p><strong>Нет</strong>, для базовой работы. Интернет нужен только для:</p>
+<ul>
+    <li>Проверки обновлений (опционально).</li>
+    <li>Уведомлений VK/SMS (опционально).</li>
+    <li>Облачных бэкапов (опционально).</li>
+</ul>
+
+<h3>Собираете ли вы мои данные?</h3>
+<p><strong>Нет</strong>. Все данные хранятся <strong>локально</strong>. <code>androidId</code> используется только для привязки Pro-ключа. См. <a href="../privacy.html">Политику конфиденциальности</a>.</p>
+
+<hr>
+
+<h2>Tuya</h2>
+
+<h3>Почему SHome не видит устройства Tuya?</h3>
+<ul>
+    <li>Телефон и устройство в <strong>одной Wi-Fi сети</strong>?</li>
+    <li><code>localKey</code> верный? (см. <a href="tuya.html">настройку Tuya</a>)</li>
+    <li>IP-адрес устройства верный?</li>
+    <li>Firewall на роутере (порт 6668)?</li>
+</ul>
+
+<h3>Как получить <code>localKey</code>?</h3>
+<p>Через <a href="https://iot.tuya.com" target="_blank">Tuya IoT Platform</a> (Devices → Device Details → Local Key) или через <code>tinytuya</code> (см. <a href="tuya.html">настройку Tuya</a>).</p>
+
+<h3><code>localKey</code> не подходит</h3>
+<p>Перепривяжите устройство в Tuya Smart (удалить → добавить заново). После перепривязки <code>localKey</code> меняется — получите новый.</p>
+
+<h3>Устройство Tuya 3.4+ / 3.5 — поддерживается?</h3>
+<p>Да, SHome поддерживает Tuya 3.3, 3.4, 3.5 (через <code>tinytuya</code>). Проверьте версию протокола в Tuya IoT Platform.</p>
+
+<hr>
+
+<h2>Zigbee (Z2M)</h2>
+
+<h3>SHome не видит Zigbee-устройства</h3>
+<ul>
+    <li>Z2M запущен? (<code>docker ps | grep zigbee2mqtt</code>)</li>
+    <li>MQTT-настройки в SHome верные?</li>
+    <li>Z2M публикует топики? (<code>zigbee2mqtt/bridge/devices</code>)</li>
+    <li>Устройства сопряжены с Z2M? (Permit join)</li>
+</ul>
+
+<h3>Как установить Z2M?</h3>
+<p>См. <a href="zigbee2mqtt.html">настройку Zigbee2MQTT</a>. Нужен координатор (CC2652, ConBee II, Sonoff Zigbee 3.0) + MQTT-брокер.</p>
+
+<h3>Устройства не сопрягаются</h3>
+<ul>
+    <li><strong>Permit join</strong> включён в Z2M?</li>
+    <li>Устройство в режиме сопряжения?</li>
+    <li>Устройство рядом с координатором?</li>
+</ul>
+
+<hr>
+
+<h2>Frigate</h2>
+
+<h3>SHome не подключается к Frigate</h3>
+<ul>
+    <li>URL верный? (<code>http://your-server:5000</code>)</li>
+    <li>Firewall (порт 5000)?</li>
+    <li>SHome (телефон) в той же сети, что Frigate?</li>
+</ul>
+
+<h3>Нет событий из Frigate</h3>
+<ul>
+    <li>Веб-интерфейс Frigate (<code>:5000</code>) показывает события?</li>
+    <li><code>detect</code> включён в <code>config.yml</code>?</li>
+    <li>Объекты (person, car) в кадре?</li>
+</ul>
+
+<h3>Как установить Frigate?</h3>
+<p>См. <a href="frigate.html">настройку Frigate</a>. Нужен сервер (Raspberry Pi 4+, NUC, Synology), IP-камеры (RTSP), MQTT-брокер.</p>
+
+<hr>
+
+<h2>MQTT</h2>
+
+<h3>Что такое MQTT и зачем он нужен?</h3>
+<p>MQTT — протокол обмена сообщениями. SHome использует его для связи с <strong>Zigbee2MQTT</strong> и <strong>Frigate</strong>. Нужен MQTT-брокер (Mosquitto). См. <a href="mqtt.html">настройку MQTT</a>.</p>
+
+<h3>«Connection refused»</h3>
+<ul>
+    <li>Mosquitto запущен? (<code>docker ps | grep mosquitto</code>)</li>
+    <li>Порт 1883 открыт?</li>
+    <li>Firewall?</li>
+</ul>
+
+<h3>«Not authorized»</h3>
+<ul>
+    <li>Пользователь создан? (<code>mosquitto_passwd</code>)</li>
+    <li>Пароль верный?</li>
+    <li><code>allow_anonymous false</code> в конфиге?</li>
+</ul>
+
+<hr>
+
+<h2>Облако (Mail.ru)</h2>
+
+<h3>«Неверный пароль» в облаке</h3>
+<p>Используйте <strong>пароль приложения</strong> Mail.ru (не основной). Создайте в <a href="https://id.mail.ru/security" target="_blank">id.mail.ru/security</a>.</p>
+
+<h3>«Ошибка расшифровки»</h3>
+<p>Ключ шифрования не совпадает с тем, которым зашифрован бэкап. Импортируйте правильный QR-код. Если ключ потерян — бэкап <strong>невосстановим</strong>.</p>
+
+<h3>Как настроить облако?</h3>
+<p>См. <a href="cloud.html">настройку облака</a>.</p>
+
+<hr>
+
+<h2>Уведомления (VK / SMS)</h2>
+
+<h3>VK: «Не удалось отправить»</h3>
+<ul>
+    <li><code>access_token</code> истёк — получите новый.</li>
+    <li><code>user_id</code> верный?</li>
+    <li>Приложение VK имеет права <code>messages</code>?</li>
+</ul>
+
+<h3>SMS: «Не удалось отправить»</h3>
+<ul>
+    <li>API-ключ верный?</li>
+    <li>Баланс SMS.ru пополнен?</li>
+    <li>Номер в формате <code>+79001234567</code>?</li>
+</ul>
+
+<h3>Слишком много уведомлений</h3>
+<ul>
+    <li>Увеличьте <strong>cooldown</strong> (10–30 мин).</li>
+    <li>Отключите лишние типы (например, «устройства»).</li>
+    <li>Включите <strong>расписание</strong> (ночь — тишина).</li>
+</ul>
+
+<h3>Как настроить уведомления?</h3>
+<p>См. <a href="notifications.html">настройку уведомлений</a>.</p>
+
+<hr>
+
+<h2>Presence</h2>
+
+<h3>Статус не меняется</h3>
+<ul>
+    <li>Геолокация включена в Android?</li>
+    <li>Координаты «дома» верные?</li>
+    <li>Радиус достаточный? (увеличьте до 200 м).</li>
+    <li>Телефон отправляет координаты?</li>
+</ul>
+
+<h3>Батарея быстро садится</h3>
+<ul>
+    <li>Уменьшите частоту обновления (10–15 мин).</li>
+    <li>Используйте Wi-Fi вместо GPS.</li>
+    <li>Отключите фоновый режим (если не нужен).</li>
+</ul>
+
+<h3>Как настроить presence?</h3>
+<p>См. <a href="presence.html">настройку присутствия</a>.</p>
+
+<hr>
+
+<h2>Pro-лицензия</h2>
+
+<h3>Что даёт Pro?</h3>
+<p>Все функции SHome: неограниченные устройства, сцены, таймеры, статистика, Zigbee, Frigate, presence, уведомления, MQTT, облако. См. <a href="pro.html">Pro-лицензия</a>.</p>
+
+<h3>Как купить Pro?</h3>
+<p>Через Telegram-бот (скоро) или вручную (<a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a>).</p>
+
+<h3>Как активировать ключ?</h3>
+<p>Настройки → Pro → «Активировать Pro» → ввести ключ.</p>
+
+<h3>Можно ли перенести Pro на другой телефон?</h3>
+<p>Ключ привязан к <code>androidId</code>. При смене устройства — нужен новый ключ (обратитесь к продавцу).</p>
+
+<h3>Что будет после триала?</h3>
+<p>Переход в демо-режим (1 устройство). Данные не удаляются. Активируйте Pro — всё вернётся.</p>
+
+<h3>Потерял ключ — что делать?</h3>
+<p>Если приложение удалено — ключ потерян. Обратитесь к продавцу с чеком об оплате.</p>
+
+<hr>
+
+<h2>Обновления</h2>
+
+<h3>Как обновить SHome?</h3>
+<ul>
+    <li><strong>GitHub Releases</strong>: скачайте новый APK, установите поверх.</li>
+    <li><strong>RuStore</strong> (скоро): автообновление.</li>
+    <li>В приложении: Настройки → «Проверить обновления».</li>
+</ul>
+
+<h3>Данные сохранятся при обновлении?</h3>
+<p>Да, при установке <strong>поверх</strong> (без удаления) данные сохраняются. При удалении — теряются (если нет бэкапа).</p>
+
+<hr>
+
+<h2>Проблемы и решения</h2>
+
+<h3>Приложение падает</h3>
+<ul>
+    <li>Обновите до последней версии.</li>
+    <li>Очистите кэш (Настройки Android → SHome → Очистить кэш).</li>
+    <li>Переустановите (с бэкапом!).</li>
+    <li>Если не помогает — напишите на <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a> с описанием.</li>
+</ul>
+
+<h3>«Устройство offline»</h3>
+<ul>
+    <li>Проверьте сеть (Wi-Fi, LAN).</li>
+    <li>Перезагрузите устройство.</li>
+    <li>Проверьте IP-адрес.</li>
+</ul>
+
+<h3>Данные пропали</h3>
+<ul>
+    <li>Проверьте, не удаляли ли приложение.</li>
+    <li>Восстановите из бэкапа (облако).</li>
+    <li>Если бэкапа нет — данные не восстановить.</li>
+</ul>
+
+<h3>«Demo: only one device allowed»</h3>
+<p>Это ограничение демо-режима. Активируйте Pro (см. <a href="pro.html">Pro-лицензия</a>).</p>
+
+<hr>
+
+<h2>Не нашли ответ?</h2>
+
+<p>Напишите на <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a> — постараемся ответить в течение 1–2 дней.</p>
+
+<p>Перед обращением:</p>
+<ul>
+    <li>Проверьте <a href="../readme.html">README</a> и документацию.</li>
+    <li>Укажите версию SHome (Настройки → О приложении).</li>
+    <li>Опишите проблему (что делали, что ожидали, что получилось).</li>
+    <li>Приложите скриншот / лог (если есть).</li>
+</ul>
+
+<footer>
+    © 2026 votsurX · SHome 8.6.0 · <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a>
+</footer>
+</body>
+</html>

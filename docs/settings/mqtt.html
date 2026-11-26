@@ -1,19 +1,226 @@
-Что нужно: Mosquitto (или другой брокер).
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Настройка MQTT — SHome</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+    <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <img src="../assets/logo.png" alt="SHome" onerror="this.style.display='none'">
+        <h1>SHome</h1>
+    </a>
+</header>
 
-Установка (Docker):
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../philosophy.html">Философия</a>
+    <a href="../readme.html">Описание</a>
+    <a href="tuya.html">Документация</a>
+    <a href="../licenses.html">Лицензии</a>
+    <a href="../privacy.html">Политика</a>
+    <a href="https://github.com/votsurx/SHome-Releases" target="_blank">GitHub</a>
+</nav>
 
-bash
-docker run -d --name mosquitto -p 1883:1883 -p 9001:9001 \
--v /path/to/mosquitto.conf:/mosquitto/config/mosquitto.conf \
-eclipse-mosquitto
-Настройка mosquitto.conf:
+<h1>Настройка MQTT-брокера</h1>
 
-text
+<p><strong>MQTT</strong> — протокол обмена сообщениями, который SHome использует для связи с <strong>Zigbee2MQTT</strong> и <strong>Frigate</strong>. Вам нужен MQTT-брокер (сервер), к которому подключатся и SHome, и Z2M/Frigate.</p>
+
+<div class="highlight">
+    <strong>Схема:</strong> SHome ← MQTT → Zigbee2MQTT / Frigate
+</div>
+
+<h2>Что нужно</h2>
+<ul>
+    <li><strong>Сервер</strong>: Raspberry Pi, Intel NUC, Synology, мини-ПК (или тот же, где Z2M/Frigate).</li>
+    <li><strong>Docker</strong> (рекомендую) или нативная установка.</li>
+    <li>Свободный порт <strong>1883</strong> (MQTT) и <strong>9001</strong> (WebSocket, опционально).</li>
+</ul>
+
+<h2>Шаг 1. Установить Mosquitto (Docker)</h2>
+
+<p><strong>Mosquitto</strong> — самый популярный MQTT-брокер. Установка через Docker:</p>
+
+<pre><code>docker run -d \
+  --name mosquitto \
+  --restart=unless-stopped \
+  -p 1883:1883 \
+  -p 9001:9001 \
+  -v /opt/mosquitto/config:/mosquitto/config \
+  -v /opt/mosquitto/data:/mosquitto/data \
+  -v /opt/mosquitto/log:/mosquitto/log \
+  eclipse-mosquitto</code></pre>
+
+<p>Создайте папки:</p>
+<pre><code>mkdir -p /opt/mosquitto/{config,data,log}</code></pre>
+
+<h2>Шаг 2. Настроить <code>mosquitto.conf</code></h2>
+
+<p>Файл: <code>/opt/mosquitto/config/mosquitto.conf</code>:</p>
+
+<pre><code># Основной listener
 listener 1883
+protocol mqtt
+
+# WebSocket (для веб-клиентов, опционально)
+listener 9001
+protocol websockets
+
+# Аутентификация
 allow_anonymous false
 password_file /mosquitto/config/passwd
-Создать пользователя:
 
-bash
-mosquitto_passwd -c /mosquitto/config/passwd your_user
-В SHome: Настройки → MQTT → mqtt://your-broker:1883 + логин/пароль.
+# Логи
+log_dest file /mosquitto/log/mosquitto.log
+log_type error
+log_type warning
+log_type notice
+log_type information</code></pre>
+
+<h2>Шаг 3. Создать пользователя</h2>
+
+<p>Создайте файл <code>passwd</code> с пользователем:</p>
+
+<pre><code>docker exec -it mosquitto mosquitto_passwd -c /mosquitto/config/passwd your_user</code></pre>
+
+<p>Введите пароль (дважды). Файл <code>passwd</code> создастся с хешем пароля.</p>
+
+<blockquote>
+    <p><strong>Добавить ещё пользователя:</strong></p>
+    <pre><code>docker exec -it mosquitto mosquitto_passwd /mosquitto/config/passwd another_user</code></pre>
+    <p>(без <code>-c</code>, чтобы не перезаписать файл)</p>
+</blockquote>
+
+<h2>Шаг 4. Перезапустить Mosquitto</h2>
+
+<pre><code>docker restart mosquitto</code></pre>
+
+<p>Проверьте логи:</p>
+<pre><code>docker logs -f mosquitto</code></pre>
+
+<p>Должно быть:</p>
+<pre><code>mosquitto version 2.x.x starting
+Opening ipv4 listen socket on port 1883.
+Opening websockets listen socket on port 9001.
+</code></pre>
+
+<h2>Шаг 5. Проверить подключение</h2>
+
+<h3>Через mosquitto_pub / mosquitto_sub (CLI)</h3>
+
+<pre><code># Подписаться на топик
+docker exec -it mosquitto mosquitto_sub -h localhost -u your_user -P your_password -t "test/topic"
+
+# В другом терминале — опубликовать
+docker exec -it mosquitto mosquitto_pub -h localhost -u your_user -P your_password -t "test/topic" -m "Hello SHome"</code></pre>
+
+<h3>Через MQTT Explorer (GUI)</h3>
+<ol>
+    <li>Скачайте <a href="https://mqtt-explorer.com/" target="_blank">MQTT Explorer</a>.</li>
+    <li>Подключитесь: <code>your-server:1883</code>, логин/пароль.</li>
+    <li>Опубликуйте тестовое сообщение → проверьте, что оно приходит.</li>
+</ol>
+
+<h2>Шаг 6. Настроить SHome</h2>
+
+<ol>
+    <li>Откройте SHome → <strong>Настройки</strong> → <strong>MQTT</strong>.</li>
+    <li>Введите:
+        <ul>
+            <li><strong>URL</strong>: <code>mqtt://your-server:1883</code></li>
+            <li><strong>Логин</strong>: <code>your_user</code></li>
+            <li><strong>Пароль</strong>: <code>your_password</code></li>
+        </ul>
+    </li>
+    <li>Сохраните. SHome подключится к брокеру.</li>
+</ol>
+
+<h2>Шаг 7. Проверить в SHome</h2>
+<ul>
+    <li>Меню → Zigbee → «Сканировать» — SHome получит список устройств (если Z2M настроен).</li>
+    <li>Меню → Frigate — SHome получит камеры (если Frigate настроен).</li>
+</ul>
+
+<h2>Безопасность (рекомендую)</h2>
+
+<h3>1. Не используйте <code>allow_anonymous true</code></h3>
+<p>Всегда создавайте пользователя и пароль.</p>
+
+<h3>2. Ограничьте доступ по IP</h3>
+<p>В <code>mosquitto.conf</code>:</p>
+<pre><code>listener 1883
+allow_anonymous false
+password_file /mosquitto/config/passwd
+
+# Разрешить только локальную сеть
+# (если брокер в той же сети, что SHome)
+# Используйте firewall (ufw / iptables) для ограничения</code></pre>
+
+<h3>3. TLS (опционально)</h3>
+<p>Для шифрования трафика:</p>
+<pre><code>listener 8883
+protocol mqtt
+cafile /mosquitto/config/ca.crt
+certfile /mosquitto/config/server.crt
+keyfile /mosquitto/config/server.key
+require_certificate false</code></pre>
+
+<p>В SHome: <code>mqtts://your-server:8883</code> (с TLS).</p>
+
+<h3>4. Firewall</h3>
+<p>Откройте порт 1883 только для локальной сети:</p>
+<pre><code>sudo ufw allow from 192.168.0.0/16 to any port 1883</code></pre>
+
+<h2>Частые проблемы</h2>
+
+<h3>SHome не подключается к MQTT</h3>
+<ul>
+    <li>Проверьте URL: <code>mqtt://your-server:1883</code> (не <code>http://</code>!).</li>
+    <li>Проверьте логин/пароль.</li>
+    <li>Проверьте, что порт 1883 открыт (firewall).</li>
+    <li>Проверьте логи Mosquitto: <code>docker logs mosquitto</code>.</li>
+</ul>
+
+<h3>«Connection refused»</h3>
+<ul>
+    <li>Mosquitto запущен? <code>docker ps | grep mosquitto</code>.</li>
+    <li>Порт 1883 слушается? <code>netstat -tlnp | grep 1883</code>.</li>
+    <li>Firewall блокирует? Проверьте <code>ufw status</code>.</li>
+</ul>
+
+<h3>«Not authorized»</h3>
+<ul>
+    <li>Пользователь создан? <code>docker exec -it mosquitto cat /mosquitto/config/passwd</code>.</li>
+    <li>Пароль верный? Пересоздайте: <code>mosquitto_passwd -c ...</code>.</li>
+    <li><code>allow_anonymous false</code> в конфиге?</li>
+</ul>
+
+<h3>Z2M / Frigate не подключаются к MQTT</h3>
+<ul>
+    <li>Проверьте <code>mqtt.server</code> в конфиге Z2M / Frigate.</li>
+    <li>Проверьте логин/пароль (те же, что в SHome).</li>
+    <li>Проверьте, что Z2M / Frigate в той же сети, что MQTT-брокер.</li>
+</ul>
+
+<h3>Сообщения не доходят</h3>
+<ul>
+    <li>Проверьте топики (MQTT Explorer).</li>
+    <li>Проверьте QoS (0, 1, 2).</li>
+    <li>Проверьте retain-флаг.</li>
+</ul>
+
+<h2>Ссылки</h2>
+<ul>
+    <li><a href="https://mosquitto.org/" target="_blank">Mosquitto — официальный сайт</a></li>
+    <li><a href="https://mosquitto.org/man/mosquitto-conf-5.html" target="_blank">mosquitto.conf — документация</a></li>
+    <li><a href="https://mqtt-explorer.com/" target="_blank">MQTT Explorer (GUI)</a></li>
+    <li><a href="https://mqtt.org/" target="_blank">MQTT.org</a></li>
+</ul>
+
+<footer>
+    © 2026 votsurX · SHome 8.6.0 · <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a>
+</footer>
+</body>
+</html>

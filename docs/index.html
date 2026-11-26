@@ -3,70 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SHome — умный дом без облака. Tuya, Zigbee, Frigate. Локально, безопасно, с Pro-лицензией.">
     <title>SHome — умный дом без облака</title>
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 <header>
-    <img src="assets/logo.png" alt="SHome" onerror="this.style.display='none'">
-    <h1>SHome</h1>
+    <a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <img src="assets/logo.png" alt="SHome" onerror="this.style.display='none'">
+        <h1>SHome</h1>
+    </a>
 </header>
 
 <nav>
     <a href="index.html">Главная</a>
     <a href="philosophy.html">Философия</a>
     <a href="readme.html">Описание</a>
-    <a href="docs/tuya.html">Документация</a>
+    <a href="settings/tuya.html">Документация</a>
     <a href="licenses.html">Лицензии</a>
     <a href="privacy.html">Политика</a>
     <a href="https://github.com/votsurx/SHome-Releases" target="_blank">GitHub</a>
 </nav>
 
-<h1>SHome — умный дом без облака</h1>
+<!-- ═══════════════ HERO ═══════════════ -->
+<section style="text-align:center; padding: 40px 0;">
+    <img src="assets/logo.png" alt="SHome" style="width:120px;height:120px;border-radius:24px;margin-bottom:16px;" onerror="this.style.display='none'">
+    <h1 style="font-size: 42px; margin: 0 0 8px; border: none;">SHome</h1>
+    <p style="font-size: 20px; color: #555; margin: 0 0 24px;">
+        Умный дом <strong>без облака</strong>. Tuya, Zigbee, Frigate.<br>
+        Локально. Безопасно. С Pro-лицензией.
+    </p>
 
-<p><strong>SHome</strong> — приложение для управления умным домом: Tuya, Zigbee, Frigate. Работает <strong>локально</strong>, без обязательного облака. Безопасно, прозрачно, с Pro-лицензией.</p>
+    <a class="btn" href="https://github.com/votsurx/SHome-Releases/releases/latest" target="_blank">
+        ⬇ Скачать APK (последний релиз)
+    </a>
+    <a class="btn btn-secondary" href="settings/tuya.html">
+        📖 Документация
+    </a>
+</section>
 
-<div class="card">
-    <h2>Скачать</h2>
-    <a class="btn" href="https://github.com/votsurx/SHome-Releases/releases/latest" target="_blank">Скачать APK (последний релиз)</a>
-    <a class="btn btn-secondary" href="docs/tuya.html">Документация</a>
-</div>
-
+<!-- ═══════════════ ВОЗМОЖНОСТИ ═══════════════ -->
 <div class="card">
     <h2>Возможности</h2>
-    <ul>
-        <li><strong>Tuya</strong> — розетки, выключатели, шторы, свет, HVAC, пылесосы (локально)</li>
-        <li><strong>Zigbee</strong> — через Zigbee2MQTT</li>
-        <li><strong>Frigate</strong> — камеры, события, статистика</li>
-        <li><strong>Сцены, таймеры</strong> — автоматизация</li>
-        <li><strong>Статистика, энергия</strong> — графики, тарифы</li>
-        <li><strong>События</strong> — журнал с фильтрами</li>
-        <li><strong>Облако</strong> — Mail.ru Cloud (опционально, зашифровано)</li>
-        <li><strong>Уведомления</strong> — VK, SMS</li>
-        <li><strong>Presence</strong> — «дома / не дома»</li>
-        <li><strong>MQTT</strong> — интеграции</li>
-    </ul>
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div>
+            <h3>🔌 Tuya</h3>
+            <p>Розетки, выключатели, шторы, свет, HVAC, пылесосы. <strong>Локально</strong>, без облака Tuya.</p>
+        </div>
+        <div>
+            <h3>🐝 Zigbee</h3>
+            <p>Через <strong>Zigbee2MQTT</strong>. Датчики, лампы, выключатели, реле.</p>
+        </div>
+        <div>
+            <h3>📹 Frigate</h3>
+            <p>Камеры, детекция объектов (person, car), события, статистика.</p>
+        </div>
+        <div>
+            <h3>🎬 Сцены и таймеры</h3>
+            <p>Автоматизация: запуск по времени, событиям, вручную.</p>
+        </div>
+        <div>
+            <h3>📊 Статистика и энергия</h3>
+            <p>Uptime, алерты, действия, энергопотребление, тарифы.</p>
+        </div>
+        <div>
+            <h3>📜 События</h3>
+            <p>Полный журнал с фильтрами по дате, устройству, типу.</p>
+        </div>
+        <div>
+            <h3>☁ Облако</h3>
+            <p><strong>Mail.ru Cloud</strong> — зашифрованные бэкапы (опционально).</p>
+        </div>
+        <div>
+            <h3>🔔 Уведомления</h3>
+            <p><strong>VK</strong> и <strong>SMS</strong>. С расписанием и cooldown.</p>
+        </div>
+        <div>
+            <h3>📍 Presence</h3>
+            <p>«Дома / не дома» по геолокации телефона (опционально).</p>
+        </div>
+        <div>
+            <h3>🔗 MQTT</h3>
+            <p>Интеграции с MQTT-брокером (Mosquitto и др.).</p>
+        </div>
+        <div>
+            <h3>🔒 Локально</h3>
+            <p>Данные на вашем устройстве. Без обязательного облака.</p>
+        </div>
+        <div>
+            <h3>🚫 Без рекламы</h3>
+            <p>Никакой рекламы, Firebase Analytics, Crashlytics.</p>
+        </div>
+    </div>
 </div>
 
+<!-- ═══════════════ ЛИЦЕНЗИЯ ═══════════════ -->
 <div class="card">
     <h2>Лицензия</h2>
-    <p><strong>Демо</strong> — 1 устройство, бесплатно.</p>
-    <p><strong>Триал</strong> — 14 дней полного доступа, автоматически.</p>
-    <p><strong>Pro</strong> — бессрочный ключ, привязка к устройству.</p>
-    <p><a href="docs/pro.html">Подробнее о Pro →</a></p>
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div style="padding:16px; background:#f9f9f9; border-radius:8px;">
+            <h3 style="margin-top:0;">🆓 Демо</h3>
+            <p><strong>Бесплатно</strong></p>
+            <ul>
+                <li>1 устройство</li>
+                <li>Вкл/выкл</li>
+                <li>Остальное — под замком</li>
+            </ul>
+        </div>
+        <div style="padding:16px; background:#fff3cd; border-radius:8px; border:2px solid #ffc107;">
+            <h3 style="margin-top:0;">⏳ Триал</h3>
+            <p><strong>14 дней</strong></p>
+            <ul>
+                <li>Все функции</li>
+                <li>Автоматически после онбординга</li>
+                <li>Без регистрации</li>
+            </ul>
+        </div>
+        <div style="padding:16px; background:#d4edda; border-radius:8px; border:2px solid #28a745;">
+            <h3 style="margin-top:0;">⭐ Pro</h3>
+            <p><strong>Бессрочно</strong></p>
+            <ul>
+                <li>Все функции</li>
+                <li>Неограниченные устройства</li>
+                <li>Ключ, привязка к устройству</li>
+            </ul>
+        </div>
+    </div>
+    <p style="text-align:center; margin-top:24px;">
+        <a class="btn" href="settings/pro.html">Подробнее о Pro →</a>
+    </p>
 </div>
 
+<!-- ═══════════════ ССЫЛКИ ═══════════════ -->
 <div class="card">
-    <h2>Ссылки</h2>
+    <h2>Документация</h2>
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 8px;">
+        <a href="settings/tuya.html" style="padding:12px; background:#f9f9f9; border-radius:8px; text-decoration:none; color:#333;">🔌 Настройка Tuya</a>
+        <a href="settings/zigbee2mqtt.html" style="padding:12px; background:#f9f9f9; border-radius:8px; text-decoration:none; color:#333;">🐝 Настройка Zigbee2MQTT</a>
+        <a href="settings/frigate.html" style="padding:12px; background:#f9f9f9; border-radius:8px; text-decoration:none; color:#333;">📹 Настройка Frigate</a>
+        <a href="settings/mqtt.html" style="padding:12px; background:#f9f9f9; border-radius:8px; text-decoration:none; color:#333;">🔗 Настройка MQTT</a>
+        <a href="settings/cloud.html" style="padding:12px; background:#f9f9f9; border-radius:8px; text-decoration:none; color:#333;">☁ Настройка облака</a>
+        <a href="settings/notifications.html" style="padding:12px; background:#f9f9f9; border-radius:8px; text-decoration:none; color:#333;">🔔 Уведомления (VK/SMS)</a>
+        <a href="settings/presence.html" style="padding:12px; background:#f9f9f9; border-radius:8px; text-decoration:none; color:#333;">📍 Присутствие</a>
+        <a href="settings/pro.html" style="padding:12px; background:#f9f9f9; border-radius:8px; text-decoration:none; color:#333;">⭐ Pro-лицензия</a>
+        <a href="settings/faq.html" style="padding:12px; background:#f9f9f9; border-radius:8px; text-decoration:none; color:#333;">❓ FAQ</a>
+    </div>
+</div>
+
+<!-- ═══════════════ ЮРИДИЧЕСКОЕ ═══════════════ -->
+<div class="card">
+    <h2>Юридическая информация</h2>
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 8px;">
+        <a href="philosophy.html" style="padding:12px; background:#f9f9f9; border-radius:8px; text-decoration:none; color:#333;">💡 Философия SHome</a>
+        <a href="readme.html" style="padding:12px; background:#f9f9f9; border-radius:8px; text-decoration:none; color:#333;">📄 README / Описание</a>
+        <a href="licenses.html" style="padding:12px; background:#f9f9f9; border-radius:8px; text-decoration:none; color:#333;">⚖️ Лицензии (EULA, Terms)</a>
+        <a href="privacy.html" style="padding:12px; background:#f9f9f9; border-radius:8px; text-decoration:none; color:#333;">🔒 Политика конфиденциальности</a>
+    </div>
+</div>
+
+<!-- ═══════════════ КОНТАКТЫ ═══════════════ -->
+<div class="card">
+    <h2>Контакты</h2>
     <ul>
-        <li><a href="philosophy.html">Философия SHome</a></li>
-        <li><a href="readme.html">Описание приложения</a></li>
-        <li><a href="docs/tuya.html">Настройка Tuya</a></li>
-        <li><a href="docs/zigbee2mqtt.html">Настройка Zigbee2MQTT</a></li>
-        <li><a href="docs/frigate.html">Настройка Frigate</a></li>
-        <li><a href="docs/faq.html">FAQ</a></li>
-        <li><a href="licenses.html">Лицензии</a></li>
-        <li><a href="privacy.html">Политика конфиденциальности</a></li>
+        <li><strong>Разработчик:</strong> ArchitectCO</li>
+        <li><strong>Владелец:</strong> votsurX</li>
+        <li><strong>Email:</strong> <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a></li>
+        <li><strong>GitHub:</strong> <a href="https://github.com/votsurx/SHome-Releases" target="_blank">votsurx/SHome-Releases</a></li>
     </ul>
 </div>
 

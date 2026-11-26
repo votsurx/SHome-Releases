@@ -1,7 +1,235 @@
-Что нужно: телефон с геолокацией, разрешение.
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Присутствие (Presence Detection) — SHome</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+    <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <img src="../assets/logo.png" alt="SHome" onerror="this.style.display='none'">
+        <h1>SHome</h1>
+    </a>
+</header>
 
-Настройка: Меню → Присутствие → добавить телефон (ID, имя, IP) → задать координаты «дома» + радиус → включить.
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../philosophy.html">Философия</a>
+    <a href="../readme.html">Описание</a>
+    <a href="tuya.html">Документация</a>
+    <a href="../licenses.html">Лицензии</a>
+    <a href="../privacy.html">Политика</a>
+    <a href="https://github.com/votsurx/SHome-Releases" target="_blank">GitHub</a>
+</nav>
 
-Как работает: телефон отправляет координаты → SHome сравнивает с «домом» → статус home / away / near.
+<h1>Присутствие (Presence Detection)</h1>
 
-Разрешения: ACCESS_FINE_LOCATION (Android).
+<p><strong>Presence Detection</strong> — определение статуса «дома / не дома / рядом» по геолокации телефонов. Используется для автоматизаций (например, «включить свет, когда я дома»).</p>
+
+<div class="highlight">
+    <strong>Важно:</strong> геолокация используется <strong>только</strong> для presence. Не передаётся разработчику или третьим лицам. Можно отключить в любой момент.
+</div>
+
+<h2>Что нужно</h2>
+<ul>
+    <li>Телефон с GPS и интернетом.</li>
+    <li>Разрешение <strong>«Геолокация»</strong> (Android: <code>ACCESS_FINE_LOCATION</code>).</li>
+    <li>Разрешение <strong>«Фоновый режим»</strong> (опционально, для работы в фоне).</li>
+    <li>Функция доступна в <strong>Pro</strong> (после триала).</li>
+</ul>
+
+<h2>Как это работает</h2>
+
+<ol>
+    <li>Телефон отправляет координаты (широта, долгота) в SHome.</li>
+    <li>SHome сравнивает с координатами «дома» + радиусом.</li>
+    <li>Если телефон в радиусе — статус <code>home</code>.</li>
+    <li>Если вне радиуса + прошло <code>awayTimeout</code> — статус <code>away</code>.</li>
+    <li>Если рядом с радиусом — статус <code>near</code>.</li>
+</ol>
+
+<blockquote>
+    <p><strong>Координаты</strong> хранятся локально (SQLite). <strong>Не передаются</strong> разработчику.</p>
+</blockquote>
+
+<h2>Шаг 1. Включить геолокацию в Android</h2>
+
+<ol>
+    <li>Настройки Android → <strong>Приложения</strong> → <strong>SHome</strong> → <strong>Разрешения</strong>.</li>
+    <li>Включите <strong>«Геолокация»</strong> → <strong>«Разрешить всегда»</strong> (или «Только при использовании»).</li>
+    <li>Опционально: <strong>«Фоновая работа»</strong> (если хотите, чтобы presence работал в фоне).</li>
+</ol>
+
+<h2>Шаг 2. Настроить координаты «дома»</h2>
+
+<ol>
+    <li>Откройте SHome → <strong>Меню</strong> → <strong>Присутствие</strong>.</li>
+    <li>Включите <strong>«Включить присутствие»</strong>.</li>
+    <li>Задайте <strong>«Координаты дома»</strong>:
+        <ul>
+            <li><strong>Широта</strong> (latitude): например, <code>55.7558</code></li>
+            <li><strong>Долгота</strong> (longitude): например, <code>37.6173</code></li>
+        </ul>
+    </li>
+    <li><strong>Радиус «дома»</strong>: например, <code>100</code> метров (по умолчанию).</li>
+    <li><strong>Таймаут «away»</strong>: например, <code>5</code> минут (сколько ждать перед тем, как считать «не дома»).</li>
+</ol>
+
+<blockquote>
+    <p><strong>Как узнать координаты дома?</strong></p>
+    <ul>
+        <li>Откройте Google Maps → найдите свой дом → долгое нажатие → скопируйте координаты.</li>
+        <li>Или на <a href="https://www.latlong.net/" target="_blank">latlong.net</a>.</li>
+    </ul>
+</blockquote>
+
+<h2>Шаг 3. Добавить телефоны</h2>
+
+<p>Presence работает по <strong>телефонам</strong> (каждому — свой ID).</p>
+
+<ol>
+    <li>В разделе <strong>«Присутствие»</strong> → <strong>«Телефоны»</strong>.</li>
+    <li>Нажмите <strong>«Добавить телефон»</strong>.</li>
+    <li>Заполните:
+        <ul>
+            <li><strong>ID телефона</strong>: уникальный (например, <code>phone_1</code>).</li>
+            <li><strong>Имя</strong>: «Мой телефон».</li>
+            <li><strong>IP-адрес</strong> (опционально, если телефон в той же сети).</li>
+            <li><strong>Включён</strong>: да.</li>
+        </ul>
+    </li>
+    <li>Сохраните.</li>
+</ol>
+
+<blockquote>
+    <p><strong>Несколько телефонов</strong> — presence учитывает <strong>все</strong>. Если хотя бы один дома — статус <code>home</code>.</p>
+</blockquote>
+
+<h2>Шаг 4. Как телефон отправляет координаты</h2>
+
+<p>Есть <strong>два способа</strong>:</p>
+
+<h3>Способ A: приложение SHome на телефоне</h3>
+<p>Если SHome установлен на телефоне — он <strong>сам</strong> отправляет координаты (через foreground service). Просто включите presence — и SHome начнёт отслеживать.</p>
+
+<h3>Способ B: HTTP-запрос (для интеграций)</h3>
+<p>Можно отправлять координаты <strong>вручную</strong> (или через Tasker / Automate):</p>
+
+<pre><code>POST http://your-phone-ip:8080/presence
+Content-Type: application/json
+
+{
+  "phoneId": "phone_1",
+  "latitude": 55.7558,
+  "longitude": 37.6173,
+  "timestamp": "2026-11-25T15:00:00Z"
+}</code></pre>
+
+<blockquote>
+    <p><strong>Примечание:</strong> SHome слушает HTTP на порту 8080 (если включено в настройках). Проверьте <strong>«Присутствие» → «HTTP-сервер»</strong>.</p>
+</blockquote>
+
+<h2>Шаг 5. Проверить</h2>
+
+<ol>
+    <li>В разделе <strong>«Присутствие»</strong> отображается статус (<code>home</code> / <code>away</code> / <code>near</code>).</li>
+    <li>Проверьте: вы дома → статус <code>home</code>.</li>
+    <li>Выйдите из радиуса → через <code>awayTimeout</code> статус <code>away</code>.</li>
+    <li>Вернитесь → статус <code>home</code>.</li>
+</ol>
+
+<h2>Использование в автоматизациях</h2>
+
+<p>Presence можно использовать в <strong>сценах</strong>:</p>
+
+<ul>
+    <li><strong>«Когда я дома»</strong> → включить свет, открыть шторы.</li>
+    <li><strong>«Когда я ушёл»</strong> → выключить всё, включить охрану.</li>
+    <li><strong>«Когда рядом»</strong> → включить свет на улице.</li>
+</ul>
+
+<p>В настройках сцены выберите триггер <strong>«Присутствие»</strong> → статус (<code>home</code> / <code>away</code> / <code>near</code>).</p>
+
+<h2>Приватность</h2>
+
+<h3>Что собирается</h3>
+<ul>
+    <li>Координаты (широта, долгота) — <strong>только</strong> при включённом presence.</li>
+    <li>ID телефона (локальный).</li>
+    <li>Timestamp (время).</li>
+</ul>
+
+<h3>Где хранится</h3>
+<ul>
+    <li>Локально в SQLite на телефоне.</li>
+    <li><strong>Не передаётся</strong> разработчику.</li>
+    <li><strong>Не передаётся</strong> третьим лицам.</li>
+</ul>
+
+<h3>Как отключить</h3>
+<ul>
+    <li>В SHome: <strong>«Присутствие»</strong> → выключить.</li>
+    <li>Или отозвать разрешение «Геолокация» в настройках Android.</li>
+    <li>Или удалить приложение (все данные удаляются).</li>
+</ul>
+
+<h2>Энергопотребление</h2>
+
+<p>Presence использует GPS — это <strong>расходует батарею</strong>. Рекомендации:</p>
+
+<ul>
+    <li>Используйте <strong>«Только при использовании»</strong> (не «Всегда»), если не нужен фоновый режим.</li>
+    <li>Увеличьте <strong>интервал</strong> обновления (например, раз в 5 минут).</li>
+    <li>Используйте <strong>Wi-Fi</strong> вместо GPS (если телефон в сети — статус <code>home</code>).</li>
+</ul>
+
+<h2>Частые проблемы</h2>
+
+<h3>Статус не меняется</h3>
+<ul>
+    <li>Геолокация включена в Android?</li>
+    <li>Координаты «дома» верные?</li>
+    <li>Радиус достаточный? (например, 100 м — может быть мало, увеличьте до 200).</li>
+    <li>Телефон отправляет координаты? (проверьте логи SHome).</li>
+</ul>
+
+<h3>«Не могу определить местоположение»</h3>
+<ul>
+    <li>GPS выключен — включите в шторке Android.</li>
+    <li>Нет сигнала GPS (в помещении) — выйдите на улицу.</li>
+    <li>Разрешение «Геолокация» не дано — проверьте настройки.</li>
+</ul>
+
+<h3>Батарея быстро садится</h3>
+<ul>
+    <li>Уменьшите частоту обновления (интервал 10–15 мин).</li>
+    <li>Используйте Wi-Fi вместо GPS.</li>
+    <li>Отключите фоновый режим (если не нужен).</li>
+</ul>
+
+<h3>Presence не работает в фоне</h3>
+<ul>
+    <li>Android: разрешение «Фоновая работа» включено?</li>
+    <li>Батарея: «Без ограничений» для SHome?</li>
+    <li>Некоторые прошивки (MIUI, EMUI) убивают фоновые приложения — добавьте SHome в исключения.</li>
+</ul>
+
+<h3>Несколько телефонов — статус неверный</h3>
+<ul>
+    <li>Presence учитывает <strong>все</strong> телефоны. Если хотя бы один дома — <code>home</code>.</li>
+    <li>Если нужно по-другому — настройте сцены с конкретным телефоном.</li>
+</ul>
+
+<h2>Ссылки</h2>
+<ul>
+    <li><a href="https://developer.android.com/develop/sensors-and-location/location/permissions" target="_blank">Android Location Permissions</a></li>
+    <li><a href="https://www.latlong.net/" target="_blank">LatLong.net (координаты)</a></li>
+</ul>
+
+<footer>
+    © 2026 votsurX · SHome 8.6.0 · <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a>
+</footer>
+</body>
+</html>

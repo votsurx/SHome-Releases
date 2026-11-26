@@ -1,13 +1,248 @@
-VK:
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Уведомления (VK / SMS) — SHome</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+    <a href="../index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <img src="../assets/logo.png" alt="SHome" onerror="this.style.display='none'">
+        <h1>SHome</h1>
+    </a>
+</header>
 
-Создать Standalone-приложение в vk.com/dev → получить access_token (через Implicit Flow).
+<nav>
+    <a href="../index.html">Главная</a>
+    <a href="../philosophy.html">Философия</a>
+    <a href="../readme.html">Описание</a>
+    <a href="tuya.html">Документация</a>
+    <a href="../licenses.html">Лицензии</a>
+    <a href="../privacy.html">Политика</a>
+    <a href="https://github.com/votsurx/SHome-Releases" target="_blank">GitHub</a>
+</nav>
 
-Или использовать сервисный ключ + user_id.
+<h1>Уведомления (VK / SMS)</h1>
 
-В SHome: Настройки → Уведомления → VK → токен + user ID.
+<p>SHome может отправлять уведомления о событиях (алерты, offline, сцены, Frigate, Zigbee) в <strong>VK</strong> и по <strong>SMS</strong>. Это опционально — работает только если настроено.</p>
 
-SMS:
+<div class="highlight">
+    <strong>Схема:</strong> SHome → VK API / SMS-шлюз → ваше устройство
+</div>
 
-SMS-уведомления работают на штатной сим-арте устройства на котором установлено приложение.
+<h2>Что нужно</h2>
+<ul>
+    <li><strong>VK</strong>: аккаунт VK, Standalone-приложение (для access_token).</li>
+    <li><strong>SMS</strong>: SMS-шлюз с API (например, SMS.ru, Twilio) или встроенный SMS-сервис телефона.</li>
+    <li>Функция доступна в <strong>Pro</strong> (после триала).</li>
+</ul>
 
-В SHome: Настройки → Уведомления → SMS → номер.
+<hr>
+
+<h2>Часть 1. VK-уведомления</h2>
+
+<h3>Шаг 1. Создать Standalone-приложение VK</h3>
+
+<ol>
+    <li>Откройте <a href="https://vk.com/dev" target="_blank">vk.com/dev</a> → <strong>«Мои приложения»</strong>.</li>
+    <li>Нажмите <strong>«Создать приложение»</strong>.</li>
+    <li>Выберите тип <strong>«Standalone-приложение»</strong>.</li>
+    <li>Название: <code>SHome</code>.</li>
+    <li>Подтвердите.</li>
+</ol>
+
+<h3>Шаг 2. Получить access_token</h3>
+
+<p>Есть <strong>два способа</strong>:</p>
+
+<h4>Способ A: Implicit Flow (через браузер)</h4>
+
+<ol>
+    <li>В настройках приложения VK найдите <strong>ID приложения</strong> (например, <code>12345678</code>).</li>
+    <li>Откройте в браузере URL:
+        <pre><code>https://oauth.vk.com/authorize?client_id=ВАШ_APP_ID&display=page&redirect_uri=https://oauth.vk.com/blank.html&scope=messages&response_type=token&v=5.131</code></pre>
+        (замените <code>ВАШ_APP_ID</code> на ID приложения)
+    </li>
+    <li>Разрешите доступ.</li>
+    <li>Вас перебросит на <code>https://oauth.vk.com/blank.html#access_token=...&expires_in=...&user_id=...</code>.</li>
+    <li>Скопируйте <code>access_token</code> (длинная строка) и <code>user_id</code>.</li>
+</ol>
+
+<h4>Способ B: Сервисный ключ (для сообществ)</h4>
+
+<p>Если у вас есть <strong>сообщество VK</strong>:</p>
+<ol>
+    <li>Управление сообществом → <strong>Работа с API</strong> → <strong>Создать ключ</strong>.</li>
+    <li>Выберите права: <code>messages</code>, <code>manage</code>.</li>
+    <li>Скопируйте <strong>сервисный ключ</strong> и <strong>ID сообщества</strong>.</li>
+</ol>
+
+<h3>Шаг 3. Настроить VK в SHome</h3>
+
+<ol>
+    <li>Откройте SHome → <strong>Настройки</strong> → <strong>Уведомления</strong>.</li>
+    <li>Включите <strong>«Уведомления включены»</strong>.</li>
+    <li>Включите <strong>«VK»</strong>.</li>
+    <li>Введите:
+        <ul>
+            <li><strong>VK Token</strong>: <code>access_token</code> из шага 2.</li>
+            <li><strong>VK User ID</strong>: ваш <code>user_id</code> (число).</li>
+        </ul>
+    </li>
+    <li>Сохраните.</li>
+</ol>
+
+<h3>Шаг 4. Настроить типы уведомлений</h3>
+
+<p>В разделе <strong>«Уведомления»</strong> → <strong>«Типы»</strong>:</p>
+
+<ul>
+    <li><strong>Сцены</strong> — уведомления при выполнении сцен.</li>
+    <li><strong>Устройства</strong> — вкл/выкл, изменения состояния.</li>
+    <li><strong>Алерты</strong> — вода, дым, газ, движение, контакт (Zigbee).</li>
+    <li><strong>Ошибки</strong> — offline, online, ошибки подключения.</li>
+    <li><strong>Zigbee</strong> — water_leak, smoke, gas, motion, contact.</li>
+    <li><strong>Frigate</strong> — person, car, dog, cat, bird.</li>
+    <li><strong>Offline</strong> — Zigbee offline, Frigate offline.</li>
+</ul>
+
+<h3>Шаг 5. Проверить</h3>
+<ol>
+    <li>Нажмите <strong>«Тест»</strong> (если есть) — SHome отправит тестовое сообщение в VK.</li>
+    <li>Или вызовите событие (вкл/выкл устройство, алерт) — проверьте, что уведомление пришло.</li>
+</ol>
+
+<blockquote>
+    <p><strong>Если уведомления не приходят</strong> — проверьте <code>access_token</code> (не истёк?), <code>user_id</code>, права приложения (<code>messages</code>).</p>
+</blockquote>
+
+<hr>
+
+<h2>Часть 2. SMS-уведомления</h2>
+
+<h3>Шаг 1. Выбрать SMS-шлюз</h3>
+
+<p>Варианты:</p>
+<ul>
+    <li><strong>SMS.ru</strong> — российский, API, доступные цены.</li>
+    <li><strong>Twilio</strong> — международный, надёжный.</li>
+    <li><strong>Встроенный SMS</strong> — через SIM-карту телефона (бесплатно, но только с телефона).</li>
+</ul>
+
+<h3>Шаг 2. Настроить SMS.ru (пример)</h3>
+
+<ol>
+    <li>Зарегистрируйтесь на <a href="https://sms.ru" target="_blank">sms.ru</a>.</li>
+    <li>Пополните баланс (от 100 ₽).</li>
+    <li>Получите <strong>API-ключ</strong> в личном кабинете.</li>
+</ol>
+
+<h3>Шаг 3. Настроить SMS в SHome</h3>
+
+<ol>
+    <li>Откройте SHome → <strong>Настройки</strong> → <strong>Уведомления</strong>.</li>
+    <li>Включите <strong>«SMS»</strong>.</li>
+    <li>Введите:
+        <ul>
+            <li><strong>Номер телефона</strong>: ваш номер (например, <code>+79001234567</code>).</li>
+            <li><strong>API-ключ</strong> (если требуется): из SMS.ru / Twilio.</li>
+        </ul>
+    </li>
+    <li>Сохраните.</li>
+</ol>
+
+<blockquote>
+    <p><strong>Внимание:</strong> SMS-шлюз <strong>платный</strong> (за каждое сообщение). Убедитесь, что баланс пополнен.</p>
+</blockquote>
+
+<h3>Шаг 4. Настроить типы уведомлений</h3>
+
+<p>Аналогично VK (см. выше). По умолчанию SMS <strong>только для алертов</strong> (вода, дым, газ) — чтобы не тратить деньги на всё подряд.</p>
+
+<h3>Шаг 5. Проверить</h3>
+<ol>
+    <li>Нажмите <strong>«Тест SMS»</strong> (если есть).</li>
+    <li>Или вызовите алерт — проверьте, что SMS пришло.</li>
+</ol>
+
+<hr>
+
+<h2>Расписание уведомлений</h2>
+
+<p>Чтобы не получать уведомления ночью — настройте <strong>расписание</strong>:</p>
+
+<ol>
+    <li>В разделе <strong>«Уведомления»</strong> → <strong>«Расписание»</strong>.</li>
+    <li>Включите <strong>«Использовать расписание»</strong>.</li>
+    <li>Задайте:
+        <ul>
+            <li><strong>С</strong>: <code>09:00</code></li>
+            <li><strong>По</strong>: <code>21:00</code></li>
+            <li><strong>Дни недели</strong>: Пн–Вс (или выборочно).</li>
+        </ul>
+    </li>
+    <li>Опция <strong>«Только алерты»</strong> — если включена, вне расписания приходят <strong>только</strong> алерты (вода, дым, газ), остальное — подавляется.</li>
+</ol>
+
+<h2>Cooldown (защита от спама)</h2>
+
+<p>Чтобы не получать <strong>100 одинаковых</strong> уведомлений — настройте <strong>cooldown</strong>:</p>
+
+<ol>
+    <li>В разделе <strong>«Уведомления»</strong> → <strong>«Cooldown»</strong>.</li>
+    <li>Задайте <strong>минуты</strong>: например, <code>5</code> — повторное уведомление того же типа не отправится в течение 5 минут.</li>
+</ol>
+
+<h2>Частые проблемы</h2>
+
+<h3>VK: «Не удалось отправить»</h3>
+<ul>
+    <li><code>access_token</code> истёк — получите новый (Implicit Flow).</li>
+    <li><code>user_id</code> неверный — проверьте (число).</li>
+    <li>Приложение VK не имеет прав <code>messages</code> — пересоздайте.</li>
+    <li>VK API недоступен — попробуйте позже.</li>
+</ul>
+
+<h3>VK: «Forbidden»</h3>
+<ul>
+    <li>Пользователь запретил сообщения от приложения — разрешите в настройках VK.</li>
+    <li>Приложение заблокировано VK — проверьте статус.</li>
+</ul>
+
+<h3>SMS: «Не удалось отправить»</h3>
+<ul>
+    <li>API-ключ неверный — проверьте в личном кабинете SMS.ru.</li>
+    <li>Баланс SMS.ru = 0 — пополните.</li>
+    <li>Номер неверный — проверьте формат (<code>+79001234567</code>).</li>
+</ul>
+
+<h3>Уведомления не приходят вообще</h3>
+<ul>
+    <li>«Уведомления включены» = true?</li>
+    <li>Типы уведомлений включены (сцены, алерты и т.д.)?</li>
+    <li>Расписание не блокирует? (если «только алерты» — обычные уведомления не придут вне расписания).</li>
+    <li>Cooldown не подавляет? (проверьте <code>5 мин</code>).</li>
+</ul>
+
+<h3>Слишком много уведомлений</h3>
+<ul>
+    <li>Увеличьте <strong>cooldown</strong> (10–30 мин).</li>
+    <li>Отключите лишние <strong>типы</strong> (например, «устройства»).</li>
+    <li>Включите <strong>расписание</strong> (ночь — тишина).</li>
+</ul>
+
+<h2>Ссылки</h2>
+<ul>
+    <li><a href="https://vk.com/dev" target="_blank">VK для разработчиков</a></li>
+    <li><a href="https://dev.vk.com/method/messages.send" target="_blank">VK API messages.send</a></li>
+    <li><a href="https://sms.ru" target="_blank">SMS.ru</a></li>
+    <li><a href="https://www.twilio.com/sms" target="_blank">Twilio SMS</a></li>
+</ul>
+
+<footer>
+    © 2026 votsurX · SHome 8.6.0 · <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a>
+</footer>
+</body>
+</html>
