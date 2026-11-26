@@ -72,7 +72,11 @@
 </ol>
 
 <blockquote>
-    <p><strong>Пароль хранится</strong> в <code>SecureStorage</code> (AES-256) на устройстве. Не передаётся разработчику.</p>
+    <p>
+        <strong>Пароль Mail.ru Cloud</strong> хранится на устройстве в защищённом
+        хранилище платформы и используется SHome для подключения к Mail.ru Cloud.
+        Он не отправляется разработчику.
+    </p>
 </blockquote>
 
 <h2>Шаг 3. Сгенерировать ключ шифрования</h2>
@@ -142,9 +146,9 @@
 
 <h3>Что защищено</h3>
 <ul>
-    <li><strong>Пароль Mail.ru</strong> — хранится в <code>SecureStorage</code> (AES-256).</li>
+    <li><strong>Пароль Mail.ru</strong> — хранится в <code>SecureStorage</code>.</li>
     <li><strong>Ключ шифрования</strong> — хранится в <code>SecureStorage</code>.</li>
-    <li><strong>Бэкап</strong> — шифруется <strong>до</strong> загрузки (AES-256-GCM).</li>
+    <li><strong>Бэкап</strong> — шифруется <strong>до</strong> загрузки.</li>
     <li><strong>Передача</strong> — HTTPS (Mail.ru Cloud API).</li>
 </ul>
 
@@ -206,7 +210,7 @@
 </ul>
 
 <footer>
-    © 2026 votsurX · SHome 8.6.0 · <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a>
+    © 2026 votsurX · SHome 8.6.1 · <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a>
 </footer>
 </body>
 </html>

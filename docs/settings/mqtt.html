@@ -32,6 +32,13 @@
     <strong>Схема:</strong> SHome ← MQTT → Zigbee2MQTT / Frigate
 </div>
 
+<div class="highlight">
+    <strong>Безопасность:</strong> не открывайте MQTT-порт на роутере
+    для доступа из интернета. Ограничьте подключения доверенной локальной
+    сетью. Для удалённого доступа используйте VPN. Одного пароля недостаточно,
+    чтобы безопасно выставлять брокер в интернет.
+</div>
+
 <h2>Что нужно</h2>
 <ul>
     <li><strong>Сервер</strong>: Raspberry Pi, Intel NUC, Synology, мини-ПК (или тот же, где Z2M/Frigate).</li>
@@ -46,12 +53,20 @@
 <pre><code>docker run -d \
   --name mosquitto \
   --restart=unless-stopped \
-  -p 1883:1883 \
-  -p 9001:9001 \
+  -p 192.168.1.10:1883:1883 \
+    -p 192.168.1.10:9001:9001 \
   -v /opt/mosquitto/config:/mosquitto/config \
   -v /opt/mosquitto/data:/mosquitto/data \
   -v /opt/mosquitto/log:/mosquitto/log \
   eclipse-mosquitto</code></pre>
+
+<p>
+    Замените <code>192.168.1.10</code> на постоянный локальный IP-адрес
+    сервера. Если WebSocket не используется, удалите строку публикации
+    порта <code>9001</code>. Не настраивайте проброс этих портов на роутере.
+    Учитывайте, что опубликованные Docker-порты могут обходить некоторые
+    правила UFW; не полагайтесь только на UFW как на защиту от внешнего доступа.
+</p>
 
 <p>Создайте папки:</p>
 <pre><code>mkdir -p /opt/mosquitto/{config,data,log}</code></pre>
@@ -93,17 +108,17 @@ log_type information</code></pre>
     <p>(без <code>-c</code>, чтобы не перезаписать файл)</p>
 </blockquote>
 
-<h2>Шаг 4. Перезапустить Mosquitto</h2>
+<h3>4. Ограничьте сетевой доступ</h3>
+<p>
+    Разрешайте подключения к MQTT только из своей доверенной локальной сети.
+    Укажите фактическую подсеть вашей LAN вместо примера ниже; не копируйте
+    адрес без проверки. Не открывайте порт на роутере для всего интернета.
+    Для доступа извне используйте VPN.
+</p>
 
-<pre><code>docker restart mosquitto</code></pre>
-
-<p>Проверьте логи:</p>
-<pre><code>docker logs -f mosquitto</code></pre>
-
-<p>Должно быть:</p>
-<pre><code>mosquitto version 2.x.x starting
-Opening ipv4 listen socket on port 1883.
-Opening websockets listen socket on port 9001.
+<pre><code># Пример: замените подсеть на фактическую сеть
+            # Если используете Docker, отдельно проверьте ограничения доступа
+            # к опубликованным портам.
 </code></pre>
 
 <h2>Шаг 5. Проверить подключение</h2>
@@ -220,7 +235,7 @@ require_certificate false</code></pre>
 </ul>
 
 <footer>
-    © 2026 votsurX · SHome 8.6.0 · <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a>
+    © 2026 votsurX · SHome 8.6.1 · <a href="mailto:votsurx@gmail.com">votsurx@gmail.com</a>
 </footer>
 </body>
 </html>
